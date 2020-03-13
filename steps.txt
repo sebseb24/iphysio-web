@@ -1,0 +1,22 @@
+1. Demarrer la BD : Modifier le script start-mongodb.bat avec les bons paths et le lancer
+
+2. Dans un autre CMD, établir la connexion avec la bd :
+	cd (...)/iphysio-web/iphysio-web/NodeJS
+	npm install -g nodemon
+	nodemon db.js
+	
+3. Dans un autre CMD, partir le serveur MongoDB:
+	cd (...)/iphysio-web/iphysio-web/NodeJS
+	nodemon index.js
+	
+4. Dans un autre CMD, lancer le serveur du projet:
+	cd (...)/iphysio-web/iphysio-web/
+	ng serve
+	
+5. Installer CORS-Enabling :
+	cd (...)/iphysio-web/iphysio-web/NodeJS
+	npm i cors --save
+
+
+Installations :
+	npm i --save express mongoose body-parser bcrypt
