@@ -1,0 +1,56 @@
+.parent {
+    position: relative;
+    overflow-x:hidden;
+    height: 100%;
+
+}
+
+
+.vert-nav {
+    display: inline-block;
+    
+
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.patients{
+    border: 1px solid rgb(115, 183, 192);
+    list-style-type: none;
+    margin: 0 0 0 0;
+    padding: 0;
+    /*width: 15em;*/
+    background-color: rgb(244, 245, 247);
+    min-height: 700px;
+    overflow-y:scroll;
+    
+}
+
+.patients li {
+    cursor: pointer;
+}
+
+.patients li.selected {
+    background-color: rgba(32, 141, 155, 0.856);
+    color: rgb(255, 255, 255);
+  }
+
+.patients li:hover {
+    background-color: rgb(64, 174, 189);
+  }
+
+.patient-container {
+    border: 1px solid rgb(139, 126, 126);
+    display: inline-block;
+    padding: 0px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow-x: hidden;
+}
+.encadre-list-patient {
+    display: inline-block;
+}
