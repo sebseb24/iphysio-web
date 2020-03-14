@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Nouveau Patient</h2>
+
+
+<!--<mat-dialog-content [formGroup]="form">
+  
+    <mat-form-field>
+        <input matInput
+                placeholder="Course Description"
+               formControlName="description">
+    </mat-form-field>
+ 
+</mat-dialog-content>-->
+<label >Prénom</label>
+<input type="text" placeholder="Prenom"/>
+<label >Nom</label>
+<input type="text" placeholder="Nom"/>
+<label >Adresse courriel</label>
+<input type="text" placeholder="Courriel"/>
+
+<mat-dialog-actions>
+
+    <button class="waves-effect waves-light btn-small"
+            (click)="close()">
+        Fermer
+    </button>
+
+    <button class="waves-effect waves-light btn-small"
+            (click)="save()">
+        Sauvegarder
+    </button>
+
+</mat-dialog-actions>
