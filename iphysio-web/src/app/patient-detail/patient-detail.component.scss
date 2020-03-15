@@ -8,11 +8,16 @@
     display: inline-block;
 }
 
-.collection {
+/*.collection {
     overflow-y: scroll;
-}
+}*/
 
 .collection-item:hover {
     background-color: rgb(71, 171, 179);
     cursor: pointer;
+}
+
+.btn-floating {
+    margin-top: 10px;
+    display: block;
 }

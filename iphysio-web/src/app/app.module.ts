@@ -13,6 +13,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NouveauPatientComponent } from './nouveau-patient/nouveau-patient.component';
 
 import {MatDialogModule} from '@angular/material/dialog';
+import { ProgrammeExerciceComponent } from './programme-exercice/programme-exercice.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {MatDialogModule} from '@angular/material/dialog';
    // MockPatientComponent,
     PatientDetailComponent,
    NouveauPatientComponent,
+   ProgrammeExerciceComponent,
   ],
   imports: [
     BrowserModule,

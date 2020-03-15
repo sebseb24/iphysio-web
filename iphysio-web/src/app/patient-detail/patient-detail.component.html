@@ -2,14 +2,6 @@
     <h3>Nom du patient: {{patient.name}}</h3>
     <div class="divider"></div>
 
-
-    <!--<div class="collection">
-        <a href="#!" class="collection-item">test</a>
-        <a href="#!" class="collection-item active">test</a>
-        <a href="#!" class="collection-item">test</a>
-        <a href="#!" class="collection-item">test</a>
-      </div>-->
-
     <div class="row">
         <ul class="collection with-header col s3">
             <li class="collection-header"><h4>Historique des activite</h4></li>
@@ -54,9 +46,14 @@
             <li class="collection-item">Programme 3</li>
             <li class="collection-item">Programme 4</li>
         </ul>
-    </div>
-    
 
-    <div>Stats</div>    
+        <a class="btn-floating waves-effect waves-light btn-small" (click)="editProgram()"><i class="material-icons left">edit</i></a>
+        <a class="btn-floating waves-effect waves-light btn-small"><i class="material-icons left">delete</i></a>
+
+    </div>
+
+    <div class="row">
+        <div>Stats</div>     
+    </div>
 </div>
   

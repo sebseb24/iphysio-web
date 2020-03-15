@@ -2,13 +2,11 @@
     position: relative;
     overflow-x:hidden;
     height: 100%;
-
 }
 
 
 .vert-nav {
     display: inline-block;
-    
 
 }
 
@@ -20,12 +18,13 @@
 .patients{
     border: 1px solid rgb(115, 183, 192);
     list-style-type: none;
-    margin: 0 0 0 0;
+    /*margin: 0 0 0 0;*/
     padding: 0;
     /*width: 15em;*/
     background-color: rgb(244, 245, 247);
-    min-height: 700px;
-    overflow-y:scroll;
+    /*min-height: 700px;*/
+    /*overflow-y:scroll;*/
+    overflow-y: hidden;
     
 }
 
@@ -43,12 +42,14 @@
   }
 
 .patient-container {
-    border: 1px solid rgb(139, 126, 126);
+    border: 1px solid rgb(99, 218, 182);
+    border-radius: 10px;
     display: inline-block;
-    padding: 0px;
+    padding: 20px;
     height: 100%;
-    width: 100%;
+    /*width: 100%;*/
     position: absolute;
+    /*position: fixed;*/
     overflow-x: hidden;
 }
 .encadre-list-patient {
