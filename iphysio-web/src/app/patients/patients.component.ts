@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Patient } from '../patient';
+import { Patient } from '../shared/patient.model';
 import { PATIENTS } from '../mock-patient/mock-patient.component';
+import { PatientService } from '../shared/patient.service'
 
 
 @Component({
@@ -12,11 +13,12 @@ import { PATIENTS } from '../mock-patient/mock-patient.component';
 export class PatientsComponent implements OnInit {
 
 
-  patients = PATIENTS;
+  //patients = PATIENTS;
 
-  constructor() { }
+  constructor(public patientService: PatientService) { }
 
   ngOnInit(): void {
+    this.refreshPatientList();
   }
 
   selectedPatient: Patient;
@@ -25,7 +27,9 @@ export class PatientsComponent implements OnInit {
     this.selectedPatient = patient;
   }
 
-
-
-
+  refreshPatientList() {
+    this.patientService.getPatientList().subscribe((res) => {
+      this.patientService.patients = res as Patient[];
+    });
+  }
 }
