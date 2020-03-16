@@ -25,9 +25,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     var emp = new Patient({
         name: req.body.name,
-        position: req.body.position,
-        office: req.body.office,
-        salary: req.body.salary
+        email: req.body.email
     });
 
     emp.save((err, doc) => {
@@ -42,9 +40,7 @@ router.put('/:id', (req, res) => {
 
         var emp = new Patient({
             name: req.body.name,
-            position: req.body.position,
-            office: req.body.office,
-            salary: req.body.salary
+            email: req.body.email,
         });
 
         Patient.findByIdAndUpdate(req.params.id, { $set: emp }, { new: true }, (err, doc) => {

@@ -1,22 +1,19 @@
 <h2 mat-dialog-title>Nouveau Patient</h2>
 
-<label >Prénom</label>
-<input type="text" placeholder="Prenom"/>
-<label >Nom</label>
-<input type="text" placeholder="Nom"/>
-<label >Adresse courriel</label>
-<input type="text" placeholder="Courriel"/>
+<form #newPatientForm="ngForm" (ngSubmit)="onSubmit(newPatientForm)">
+    <label>Nom :
+        <label class="red-text">*</label>
+    </label>
+    <input type="text" name="name" ngModel placeholder="Nom complet" required>
 
-<mat-dialog-actions>
+    <label>Adresse courriel :
+        <label class="red-text">*</label>
+    </label>
+    <input type="text" name="email" ngModel placeholder="Adresse courriel" required>
 
-    <button class="waves-effect waves-light btn-small"
-            (click)="close()">
-        Fermer
-    </button>
+    <mat-dialog-actions>
+        <button class="waves-effect waves-light btn-small" type="submit" [disabled]="!newPatientForm.valid">Sauvegarder</button>
+        <button class="waves-effect waves-light btn-small" type="button" (click)="close()">Fermer</button>
+    </mat-dialog-actions>
+</form>
 
-    <button class="waves-effect waves-light btn-small"
-            (click)="save()">
-        Sauvegarder
-    </button>
-
-</mat-dialog-actions>
