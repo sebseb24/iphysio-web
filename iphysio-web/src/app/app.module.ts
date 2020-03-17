@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PatientComponent } from './patient/patient.component';
 import { PatientsComponent } from './patients/patients.component';
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,7 +20,6 @@ import {DemoMaterialModule} from './material-module';
 @NgModule({
   declarations: [
     AppComponent,
-    PatientComponent,
     PatientsComponent,
     PatientDetailComponent,
    NouveauPatientComponent,
