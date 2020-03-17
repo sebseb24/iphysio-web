@@ -1,8 +1,8 @@
-<div class="parent">
-    <div class="vert-nav">
+<div class="row">
+    <div class="vert-nav col s12 m2">
         <div class="wrapper">
 
-            <div class="input-field col s6">
+            <div class="input-field">
                 <i class="material-icons prefix">search</i>
                 <input id="icon_prefix" type="text" class="validate">
                 <label for="icon_prefix">Recherche un patient</label>
@@ -18,7 +18,7 @@
         </div>
     </div>
 
-    <div class="patient-container">
+    <div class="container col s12 m10">
         <app-patient-detail [patient]="selectedPatient"></app-patient-detail>
     </div>
 </div>
