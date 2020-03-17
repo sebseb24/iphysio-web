@@ -7,3 +7,5 @@ var envConfig = config[env];
 
 // add env. config values to process.env
 Object.keys(envConfig).forEach(key => process.env[key] = envConfig[key]);
+
+//// "MONGODB_URI": "mongodb://localhost:27017/CrudDB"
