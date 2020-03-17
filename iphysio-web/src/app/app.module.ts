@@ -7,13 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PatientComponent } from './patient/patient.component';
 import { PatientsComponent } from './patients/patients.component';
-//import { MockPatientComponent } from './mock-patient/mock-patient.component';
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NouveauPatientComponent } from './nouveau-patient/nouveau-patient.component';
 
 import {MatDialogModule} from '@angular/material/dialog';
 import { ProgrammeExerciceComponent } from './programme-exercice/programme-exercice.component';
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
+import {MatNativeDateModule} from '@angular/material/core';
+import {DemoMaterialModule} from './material-module';
 
 
 @NgModule({
@@ -21,7 +23,6 @@ import { ProgrammeExerciceComponent } from './programme-exercice/programme-exerc
     AppComponent,
     PatientComponent,
     PatientsComponent,
-   // MockPatientComponent,
     PatientDetailComponent,
    NouveauPatientComponent,
    ProgrammeExerciceComponent,
@@ -33,9 +34,11 @@ import { ProgrammeExerciceComponent } from './programme-exercice/programme-exerc
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    DemoMaterialModule,
+    MatNativeDateModule
   ],
-  providers: [],
+  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },],
   bootstrap: [AppComponent],
 
   entryComponents: [NouveauPatientComponent]
