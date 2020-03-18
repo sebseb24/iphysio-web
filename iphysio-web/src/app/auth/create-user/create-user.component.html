@@ -1,18 +1,27 @@
-<h2 mat-dialog-title>Inscrivez-vous</h2>
-
-<form #createForm="ngForm" (ngSubmit)="onCreateUserSubmit(createForm)">
-    <input type="text" name="email" ngModel placeholder="Saisissez une adresse e-mail" required>
-
-    <input type="text" name="name" ngModel placeholder="Saisissez votre nom complet" required>
-
-    <input type="password" name="password" ngModel placeholder="Saisissez le mot de passe" required>
-
-    <mat-dialog-actions>
-        <button class="waves-effect waves-light btn-small" type="submit" [disabled]="!createForm.valid">S'inscrire</button>
-    </mat-dialog-actions>
-
-    <mat-dialog-actions>
-        <a routerLink="/login">Je possède déjà un compte</a>
-    </mat-dialog-actions>
-    
-</form>
+<div class="row pt-5">
+    <div class="col-md-6 mx-auto">
+        <div class="card rounded-0">
+            <div class="card-header">
+                <h3 class="mb-0">Créer un compte</h3>
+            </div>
+            <div class="card-body">
+                <form #createForm="ngForm" (ngSubmit)="onCreateUserSubmit(createForm)">
+                    <div class="form-group">
+                        <label for="">Adresse courriel</label>
+                        <input name="email" ngModel type="text" class="form-control rounded-0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nom complet</label>
+                        <input name="name" ngModel type="text" class="form-control rounded-0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Mot de passe</label>
+                        <input name="hash" ngModel type="password" class="form-control rounded-0" required>
+                    </div>
+                    <button class="btn btn-primary login-btn" type="submit" [disabled]="!createForm.valid">S'inscrire</button>
+                    <a type="button" routerLink="/login">J'ai déjà un compte</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
