@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken');
 var Physio = mongoose.model('Physio', {
     name: { type: String },
     email: { type: String },
-    password: { type: String },
+    hash: { type: String },
     saltSecret: String
 }, 'physios');
 

@@ -28,4 +28,30 @@ router.post('/', (req, res) => {
     });
 });
 
+router.post('/login', (req, res) => {
+    let userData = req.body;
+
+    Physio.findOne({email: userData.email}, (error, user) => {
+        if(error) {
+            console.log(error);
+        }
+        
+        else {
+            if(!user) {
+                res.status(401).send('Email invalide');
+            }
+
+            else {
+                if(user.hash !== userData.hash) {
+                    res.status(401).send('Mot de passe invalide');
+                }
+
+                else {
+                    res.status(200).send(user);
+                }
+            }
+        }
+    });
+});
+
 module.exports = router;

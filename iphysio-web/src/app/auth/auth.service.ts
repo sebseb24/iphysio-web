@@ -14,7 +14,7 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   checkLogin(physio: Physio) {
-    return this.http.post(this.baseURL, physio);
+    return this.http.post(this.baseURL + '/login', physio);
   }
 
   createUser(physio: Physio) {
