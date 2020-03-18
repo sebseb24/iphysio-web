@@ -22,8 +22,12 @@
     "@angular/platform-browser-dynamic": "~9.0.5",
     "@angular/router": "~9.0.5",
     "bcrypt": "^4.0.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "js": "^0.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

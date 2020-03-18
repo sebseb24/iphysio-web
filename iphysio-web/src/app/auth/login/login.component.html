@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Se connecter à iPhysio</h2>
+
+<form #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm)">
+    <input type="text" name="email" ngModel placeholder="Saisissez une adresse e-mail" required>
+
+    <input type="password" name="password" ngModel placeholder="Saisissez le mot de passe" required>
+
+    <mat-dialog-actions>
+        <button class="waves-effect waves-light btn-small" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+    </mat-dialog-actions>
+
+    <mat-dialog-actions>
+        <button class="waves-effect waves-light btn-small" type="button" routerLink="/create-user">Créer un compte</button>
+    </mat-dialog-actions>
+</form>

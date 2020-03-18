@@ -14,8 +14,6 @@ declare var M: any;
 })
 export class NouveauPatientComponent implements OnInit {
 
-  form: FormGroup;
-
   constructor(private dialogRef: MatDialogRef<NouveauPatientComponent>, private patientService: PatientService) {}
 
   ngOnInit(): void {

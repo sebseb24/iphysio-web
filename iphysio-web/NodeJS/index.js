@@ -1,8 +1,11 @@
+// DOC : https://www.youtube.com/watch?v=imR9LlbG3pU
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
 var patientController = require('./controllers/patientController.js');
+var physioController = require('./controllers/physioController.js');
 
 const mongoose = require('mongoose');
 
@@ -23,4 +26,5 @@ app.use(cors({ origin: 'http://localhost:4200' }));
 
 app.listen(3000, () => console.log('Server started at port : 3000'));
 
+app.use('/physios', physioController);
 app.use('/patients', patientController);
