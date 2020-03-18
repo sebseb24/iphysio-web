@@ -1,7 +1,7 @@
 const express = require('express');
 var router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
-//const jwt = require('jwt');
+const jwt = require('jsonwebtoken');
 
 var { Physio } = require('../models/physios');
 
@@ -25,9 +25,9 @@ router.post('/', (req, res) => {
 
     phy.save((err, registeredUser) => {
         if (!err) {
-            //let payload = { subject: registeredUser._id };
-            //let token = jwt.sign(payload, 'secretKey');
-            res.status(200).send({registeredUser}); 
+            let payload = { subject: registeredUser._id };
+            let token = jwt.sign(payload, 'secretKey');
+            res.status(200).send({token}); 
         }
         else { console.log('Error in Physio Save : ' + JSON.stringify(err, undefined, 2)); }
     });
@@ -52,7 +52,9 @@ router.post('/login', (req, res) => {
                 }
 
                 else {
-                    res.status(200).send(user);
+                    let payload = { subject: user._id };
+                    let token = jwt.sign(payload, 'secretKey');
+                    res.status(200).send({token});
                 }
             }
         }
