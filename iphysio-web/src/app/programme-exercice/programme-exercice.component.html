@@ -2,7 +2,6 @@
     
 <div class="row">
 
-
 <ul class="collection with-header col s12 m6 l3">
     <li class="collection-header"><h5>Programme</h5></li>
     <li class="collection-item">Exercice 1<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>
@@ -12,7 +11,6 @@
 </ul>
 
 <div id="id_boite_exercices" class="col s12 m6 l3">
-
 
 <ul class="collection with-header">
     <li class="collection-header"><h5>Exercices</h5></li>
@@ -25,50 +23,60 @@
     <li class="collection-item">Exercice 3</li>
     <li class="collection-item">Exercice 4</li>
 </ul>
-
-
 </div>
 
 <div class="col s12 m12 l6">
     <h4>Options d'exercice</h4>
-    <label>Nom:</label>
-    <input type="text" />
-    <mat-form-field>
-        <mat-label>Type</mat-label>
-        <mat-select [(value)]="selected">
-          <mat-option>None</mat-option>
-          <mat-option value="option1">Option 1</mat-option>
-          <mat-option value="option2">Option 2</mat-option>
-          <mat-option value="option3">Option 3</mat-option>
-        </mat-select>
-      </mat-form-field>
-    <mat-form-field>
-        <mat-label>Date de début</mat-label>
-        <input matInput [matDatepicker]="datedebut" [formControl]="dateDebut">
-        <mat-datepicker-toggle matSuffix [for]="datedebut"></mat-datepicker-toggle>
-        <mat-datepicker #datedebut></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Date de fin</mat-label>
-        <input matInput [matDatepicker]="datefin">
-        <mat-datepicker-toggle matSuffix [for]="datefin"></mat-datepicker-toggle>
-        <mat-datepicker #datefin></mat-datepicker>
-    </mat-form-field>
-    <div>
-        <mat-checkbox>Option 1</mat-checkbox>
-        <mat-checkbox>Option 2</mat-checkbox>
-        <mat-checkbox>Option 3</mat-checkbox>
+    <div class="row"> 
+        <div class="col s12">
+        <label>Nom:</label>
+        <input type="text" />
+        </div>
+        <mat-form-field class="col s12">
+            <mat-label>Type</mat-label>
+            <mat-select [(value)]="selected">
+            <mat-option>None</mat-option>
+            <mat-option value="option1">Option 1</mat-option>
+            <mat-option value="option2">Option 2</mat-option>
+            <mat-option value="option3">Option 3</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col s6">
+            <mat-label>Date de début</mat-label>
+            <input matInput [matDatepicker]="datedebut" [formControl]="dateDebut">
+            <mat-datepicker-toggle matSuffix [for]="datedebut"></mat-datepicker-toggle>
+            <mat-datepicker #datedebut></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field class="col s6">
+            <mat-label>Date de fin</mat-label>
+            <input matInput [matDatepicker]="datefin">
+            <mat-datepicker-toggle matSuffix [for]="datefin"></mat-datepicker-toggle>
+            <mat-datepicker #datefin></mat-datepicker>
+        </mat-form-field>
+        <div class="radiogroup col s12">
+            <mat-checkbox>Option 1</mat-checkbox>
+            <mat-checkbox>Option 2</mat-checkbox>
+            <mat-checkbox>Option 3</mat-checkbox>
+        </div>
+        <div class="right-align">
+        <button class="right-aligned" mat-raised-button>Ajouter</button>
+        </div>
     </div>
-    <button mat-raised-button>Ajouter</button>
 </div>
-
 
 </div>
 
 <div class="row">
 
-    <label>Nom du programme</label>
-    <input type="text" />
+    <div class="col s6">
+        <label>Nom du programme</label>
+        <input type="text" />
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="divider"></div>
     <mat-dialog-actions>
     
         <button class="waves-effect waves-light btn-small"

@@ -29,11 +29,9 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss",
-              "src/app/css/materialize.css"
+              "src/styles.scss"
             ],
             "scripts": [
-              "src/app/js/materialize.js"
             ]
           },
           "configurations": {
