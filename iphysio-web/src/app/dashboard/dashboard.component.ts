@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NouveauPatientComponent } from '../nouveau-patient/nouveau-patient.component';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog, private _authService: AuthService) {
 
   }
 
@@ -28,8 +29,10 @@ export class DashboardComponent implements OnInit {
     };
 
     this.dialog.open(NouveauPatientComponent, dialogConfig);
+  }
 
-
+  onLogout() {
+    this._authService.logoutUser();
   }
 
 }

@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthService, private router: Router) { }
 
+  wrongCred = false;
+
   ngOnInit(): void {
   }
 
@@ -23,7 +25,10 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', res.token);
           this.router.navigate(['/']);
         },
-        err => console.log(err)
+        err => {
+          console.log(err);
+          this.wrongCred = true;
+        }
       )
   }
 }
