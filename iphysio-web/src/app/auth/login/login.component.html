@@ -1,10 +1,10 @@
-<div class="row pt-5">
-    <div class="col-md-6 mx-auto">
-        <div class="card rounded-0">
-            <div class="card-header">
-                <h3 class="mb-0">Se connecter</h3>
+<div class="layout-div">
+    <div class="col-div">
+        <div class="card-div">
+            <div class="header-div">
+                <h3 class="title">Se connecter</h3>
             </div>
-            <div class="card-body">
+            <div class="body-card">
                 <form #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm)">
                     <div class="form-group">
                         <label for="">Adresse courriel</label>
@@ -14,6 +14,11 @@
                         <label for="">Mot de passe</label>
                         <input type="password" name="hash" ngModel class="form-control rounded-0" required>
                     </div>
+
+                    <div *ngIf="wrongCred" class="warning-div">
+                        <label class="warning-label">Adresse courriel et/ou mot de passe invalide</label>
+                    </div>
+                    
                     <button class="btn btn-primary login-btn" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
                     <button class="btn btn-primary login-btn" type="button" routerLink="/create-user">Créer un compte</button>
                 </form>

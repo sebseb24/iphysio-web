@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router'
+import { HttpErrorResponse } from '@angular/common/http';
 
 import { Patient } from '../../../NodeJS/models/patients';
-//import { PATIENTS } from '../mock-patient/mock-patient.component';
 import { PatientService } from './patient.service'
-
 
 @Component({
   selector: 'app-patients',
@@ -12,7 +12,7 @@ import { PatientService } from './patient.service'
 })
 export class PatientsComponent implements OnInit {
 
-  constructor(public patientService: PatientService) { }
+  constructor(public patientService: PatientService, private _router: Router) { }
 
   ngOnInit(): void {
     this.refreshPatientList();
@@ -25,8 +25,17 @@ export class PatientsComponent implements OnInit {
   }
 
   refreshPatientList() {
-    this.patientService.getPatientList().subscribe((res) => {
-      this.patientService.patients = res as Patient[];
-    });
+    this.patientService.getPatientList().subscribe(
+      (res) => {
+        this.patientService.patients = res as Patient[];
+      },
+      (err) => {
+        if(err instanceof HttpErrorResponse) {
+          if(err.status === 401 || err.status === 500) {
+            localStorage.removeItem('token');
+            this._router.navigate(['/login']);
+          }
+        }
+      });
   }
 }

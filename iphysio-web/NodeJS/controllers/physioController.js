@@ -1,7 +1,8 @@
 const express = require('express');
 var router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
-//const jwt = require('jwt');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
 
 var { Physio } = require('../models/physios');
 
@@ -16,20 +17,24 @@ router.get('/:email', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    var phy = new Physio({
-        name: req.body.name,
-        email: req.body.email,
-        hash: req.body.hash,
-        salt: req.body.salt
-    });
 
-    phy.save((err, registeredUser) => {
-        if (!err) {
-            //let payload = { subject: registeredUser._id };
-            //let token = jwt.sign(payload, 'secretKey');
-            res.status(200).send({registeredUser}); 
-        }
-        else { console.log('Error in Physio Save : ' + JSON.stringify(err, undefined, 2)); }
+    bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.hash(req.body.hash, salt, function(err, hash) {
+            var phy = new Physio({
+                name: req.body.name,
+                email: req.body.email,
+                hash: hash
+            });
+        
+            phy.save((err, registeredUser) => {
+                if (!err) {
+                    let payload = { subject: registeredUser._id };
+                    let token = jwt.sign(payload, 'secretKey');
+                    res.status(200).send({token}); 
+                }
+                else { console.log('Error in Physio Save : ' + JSON.stringify(err, undefined, 2)); }
+            });
+        });
     });
 });
 
@@ -47,13 +52,17 @@ router.post('/login', (req, res) => {
             }
 
             else {
-                if(user.hash !== userData.hash) {
-                    res.status(401).send('Mot de passe invalide');
-                }
+                bcrypt.compare(userData.hash, user.hash, function(err,isGood) {
+                    if(!isGood) {
+                        res.status(401).send('Mot de passe invalide');
+                    }
 
-                else {
-                    res.status(200).send(user);
-                }
+                    else {
+                        let payload = { subject: user._id };
+                        let token = jwt.sign(payload, 'secretKey');
+                        res.status(200).send({token});
+                    }
+                })
             }
         }
     });

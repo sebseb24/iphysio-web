@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +20,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { AdminComponent } from './auth/admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateUserComponent } from './auth/create-user/create-user.component';
+import { AuthGuard } from './auth/auth.guard';
+import { TokenInterceptorService } from './auth/token-interceptor.service';
 
 
 @NgModule({
@@ -55,15 +57,17 @@ import { CreateUserComponent } from './auth/create-user/create-user.component';
       },
       {
         path: '',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AuthGuard]
       }
+
     ]),
     BrowserAnimationsModule,
     MatDialogModule,
     DemoMaterialModule,
     MatNativeDateModule
   ],
-  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },],
+  providers: [{ provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }],
   bootstrap: [AppComponent],
 
   entryComponents: [NouveauPatientComponent]

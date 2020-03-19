@@ -1,5 +1,6 @@
 // DOC : https://www.youtube.com/watch?v=imR9LlbG3pU
 
+const bcrypt = require('bcryptjs');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');

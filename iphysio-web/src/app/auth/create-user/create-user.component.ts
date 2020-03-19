@@ -18,9 +18,12 @@ export class CreateUserComponent implements OnInit {
   }
 
   onCreateUserSubmit(form: NgForm) {
-      this.authService.createUser(form.value).subscribe((res) => {
-        M.toast({ html: 'Compte créé avec succès !', classes: 'rounded' });
-        this.router.navigate(['/login']);
-      });
+      this.authService.createUser(form.value).subscribe(
+        (res) => {
+          M.toast({ html: 'Compte créé avec succès !', classes: 'rounded'});
+          this.router.navigate(['/login']);
+        },
+        err => console.log(err)
+      );
   }
 }

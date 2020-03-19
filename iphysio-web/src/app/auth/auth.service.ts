@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Physio } from '../../../NodeJS/models/physios';
-
-//const bcrypt = require('bcryptjs');
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +10,26 @@ export class AuthService {
 
   readonly baseURL = 'http://localhost:3000/physios';
 
-  constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient, private _router: Router) { }
 
   checkLogin(physio: Physio) {
-    return this.http.post(this.baseURL + '/login', physio);
+    return this._http.post<any>(this.baseURL + '/login', physio);
   }
 
   createUser(physio: Physio) {
-    /*bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(physio.password, salt, (err, hash) => {
-        physio.password = hash;
-        physio.saltSecret = salt;
-      });
-    });*/
+    return this._http.post<any>(this.baseURL, physio);
+  }
 
-    return this.http.post(this.baseURL, physio);
+  loggedIn() {
+    return !!localStorage.getItem('token'); // !! return boolean
+  }
+
+  logoutUser() {
+    localStorage.removeItem('token');
+    this._router.navigate(['/login']);
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 }
