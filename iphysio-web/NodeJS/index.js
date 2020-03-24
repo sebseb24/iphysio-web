@@ -7,6 +7,8 @@ const cors = require('cors');
 
 var patientController = require('./controllers/patientController.js');
 var physioController = require('./controllers/physioController.js');
+var programmeController = require('./controllers/programmeController.js');
+var exerciceController = require('./controllers/exerciceController.js');
 
 const mongoose = require('mongoose');
 
@@ -29,3 +31,5 @@ app.listen(3000, () => console.log('Server started at port : 3000'));
 
 app.use('/physios', physioController);
 app.use('/patients', patientController);
+app.use('/programmes', programmeController);
+app.use('/exercices', exerciceController);

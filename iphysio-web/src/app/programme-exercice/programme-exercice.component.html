@@ -18,10 +18,12 @@
         <i class="material-icons prefix">search</i>
         <input type="text" />        
     </div>
-    <li class="collection-item">Exercice 1</li>
-    <li class="collection-item">Exercice 2</li>
+    <li class="collection-item" *ngFor="let exer of exercices">{{exer.name}}</li>
+    <!--<li class="collection-item">Exercice 2</li>
     <li class="collection-item">Exercice 3</li>
     <li class="collection-item">Exercice 4</li>
+    <li class="collection-item">Exercice 4</li>-->
+    
 </ul>
 </div>
 
@@ -70,7 +72,7 @@
 
     <div class="col s6">
         <label>Nom du programme</label>
-        <input type="text" />
+        <input type="text" [(ngModel)]="data.nom"/>
     </div>
 
 </div>
@@ -80,12 +82,12 @@
     <mat-dialog-actions>
     
         <button class="waves-effect waves-light btn-small"
-               (click)="sauvegarder()" >
+               (click)="fermer()" >
             Fermer
         </button>
     
         <button class="waves-effect waves-light btn-small"
-               (click)="fermer()" >
+               (click)="sauvegarder()" >
             Sauvegarder
         </button>
     
