@@ -22,6 +22,29 @@ export class PatientsComponent implements OnInit {
 
   onSelect(patient: Patient): void {
     this.selectedPatient = patient;
+    this.patientService.selectedPatient = patient;
+
+    console.log(patient._id);
+
+    this.patientService.getProgrammeList(patient._id).subscribe(
+      (res) => {
+        this.patientService.programmeList= res as any[];
+        console.log(this.patientService.programmeList);
+      },
+      (err) => {
+        if(err instanceof HttpErrorResponse) {
+          if(err.status === 401 || err.status === 500) {
+            //localStorage.removeItem('token');
+            //this._router.navigate(['/login']);
+          }
+        }
+      });
+
+
+    
+
+
+
   }
 
   refreshPatientList() {
