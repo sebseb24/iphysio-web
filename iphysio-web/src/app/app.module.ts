@@ -22,6 +22,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateUserComponent } from './auth/create-user/create-user.component';
 import { AuthGuard } from './auth/auth.guard';
 import { TokenInterceptorService } from './auth/token-interceptor.service';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { TokenInterceptorService } from './auth/token-interceptor.service';
    AdminComponent,
    DashboardComponent,
    CreateUserComponent,
+   ConfirmDialogComponent,
   ],
   imports: [
     BrowserModule,

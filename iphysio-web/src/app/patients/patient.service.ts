@@ -10,8 +10,13 @@ import { Patient } from '../../../NodeJS/models/patients';
 export class PatientService {
 
   selectedPatient: Patient;
+  programmeList : any[];
   patients: Patient[];
+
+
   readonly baseURL = 'http://localhost:3000/patients';
+  readonly progURL = 'http://localhost:3000/programmes';
+  readonly exerURL = 'http://localhost:3000/exercices';
 
   constructor(private http: HttpClient) { }
 
@@ -30,4 +35,33 @@ export class PatientService {
   deletePatient(_id: string) {
     return this.http.delete(this.baseURL + `/${_id}`);
   }
+
+  getSelectedPatient() {
+    return this.selectedPatient;
+  }
+
+  getProgrammeList(patientId : string) {
+    return this.http.get(this.progURL + `/${patientId}`);
+
+  }
+
+  getExerciceList() {
+    return this.http.get(this.exerURL);
+  }
+
+  postProgramExercice(patientId : string, programme : any) {
+    programme.patientId = patientId;
+    return this.http.post(this.progURL, programme);
+  }
+
+  deleteProgrammeExercice(id : string) {
+    return this.http.delete(this.progURL + `/${id}`);
+  }
+
+  putProgramExercice(programme : any) {
+    return this.http.put(this.progURL, programme);
+  }
+
+
+
 }
