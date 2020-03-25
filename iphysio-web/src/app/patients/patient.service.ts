@@ -58,6 +58,10 @@ export class PatientService {
     return this.http.delete(this.progURL + `/${id}`);
   }
 
+  putProgramExercice(programme : any) {
+    return this.http.put(this.progURL, programme);
+  }
+
 
 
 }

@@ -4,10 +4,12 @@
 
 <ul class="collection with-header col s12 m6 l3">
     <li class="collection-header"><h5>Programme</h5></li>
-    <li class="collection-item">Exercice 1<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>
+    <!--<li class="collection-item">Exercice 1<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>
     <li class="collection-item">Exercice 2<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>
     <li class="collection-item">Exercice 3<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>
-    <li class="collection-item">Exercice 4<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>
+    <li class="collection-item">Exercice 4<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>-->
+
+    <li class="collection-item" *ngFor="let exer of data.exercices"><a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>
 </ul>
 
 <div id="id_boite_exercices" class="col s12 m6 l3">

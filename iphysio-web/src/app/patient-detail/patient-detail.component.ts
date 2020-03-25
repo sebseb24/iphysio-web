@@ -5,6 +5,7 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { ProgrammeExerciceComponent } from '../programme-exercice/programme-exercice.component';
 import { PatientService} from '../patients/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { DialogService } from '../shared/dialog.service';
 
 
 
@@ -20,10 +21,9 @@ export class PatientDetailComponent implements OnInit {
   selectedPatient : any;
   //listeProgramme : any[];
 
-  constructor(private dialog: MatDialog,  public patientService : PatientService) { 
-    
-
-  }
+  constructor(private dialog: MatDialog,
+      public patientService : PatientService,
+      private dialogService : DialogService) { }
 
   ngOnInit(): void {
     this.selectedPatient = this.patientService.getSelectedPatient();
@@ -60,16 +60,24 @@ export class PatientDetailComponent implements OnInit {
   }
 
   deleteProgramme(pro) {
-    if(confirm("voulez vous vraiment supprimer " + pro.nom)) {
+    /*if(confirm("voulez vous vraiment supprimer " + pro.nom)) {
       console.log("programme supprimé");
       
-      this.patientService.deleteProgrammeExercice(pro._id).subscribe( res => {
-        console.log("delete avec succes");
-        this.refreshProgrammeList();
+      
 
-      });
+    }*/
 
-    }
+    this.dialogService.openConfirmDialog("Voulez vous vraiment supprimer " + pro.nom + " ?").afterClosed().subscribe( res => {
+      if (res) {
+
+        this.patientService.deleteProgrammeExercice(pro._id).subscribe( res => {
+          console.log("delete avec succes");
+          this.refreshProgrammeList();
+  
+        });
+
+      } 
+    });
   }
 
 
