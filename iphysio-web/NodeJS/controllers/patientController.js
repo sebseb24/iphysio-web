@@ -5,7 +5,6 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 var { Patient } = require('../models/patients');
 
-// => localhost:3000/Patients/
 router.get('/', verifyToken, (req, res) => {
     Patient.find((err, docs) => {
         if (!err) {res.send(docs); }

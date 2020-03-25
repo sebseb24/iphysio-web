@@ -5,26 +5,11 @@
     <div class="row">
         <ul class="collection with-header col s12 m6 l4">
             <li class="collection-header"><h4>Historique des activités</h4></li>
-            <li class="collection-item">
-                <p>Activite 1 <br>
-                    Detail
+            <li class="collection-item" *ngFor="let hist of historiqueService.historique">
+                <p>{{hist.programme_id}} <br>
+                    {{hist.date}}
                  </p>
-            </li>
-            <li class="collection-item">
-                <p>Activite 2 <br>
-                    Detail
-                 </p>
-            </li>
-            <li class="collection-item">
-                <p>Activite 3 <br>
-                    Detail
-                 </p>
-            </li>
-            <li class="collection-item">
-                <p>Activite 4 <br>
-                    Detail
-                 </p>
-            </li>        
+            </li>      
         </ul>   
         
         <div class="col s12 m6 l4">
@@ -42,8 +27,7 @@
         <ul class="collection with-header col s12 m6 l4">
             <li class="collection-header">
                 <h4>Programme<a class="secondary-content btn-small waves-effect waves-light" (click)="editProgram()"><i class="material-icons">add</i></a>      </h4> 
-                         
-            </li>
+            </li> 
             <!--<li class="collection-item" (click)="editProgram()">Programme 1               
                  <a class="secondary-content"><i class="material-icons">delete</i></a>
             </li>

@@ -17,7 +17,6 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {DemoMaterialModule} from './material-module';
 import { LoginComponent } from './auth/login/login.component';
-import { AdminComponent } from './auth/admin/admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CreateUserComponent } from './auth/create-user/create-user.component';
 import { AuthGuard } from './auth/auth.guard';
@@ -33,7 +32,6 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
    NouveauPatientComponent,
    ProgrammeExerciceComponent,
    LoginComponent,
-   AdminComponent,
    DashboardComponent,
    CreateUserComponent,
    ConfirmDialogComponent,
@@ -48,10 +46,6 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
       {
         path: 'login',
         component: LoginComponent
-      },
-      {
-        path: 'admin',
-        component: AdminComponent
       },
       {
         path: 'create-user',
