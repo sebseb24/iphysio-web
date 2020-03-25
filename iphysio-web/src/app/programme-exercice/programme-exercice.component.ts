@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl} from '@angular/forms';
 import { PatientService } from '../patients/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -49,6 +50,17 @@ export class ProgrammeExerciceComponent implements OnInit {
           this.dialogRef.close();
         }
       )
+    } else {
+
+      this.patientService.putProgramExercice(this.data).subscribe((res) => {
+        console.log(res);
+        this.dialogRef.close();
+      }, (err) => {
+        console.log(err);
+        this.dialogRef.close();
+      })
+
+
     }
 
 
