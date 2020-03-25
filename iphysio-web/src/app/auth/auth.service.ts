@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
 
   readonly baseURL = 'http://localhost:3000/physios';
+  connectedUser = new Physio;
 
   constructor(private _http: HttpClient, private _router: Router) { }
 
@@ -25,7 +26,8 @@ export class AuthService {
   }
 
   logoutUser() {
-    localStorage.removeItem('token');
+    //localStorage.removeItem('token');
+    localStorage.clear();
     this._router.navigate(['/login']);
   }
 

@@ -25,7 +25,7 @@ export class PatientsComponent implements OnInit {
   }
 
   refreshPatientList() {
-    this.patientService.getPatientList().subscribe(
+    this.patientService.getPatientList(localStorage.getItem('_id')).subscribe(
       (res) => {
         this.patientService.patients = res as Patient[];
       },

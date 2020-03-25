@@ -32,7 +32,7 @@ export class NouveauPatientComponent implements OnInit {
   }
 
   refreshPatientList() {
-    this.patientService.getPatientList().subscribe((res) => {
+    this.patientService.getPatientList("5e73a4490ff6c3ac5cbd9147").subscribe((res) => {
       this.patientService.patients = res as Patient[];
     });
   }
