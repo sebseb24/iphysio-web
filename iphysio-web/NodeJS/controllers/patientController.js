@@ -5,7 +5,6 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 var { Patient } = require('../models/patients');
 
-// => localhost:3000/Patients/
 router.get('/', verifyToken, (req, res) => {
     Patient.find((err, docs) => {
         if (!err) {res.send(docs); }
@@ -13,14 +12,14 @@ router.get('/', verifyToken, (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
-    if (!ObjectId.isValid(req.params.id))
-        return res.status(400).send('No record with given id :  + ${res.params.id};');
-
-    Patient.findById(req.params.id, (err, doc) => {
-        if (!err) { res.send(doc); }
-        else { console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2)); }
-    });
+router.get('/:physio_associe_id', (req, res) => {
+    Patient.find(
+        { physio_associe: req.params.physio_associe_id },
+        (err, doc) => {
+            if (!err) { res.send(doc); }
+            else { console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2)); }
+        }
+    )
 });
 
 router.post('/', (req, res) => {

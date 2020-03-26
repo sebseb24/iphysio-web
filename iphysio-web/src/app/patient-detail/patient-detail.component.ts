@@ -7,6 +7,9 @@ import { PatientService} from '../patients/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from '../shared/dialog.service';
 
+import { Historique } from '../../../NodeJS/models/historique';
+import { HistoriqueService } from '../../../NodeJS/services/historique.service';
+
 
 
 @Component({
@@ -17,18 +20,16 @@ import { DialogService } from '../shared/dialog.service';
 export class PatientDetailComponent implements OnInit {
 
   @Input() patient: Patient;
-
+  
   selectedPatient : any;
-  //listeProgramme : any[];
 
   constructor(private dialog: MatDialog,
       public patientService : PatientService,
+      public historiqueService : HistoriqueService,
       private dialogService : DialogService) { }
 
   ngOnInit(): void {
     this.selectedPatient = this.patientService.getSelectedPatient();
-    //this.listeProgramme = this.patientService.programmeList;
-
   }
 
   editProgram(pro ? : any) {
@@ -57,6 +58,15 @@ export class PatientDetailComponent implements OnInit {
     });
     
 
+  }
+
+  refreshHistoriqueList() {
+    /*this.historiqueService.getHistoriqueList(this.patientService.selectedPatient._id).subscribe(
+      (res) => {
+        this.historiqueService.historique = res as Historique[];
+      },
+      (err) => {
+      });*/
   }
 
   deleteProgramme(pro) {

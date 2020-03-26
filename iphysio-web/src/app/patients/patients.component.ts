@@ -3,7 +3,10 @@ import { Router } from '@angular/router'
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Patient } from '../../../NodeJS/models/patients';
-import { PatientService } from './patient.service'
+import { PatientService } from './patient.service';
+
+import { Historique } from '../../../NodeJS/models/historique';
+import { HistoriqueService } from '../../../NodeJS/services/historique.service';
 
 @Component({
   selector: 'app-patients',
@@ -12,7 +15,7 @@ import { PatientService } from './patient.service'
 })
 export class PatientsComponent implements OnInit {
 
-  constructor(public patientService: PatientService, private _router: Router) { }
+  constructor(public patientService: PatientService, private _router: Router, private historiqueService: HistoriqueService) { }
 
   ngOnInit(): void {
     this.refreshPatientList();
@@ -24,8 +27,6 @@ export class PatientsComponent implements OnInit {
     this.selectedPatient = patient;
     this.patientService.selectedPatient = patient;
 
-    console.log(patient._id);
-
     this.patientService.getProgrammeList(patient._id).subscribe(
       (res) => {
         this.patientService.programmeList= res as any[];
@@ -34,21 +35,20 @@ export class PatientsComponent implements OnInit {
       (err) => {
         if(err instanceof HttpErrorResponse) {
           if(err.status === 401 || err.status === 500) {
-            //localStorage.removeItem('token');
-            //this._router.navigate(['/login']);
           }
         }
       });
 
-
-    
-
-
-
+      this.historiqueService.getHistoriqueList(this.patientService.selectedPatient._id).subscribe(
+        (res) => {
+          this.historiqueService.historique = res as Historique[];
+        },
+        (err) => {
+        });
   }
 
   refreshPatientList() {
-    this.patientService.getPatientList().subscribe(
+    this.patientService.getPatientList(localStorage.getItem('_id')).subscribe(
       (res) => {
         this.patientService.patients = res as Patient[];
       },
