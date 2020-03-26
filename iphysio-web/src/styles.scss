@@ -48,3 +48,13 @@ a.action-btn:hover{
   }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.collection-item:hover {
+    background-color: rgb(71, 171, 179);
+    cursor: pointer;
+}
+
+.secondary-content:hover {
+    color:black;
+}

@@ -55,8 +55,14 @@ router.put('/', (req, res) => {
 
         if(req.body.nom != null && req.body.nom != doc.nom) {
             doc.nom = req.body.nom;
+            
         }
 
+        //doc.exercices.concat(req.body.exercices);
+
+        //doc.exercices = req.exercices;
+
+        console.log(doc);
         doc.save((err, product) => {
 
             if(!err) {res.send(product);}
