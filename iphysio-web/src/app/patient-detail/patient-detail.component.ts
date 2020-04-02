@@ -10,6 +10,7 @@ import { DialogService } from '../shared/dialog.service';
 import { Historique } from '../../../NodeJS/models/historique';
 import { HistoriqueService } from '../../../NodeJS/services/historique.service';
 
+import { HistoriqueActiviteComponent } from '../historique-activite/historique-activite.component';
 
 
 @Component({
@@ -102,6 +103,24 @@ export class PatientDetailComponent implements OnInit {
         console.log(err);
       }
     )
+
+  }
+
+  openHistorique(hist) {
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "700px";
+    
+    dialogConfig.data = hist;    
+
+    let dialogRef =this.dialog.open(HistoriqueActiviteComponent, dialogConfig);
+
+
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
+
+
 
   }
 
