@@ -22,6 +22,7 @@ import { CreateUserComponent } from './auth/create-user/create-user.component';
 import { AuthGuard } from './auth/auth.guard';
 import { TokenInterceptorService } from './auth/token-interceptor.service';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { HistoriqueActiviteComponent } from './historique-activite/historique-activite.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
    DashboardComponent,
    CreateUserComponent,
    ConfirmDialogComponent,
+   HistoriqueActiviteComponent,
   ],
   imports: [
     BrowserModule,

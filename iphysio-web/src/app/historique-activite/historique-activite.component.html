@@ -1,0 +1,16 @@
+<div class="row" id="container-div">
+    <div class="col s12 m12">
+    <label>Date :</label>
+    <p>{{data.date}}</p>
+    <label>Duree total :</label>
+    <p>{{data.duree}}</p>
+    <h5>Liste des activités</h5>
+    <div *ngFor="let act of data.activite">
+        <div class="divider"></div>
+        <label>nom</label> <p> {{act.nom}}</p>
+        <label>resultat</label> <p>{{act.resultat}}</p> 
+        
+
+    </div>
+</div>
+</div>
