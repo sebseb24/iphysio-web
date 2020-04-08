@@ -17,7 +17,8 @@ const URI = "mongodb+srv://admin:admin@iphysio-cluster-zq4bh.mongodb.net/iphysio
 
 mongoose.connect(URI || 'mongodb://localhost:27017/iphysioBD-dev', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify : false
 });
 
 mongoose.connection.on('connected', () => {
