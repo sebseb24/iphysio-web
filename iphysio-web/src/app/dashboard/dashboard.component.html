@@ -1,34 +1,99 @@
+
+<!--
+  <ul id="dropdown1" class="dropdown-content">
+    <li><a href="#!">one</a></li>
+    <li class="divider"></li>
+    <li><a href="#!">two</a></li>
+    <li><a href="#!">three</a></li>
+  </ul>
   <nav>
-    <div class="nav-wrapper teal lighten-3">
+    <div class="nav-wrapper primary-color">
       <button class="btn waves-effect waves-light" (click)="openDialog()">Ajouter un patient</button>
+      <div class="header-search-wrapper left">
+        <i class="material-icons" style="display: inline-block; color: black; margin-left: 10px; position: absolute; line-height: 43px; ">search</i>
+        <input id="search-patient" class="header-search-input" type="search" placeholder="Rechercher un patient">
+      </div>
+      
+      <a href="#" class="brand-logo center">
+        <img src="assets/image/logo_navbar.png" alt="logo_navbar" height="40px" style="vertical-align: middle;" >
+      </a>
+
       <ul id="nav-mobile" class="right hide-on-med-and-down ">
         <li><a href="#"> <i class="material-icons">mail</i></a></li>
         <li><a href="#"><i class="material-icons">help</i></a></li>
-        <li><a (click)="onLogout()"><i class="material-icons">portrait</i></a></li>
+        <li><a href="#" class="dropdown-trigger" data-activates="dropdown1"><i class="material-icons">portrait</i></a></li>
       </ul>
     </div>
   </nav>
+-->
 
-
-<app-patients></app-patients>
-
-
-<footer class="page-footer teal lighten-3">
-  <div class="container">
-    <div class="row">
-      <div class="col l6 s12">
-        <h5 class="white-text">EPMUS</h5>
-        <p class="grey-text text-lighten-4">Utilisateur connecté : {{connectedUser.name}}</p>
-      </div>      
-    </div>
+<!-- TOPBAR -->
+<div class="topbar-wrapper">
+  <div class="topbar-nav-wrapper">
+    <a href="#"><i class="material-icons topbar-nav-button">mail</i></a>
+    <a (click)="onLogout()"><i class="material-icons topbar-nav-button">account_circle</i></a>
   </div>
-  <div class="footer-copyright">
-    <div class="container">
-    Made by EPMUS
-    </div>
-  </div>
-</footer>
 
+  <div class="topbar-search-wrapper">
+    <i class="material-icons" style="display: inline-block; color: black; margin-left: 10px; position: absolute; line-height: 43px; ">search</i>
+
+    <!--<input type="text" class="topbar-search-input" placeholder="Trouver un patient">-->
+    <div class="ng-autocomplete">
+      <ng-autocomplete
+        class="topbar-search-input"
+        id="autocomplete"
+        placeholder="Trouver un patient" 
+        [data]="data"
+        [searchKeyword]="keyword"
+        (selected)='selectEvent($event)'
+        (inputFocused)='onFocused($event)'
+        [itemTemplate]="itemTemplate"
+        [notFoundTemplate]="notFoundTemplate">                                 
+      </ng-autocomplete>
+
+      <ng-template #itemTemplate let-item>
+        <a [innerHTML]="item.name"></a>
+      </ng-template>
+
+      <ng-template #notFoundTemplate let-notFound>
+        <div [innerHTML]="notFound"></div>
+      </ng-template>
+    </div>
+    
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div class="sidebar-wrapper">
+  <div class="sidebar-header">
+    <img src="assets/image/logo.jpg" alt="logo_navbar" height="25px" >
+    <label class="sidebar-header-label">iPhysio</label>
+  </div>
+  
+  <div class="sidebar-user">
+    <ul>
+      <li (click)="openDialog()"><i class="material-icons sidebar-menu-icon">add_circle_outline</i>Nouveau patient</li>
+      <li><i class="material-icons sidebar-menu-icon">assignment</i>Programmes d'exercices</li>
+    </ul>
+  </div>
+</div>
+
+
+<div class="dashboard-body">
+
+  <div class="dashboard-background"></div>
+
+  <app-patient-detail [patient]="patientService.selectedPatient"></app-patient-detail>
+
+  <footer *ngIf="patientService.selectedPatient" class="page-footer">
+      <div class="container-left">
+        <label style="color: white">© 2020 <b>iPhysio</b> Tous droits réservés</label>
+      </div>
+      <div class="container-right">
+        <label style="color: white">Conçu et développé par <b>EPMUS</b></label>
+      </div>
+  </footer>
+</div>
 
 
 

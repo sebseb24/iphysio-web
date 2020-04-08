@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Patient } from '../patient';
+import { Patient } from '../../../NodeJS/models/patients';
 
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { ProgrammeExerciceComponent } from '../programme-exercice/programme-exercice.component';
@@ -22,7 +22,7 @@ export class PatientDetailComponent implements OnInit {
 
   @Input() patient: Patient;
   
-  selectedPatient : any;
+  selectedPatient : Patient;
 
   constructor(private dialog: MatDialog,
       public patientService : PatientService,
@@ -31,8 +31,9 @@ export class PatientDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedPatient = this.patientService.getSelectedPatient();
+    this.refreshHistoriqueList();
   }
-
+ 
   editProgram(pro ? : any) {
 
     const dialogConfig = new MatDialogConfig();
@@ -58,8 +59,6 @@ export class PatientDetailComponent implements OnInit {
         }
       )
     });
-    
-
   }
 
   refreshHistoriqueList() {

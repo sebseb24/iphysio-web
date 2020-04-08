@@ -1,6 +1,9 @@
 .login-btn {
+    margin: auto;
+    text-align: center;
     width: 100%;
-    margin-bottom: 15px;
+    margin-top: 15px;
+    border-radius: 30px;
 }
 
 .layout-div {
@@ -8,13 +11,14 @@
     margin-right: auto;
     margin-bottom: 20px;
     padding-top: 7rem !important;
-    max-width: 45%;
+    max-width: 27%;
     flex: 0 0 50%;
 }
 
 .col-div {
     position: relative;
     width: 100%;
+    text-align: center;
     padding-right: 15px;
     padding-left: 15px;
     margin-right: auto!important;
@@ -26,15 +30,14 @@
     margin: 0.5rem 0 1rem 0;
     background-color: #fff;
     transition: box-shadow .25s;
-    border-radius: 10px;
-
     display: flex;
     flex-direction: column;
+    padding: 20px;
     min-width: 0;
     word-wrap: break-word;
     border: 1px solid rgba(0,0,0,.125);
 
-    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 0px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
 .header-div {
@@ -54,6 +57,20 @@
     padding: 1.25rem;
 }
 
+.card-component {
+    margin-bottom: 15px;
+}
+
 .form-group {
     margin-bottom: 10px;
+}
+
+.warning-div {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.warning-label {
+    font-size: 14px;
+    color: red;
 }
