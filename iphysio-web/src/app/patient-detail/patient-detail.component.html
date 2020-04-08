@@ -1,4 +1,4 @@
-<div *ngIf="patient" class="wrapper">
+<!--<div *ngIf="patient" class="wrapper">
     <h5>Nom du patient: {{patient.name}}</h5>
     <div class="divider"></div>
 
@@ -39,26 +39,130 @@
             </li>
             <li class="collection-item" (click)="editProgram()">Programme 4               
                 <a class="secondary-content"><i class="material-icons">delete</i></a>
-            </li>-->
+            </li>
 
 
             <li class="collection-item" *ngFor="let pro of patientService.programmeList" (click)="editProgram(pro)">{{pro.nom}}          
                 <a class="secondary-content" (click)="deleteProgramme(pro);$event.stopPropagation()"><i class="material-icons">delete</i></a>
             </li>
-
-
-
-            
-
-
         </ul>
-
-
-
     </div>
 
     <div class="col s12">
         <div>Stats</div>     
     </div>
-</div>
+</div>-->
+<script>
+    window.onload = function () {
+    
+    var chart = new CanvasJS.Chart("chartContainer", {
+        animationEnabled: true,
+        theme: "light2",
+        title:{
+            text: "Simple Line Chart"
+        },
+        axisY:{
+            includeZero: false
+        },
+        data: [{        
+            type: "line",
+              indexLabelFontSize: 16,
+            dataPoints: [
+                { y: 450 },
+                { y: 414},
+                { y: 520, indexLabel: "\u2191 highest",markerColor: "red", markerType: "triangle" },
+                { y: 460 },
+                { y: 450 },
+                { y: 500 },
+                { y: 480 },
+                { y: 480 },
+                { y: 410 , indexLabel: "\u2193 lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+                { y: 500 },
+                { y: 480 },
+                { y: 510 }
+            ]
+        }]
+    });
+    chart.render();
+    
+    }
+    </script>
   
+<div *ngIf="patient">
+    <div class="grid-container">
+
+        <div class="info">
+            <div class="card-header">
+                <label>Informations</label>
+            </div>
+            <p>Nom : {{patient.name}}</p>
+            <p>Email : {{patient.email}}</p>
+            <p>Diagnostic : Tendinite à l'épaule droite</p>
+        </div>
+
+        <div class="graph">
+            <div class="card-header">
+                <label>Graphique d'activités</label>
+            </div>
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+            <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        </div>
+
+        <div class="historique">
+            <div class="card-header">
+                <label>Historique des activités</label>
+            </div>
+            <div class="card-content">
+                <ul>
+                    <li *ngFor="let hist of historiqueService.historique"> 
+                        <div class="historique-header">
+                            <label class="hist-label" style="float: left; font-weight: 400;">{{hist.date}}</label>
+                            <label class="hist-label" style="float: right; font-weight: 600;">{{hist.programme_id}}</label>
+                            
+                        </div>
+                        <div>
+                            <div class="historique-stats">
+                                <label class="hist-label" style="position: relative; top: -10px;">Durée : {{hist.duree}} ; 6 exercices</label>
+                            </div>
+                            <div class="historique-score">
+                                <label class="hist-label" style="font-size: 16px; font-weight: 400; position: relative; top: -10px">97%</label>
+                            </div>
+                            <div style="clear: both;"></div>
+                        </div>  
+                    </li>
+                </ul>
+            </div>
+
+            
+        </div>
+        <div class="programs">
+            <div class="card-header">
+                <label>Programmes</label>
+                <a (click)="editProgram()"><i class="material-icons" style="position: relative; float: right; margin-top: 13px; color: #009900; cursor: pointer;">add_box</i></a>
+            </div>
+
+            <div class="card-content">
+                <ul>
+                    <li *ngFor="let pro of patientService.programmeList" (click)="editProgram(pro)">
+                        <label class="hist-label" style="margin-left: 10px; position: relative; top: -6px;">{{pro.nom}}</label>          
+                        <a class="secondary-content" (click)="deleteProgramme(pro);$event.stopPropagation()"><i class="material-icons" style="color: red">clear</i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="item5">
+            <div class="card-header">
+                <label>Commentaires</label>
+            </div>
+        </div>
+        <div class="notes">
+            <div class="card-header">
+                <label>Notes</label>
+            </div>
+            <div class="card-content">
+                <textarea style="height: 100%; border: none; padding: 15px; font-size: 13px; line-height: inherit; resize: none;" rows="14" cols="50">{{patientService.selectedPatient.notes}}</textarea>
+            </div>
+        </div>
+    </div>
+</div>

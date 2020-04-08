@@ -1,26 +1,28 @@
-<div class="layout-div">
+<div class="layout-div" ng-style="{'background-color':'black'}">
     <div class="col-div">
         <div class="card-div">
-            <div class="header-div">
-                <h3 class="title">Se connecter</h3>
-            </div>
             <div class="body-card">
+                <div class="card-component">
+                    <img src="assets/image/logo.jpg" alt="logo" height="100px">
+                </div>
                 <form #loginForm="ngForm" (ngSubmit)="onLoginSubmit(loginForm)">
-                    <div class="form-group">
-                        <label for="">Adresse courriel</label>
-                        <input type="text" name="email" ngModel class="form-control rounded-0" required>
+                    <div class="card-component">
+                        <div class="form-group">
+                            <input type="text" name="email" ngModel class="form-control rounded-0" placeholder="Adresse courriel" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="hash" ngModel class="form-control rounded-0" placeholder="Mot de passe" required>
+                        </div>
+    
+                        <div *ngIf="wrongCred" class="warning-div">
+                            <label class="warning-label">Adresse courriel et/ou mot de passe invalide</label>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="">Mot de passe</label>
-                        <input type="password" name="hash" ngModel class="form-control rounded-0" required>
+                   
+                    <div class="card-component">
+                        <button class="btn primary-color login-btn" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+                        <button class="btn primary-color login-btn" type="button" routerLink="/create-user">Créer un compte</button>
                     </div>
-
-                    <div *ngIf="wrongCred" class="warning-div">
-                        <label class="warning-label">Adresse courriel et/ou mot de passe invalide</label>
-                    </div>
-                    
-                    <button class="btn btn-primary login-btn" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
-                    <button class="btn btn-primary login-btn" type="button" routerLink="/create-user">Créer un compte</button>
                 </form>
             </div>
         </div>

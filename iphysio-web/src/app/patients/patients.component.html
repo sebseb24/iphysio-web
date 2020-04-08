@@ -1,4 +1,4 @@
-<div class="row">
+<!--<div class="row">
     <div class="vert-nav col s12 m2">
         <div class="wrapper">
 
@@ -21,4 +21,14 @@
     <div class="container col s12 m10">
         <app-patient-detail [patient]="selectedPatient"></app-patient-detail>
     </div>
+</div>-->
+
+<div>
+    <ul class="patients">
+        <li *ngFor="let pat of patientService.patients"
+        [class.selected]="pat === selectedPatient"
+        (click)="onSelect(pat)">
+            {{pat.name}}
+        </li>
+    </ul>
 </div>

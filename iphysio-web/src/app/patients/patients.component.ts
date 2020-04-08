@@ -19,6 +19,7 @@ export class PatientsComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshPatientList();
+    this.selectedPatient = this.patientService.getSelectedPatient();
   }
 
   selectedPatient: Patient;

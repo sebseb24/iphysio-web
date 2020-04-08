@@ -22,6 +22,7 @@ import { CreateUserComponent } from './auth/create-user/create-user.component';
 import { AuthGuard } from './auth/auth.guard';
 import { TokenInterceptorService } from './auth/token-interceptor.service';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    AutocompleteLibModule,
     RouterModule.forRoot([
       {
         path: 'login',
