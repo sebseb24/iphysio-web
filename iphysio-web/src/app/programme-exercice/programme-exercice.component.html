@@ -32,6 +32,7 @@
 <div class="col s12 m12 l6" *ngIf="selectedExercice">
     <h4>Options d'exercice </h4>
     <p>Exercice : ({{selectedExercice.refExercice}})</p>
+    
     <div class="row"> 
         <div class="col s12">
         <label>Nom:</label>
@@ -68,6 +69,36 @@
             <mat-checkbox [(ngModel)]="selectedExercice.jeudi">Jeudi</mat-checkbox>
             <mat-checkbox [(ngModel)]="selectedExercice.vendredi">Vendredi</mat-checkbox>
             <mat-checkbox [(ngModel)]="selectedExercice.samedi">Samedi</mat-checkbox>
+        </div>
+        <div *ngIf="selectedExercice.refExercice=='Mouvement bras'" class="radiogroup col s12">
+            <p>Bras où l'exercice doit être éffectué</p>
+            <mat-checkbox [(ngModel)]="selectedExercice.brasGauche">Gauche</mat-checkbox>
+            <mat-checkbox [(ngModel)]="selectedExercice.brasDroit">Droit</mat-checkbox>
+        </div>
+        <div *ngIf="selectedExercice.refExercice=='Étirement du trapèze'" class="col s12">
+            <div class="col s12 m4">
+            <p>Séries</p>
+            <input type="number" [(ngModel)]="selectedExercice.series" >
+            </div>
+            <div class="col s12 m4">
+            <p>Temps (en seconde)</p>
+            <input type="number" [(ngModel)]="selectedExercice.tempSerie" >
+            </div>            
+        </div>
+        <div *ngIf="selectedExercice.refExercice=='Flexion du coude'" class="col s12">
+            <div class="col s12 m4">
+            <p>Séries</p>
+            <input type="number" [(ngModel)]="selectedExercice.serie" >
+            </div>
+            <div class="col s12 m4">
+            <p>Temps (en seconde)</p>
+            <input type="number" [(ngModel)]="selectedExercice.tempSerie" >
+            
+            </div>   
+            <div class="col s12 m4">
+                <p>Angle à maintenir</p>
+                <input type="number" [(ngModel)]="selectedExercice.angle" > <label>degré</label>               
+            </div>           
         </div>
         <div class="right-align" *ngIf="isNewExercice">
         <button class="right-aligned" mat-raised-button (click)="ajoutElement()">{{sauvegarderOptions}}</button>

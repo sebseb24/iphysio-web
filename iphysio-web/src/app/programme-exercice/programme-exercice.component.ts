@@ -182,7 +182,8 @@ export class ProgrammeExerciceComponent implements OnInit {
   newExercice(ex) {
     this.isNewExercice = true;
     this.sauvegarderOptions = "Ajouter";
-    this.selectedExercice = {refExercice : ex.name};
+    this.selectedExercice = {refExercice : ex.name,
+                            nom : ex.name};
   }
 
   deleteExercice(index) {
