@@ -11,6 +11,7 @@ import { Historique } from '../../../NodeJS/models/historique';
 import { HistoriqueService } from '../../../NodeJS/services/historique.service';
 
 import { HistoriqueActiviteComponent } from '../historique-activite/historique-activite.component';
+import { EditPatientComponent } from '../edit-patient/edit-patient.component';
 
 
 @Component({
@@ -118,9 +119,21 @@ export class PatientDetailComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       
     });
+  }
+
+  editPatient(pat: Patient) {
+
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.width = "700px";
+    
+    dialogConfig.data = pat;    
+
+    let dialogRef =this.dialog.open(EditPatientComponent, dialogConfig);
 
 
-
+    dialogRef.afterClosed().subscribe(result => {
+      
+    });
   }
 
  
