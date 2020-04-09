@@ -24,6 +24,7 @@ import { TokenInterceptorService } from './auth/token-interceptor.service';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { HistoriqueActiviteComponent } from './historique-activite/historique-activite.component';
+import { EditPatientComponent } from './edit-patient/edit-patient.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { HistoriqueActiviteComponent } from './historique-activite/historique-ac
    CreateUserComponent,
    ConfirmDialogComponent,
    HistoriqueActiviteComponent,
+   EditPatientComponent,
   ],
   imports: [
     BrowserModule,
