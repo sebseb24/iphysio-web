@@ -8,10 +8,6 @@
     display: inline-block;
 }
 
-/*.collection {
-    overflow-y: scroll;
-}*/
-
 .btn-floating {
     margin-top: 10px;
     display: block;
@@ -110,4 +106,15 @@
     float: left;
     width: 30%;
     height: 40px;
+}
+
+.notes {
+    height: auto;
+    overflow: auto;
+}
+
+.note-text{
+    min-height: 300px;
+    overflow-y: scroll;
+    resize: none;
 }
