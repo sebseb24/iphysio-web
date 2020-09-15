@@ -45,6 +45,7 @@
     <ul>
       <li (click)="openDialog()"><i class="material-icons sidebar-menu-icon">add_circle_outline</i>Nouveau patient</li>
       <li><i class="material-icons sidebar-menu-icon">assignment</i>Programmes d'exercices</li>
+      <li (click)="displayArchive()"><i class="material-icons sidebar-menu-icon">archive</i>Archive</li>
     </ul>
   </div>
 </div>
@@ -54,7 +55,8 @@
 
   <div class="dashboard-background"></div>
 
-  <app-patient-detail [patient]="patientService.selectedPatient"></app-patient-detail>
+  <app-patient-archive *ngIf="dispArchive"></app-patient-archive>
+  <app-patient-detail *ngIf="dispPatientDetail" [patient]="patientService.selectedPatient"></app-patient-detail>
 
   <footer *ngIf="patientService.selectedPatient" class="page-footer">
       <div class="container-left">

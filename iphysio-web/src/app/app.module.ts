@@ -25,6 +25,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { HistoriqueActiviteComponent } from './historique-activite/historique-activite.component';
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
+import { PatientArchiveComponent } from './patient-archive/patient-archive.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { EditPatientComponent } from './edit-patient/edit-patient.component';
    ConfirmDialogComponent,
    HistoriqueActiviteComponent,
    EditPatientComponent,
+   PatientArchiveComponent,
   ],
   imports: [
     BrowserModule,

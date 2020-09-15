@@ -28,6 +28,10 @@ export class PatientService {
     return this.http.get(this.baseURL +  `/${_id}`);
   }
 
+  getAllPatientList(_id: String) {
+    return this.http.get(this.baseURL +  `/all/${_id}`);
+  }
+
   putPatient(pat : Patient) {
     return this.http.put(this.baseURL + `/${pat._id}`, pat);
   }
