@@ -4,11 +4,6 @@
 
 <ul class="collection with-header col s12 m6 l3">
     <li class="collection-header"><h5>Programme</h5></li>
-    <!--<li class="collection-item">Exercice 1<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>
-    <li class="collection-item">Exercice 2<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>
-    <li class="collection-item">Exercice 3<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>
-    <li class="collection-item">Exercice 4<a href="#" class="secondary-content"><i class="material-icons">delete</i></a></li>-->
-
     <li class="collection-item" *ngFor="let exer of data.exercices; let i = index;" (click)="showExerciceParam(exer, i)">{{exer.nom}}<a  class="secondary-content" (click)="deleteExercice(i)"><i class="material-icons">delete</i></a></li>
 </ul>
 
@@ -20,12 +15,7 @@
         <i class="material-icons prefix">search</i>
         <input type="text" />        
     </div>
-    <li class="collection-item" *ngFor="let exer of exercices" (click)="newExercice(exer)">{{exer.name}}</li>
-    <!--<li class="collection-item">Exercice 2</li>
-    <li class="collection-item">Exercice 3</li>
-    <li class="collection-item">Exercice 4</li>
-    <li class="collection-item">Exercice 4</li>-->
-    
+    <li class="collection-item" *ngFor="let exer of exercices" (click)="newExercice(exer)">{{exer.name}}</li>    
 </ul>
 </div>
 <div id="containerOption" class="col s12 m12 l6" *ngIf="selectedExercice==null"></div>
@@ -36,16 +26,9 @@
     <div class="row"> 
         <div class="col s12">
         <label>Nom:</label>
-        <input type="text" [(ngModel)]="selectedExercice.nom"/> <!--data.exercices[selectedExercice.index].nom-->
+        <input type="text" [(ngModel)]="selectedExercice.nom"/> 
         </div>
         <div class="col s12">
-            <!--<mat-label>Type</mat-label>
-            <mat-select [(value)]="exerciceFrequence">
-            <mat-option>None</mat-option>
-            <mat-option value="journalier">Journalier</mat-option>
-            <mat-option value="hebdomadaire">Mensuel</mat-option>
-            <mat-option value="option3">Option 3</mat-option>
-            </mat-select>-->
             <label>Repetition par jours</label>
             <input type="number" [(ngModel)]="selectedExercice.repetition">
         </div>

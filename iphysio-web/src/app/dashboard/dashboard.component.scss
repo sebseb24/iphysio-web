@@ -174,14 +174,9 @@
 .patients{
     border: 1px solid rgb(115, 183, 192);
     list-style-type: none;
-    /*margin: 0 0 0 0;*/
     padding: 0;
-    /*width: 15em;*/
     background-color: rgb(244, 245, 247);
-    /*min-height: 700px;*/
-    /*overflow-y:scroll;*/
-    overflow-y: hidden;
-    
+    overflow-y: hidden;    
 }
 
 .patients > li {

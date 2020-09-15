@@ -5,7 +5,6 @@ var ObjectId = require('mongoose').Types.ObjectId;
 
 var { Patient } = require('../models/patients');
 var { Programme } = require('../models/programme');
-//var { Exercice} = require('../models/exercices');
 
 // => localhost:3000/Patients/
 router.get('/', (req, res) => {
@@ -27,24 +26,6 @@ router.get('/:patientId', (req, res) => {
 
     });
 
-//
-    /*Programme.find({patientId : req.params.patientId}).populate('exercices.refExercice')
-    .exec(function(err, item) {
-
-        if(err) {res.send(err)} 
-        else {
-
-
-            Programme.populate(item,  { path:"exercices", model:"exercices" }, function(err, course){
-                //console.log(course);
-                 res.send(item);
-              });
-           
-        
-        
-        }
-
-    });*/
 });
 
 router.delete('/:id', (req, res) => {
@@ -73,9 +54,6 @@ router.post('/', (req, res) => {
 
 router.put('/', (req, res) => {
 
-    //console.log(req.body._id);
-    console.log(req.body);
-
     Programme.findByIdAndUpdate(req.body._id,
         
         {
@@ -87,36 +65,7 @@ router.put('/', (req, res) => {
 
         if(err) {res.send(err);}
         else {
-
-            /*if(req.body.nom != null && req.body.nom != doc.nom) {
-                doc.nom = req.body.nom;
-                
-            }*/
-
-            //doc.update()
-
-            
-
-
-
-            console.log("debut");
-            //doc.exercices.push({nom : "test", refExercice : ObjectId("5e728ac6782c473c20eb8e78")});
-            console.log("fin");
             res.send(doc);
-
-            //doc.exercices.concat(req.body.exercices);
-
-            //doc.exercices = req.exercices;
-
-            //console.log(doc);
-
-            /*doc.save((err, product) => {
-
-            if(!err) {res.send(product);}
-            else {res.send(JSON.stringify(err, undefined, 2));}
-
-             });*/
-            //res.send(doc);
         }
     }); 
 

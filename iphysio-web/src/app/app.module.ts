@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PatientsComponent } from './patients/patients.component';
+//import { PatientsComponent } from './patients/patients.component';
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NouveauPatientComponent } from './nouveau-patient/nouveau-patient.component';
@@ -30,7 +30,7 @@ import { EditPatientComponent } from './edit-patient/edit-patient.component';
 @NgModule({
   declarations: [
     AppComponent,
-    PatientsComponent,
+    
     PatientDetailComponent,
    NouveauPatientComponent,
    ProgrammeExerciceComponent,

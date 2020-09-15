@@ -20,8 +20,7 @@ export class DashboardComponent implements OnInit {
   connectedUser = new Physio;
   keyword = 'name';
   data: Patient[];
-  //emptyValue: String = "";
-
+ 
   constructor(private dialog: MatDialog, private _authService: AuthService, public patientService: PatientService, public historiqueService: HistoriqueService,private _router: Router) {
 
   }
@@ -96,7 +95,6 @@ export class DashboardComponent implements OnInit {
   
   onFocused(e){
     console.log("onChangeSearch : " + e);
-    //this.emptyValue = ''; // [(ngModel)]
   }
 
 }
