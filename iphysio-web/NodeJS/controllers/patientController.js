@@ -14,7 +14,18 @@ router.get('/', verifyToken, (req, res) => {
 
 router.get('/:physio_associe_id', (req, res) => {
     Patient.find(
-        { physio_associe: req.params.physio_associe_id },
+        { physio_associe: req.params.physio_associe_id,
+           isActive : true },
+        (err, doc) => {
+            if (!err) { res.send(doc); }
+            else { console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2)); }
+        }
+    )
+});
+
+router.get('/all/:physio_associe_id', (req, res) => {
+    Patient.find(
+        { physio_associe: req.params.physio_associe_id},
         (err, doc) => {
             if (!err) { res.send(doc); }
             else { console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2)); }
@@ -25,7 +36,8 @@ router.get('/:physio_associe_id', (req, res) => {
 router.post('/', (req, res) => {
     var emp = new Patient({
         name: req.body.name,
-        email: req.body.email
+        email: req.body.email,
+        isActive : true
     });
 
     emp.save((err, doc) => {
@@ -45,10 +57,13 @@ router.put('/:id', (req, res) => {
         var emp = new Patient({
             name: req.body.name,
             email: req.body.email,
-            notes: req.body.notes
+            notes: req.body.notes,
+            isActive : req.body.isActive,
         });
 
-        Patient.findByIdAndUpdate(req.params.id, {$set:{notes:req.body.notes}}, function(err, doc)  {
+        
+
+        Patient.findByIdAndUpdate(req.params.id, {$set:{notes:req.body.notes, isActive: req.body.isActive}}, function(err, doc)  {
             if (!err) { 
                 res.send(doc);
                 console.log("gdfgdfgdfgdfg");
