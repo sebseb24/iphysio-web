@@ -33,6 +33,13 @@ router.get('/all/:physio_associe_id', (req, res) => {
     )
 });
 
+router.get('/patient/:id', (req, res) => {
+    Patient.findById(req.params.id, (err, doc) => {
+        if(!err) {res.send(doc);}
+        else { console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2));}
+    });
+});
+
 router.post('/', (req, res) => {
     var emp = new Patient({
         name: req.body.name,
@@ -54,21 +61,26 @@ router.put('/:id', (req, res) => {
         console.log(req.body.notes);
         console.log(req.params.id);
 
-        var emp = new Patient({
+        var pat = new Patient({
             name: req.body.name,
             email: req.body.email,
             notes: req.body.notes,
+            telephone : req.body.telephone,
+            adresse : req.body.adresse,
             isActive : req.body.isActive,
         });
 
         
 
-        Patient.findByIdAndUpdate(req.params.id, {$set:{notes:req.body.notes, isActive: req.body.isActive}}, function(err, doc)  {
-            if (!err) { 
-                res.send(doc);
-                console.log("gdfgdfgdfgdfg");
+        Patient.findByIdAndUpdate(req.params.id, {$set:{notes:req.body.notes, isActive: req.body.isActive, 
+            name : pat.name, email: pat.email, telephone: pat.telephone, adresse: pat.adresse}}, 
+            function(err, doc)  {
+                if (!err) { 
+                    res.send(doc);
+                    //console.log("gdfgdfgdfgdfg");
+                }
+                else { console.log('Error in Patient Update: ' + JSON.stringify(err, undefined, 2));
              }
-            else { console.log('Error in Patient Update: ' + JSON.stringify(err, undefined, 2)); }
         });
 
         /*Patient.findByIdAndUpdate(req.params.id, { $set: {notes:req.body.notes} }, { new: true }, (err, doc) => {
