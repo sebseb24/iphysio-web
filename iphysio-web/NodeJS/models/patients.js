@@ -5,6 +5,8 @@ var Patient = mongoose.model('Patient', {
     email: { type: String },
     physio_associe: { type: Array},
     notes: { type: String },
+    telephone : {type : String},
+    adresse : { type : String},
     isActive : {type : Boolean}
 }, 'patients');
 

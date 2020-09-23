@@ -1,16 +1,17 @@
 <div class="row" id="container-div">
     <div class="col s12 m12">
         <label>Nom :</label>
-        <input type="text" value="{{data.name}}">
+        <input type="text" [(ngModel)]="nom" >
         <label>Email :</label>
-        <input type="text" value="{{data.email}}">
-        <label>Diagnostic : </label>
-        <input type="text" value="Tendinite à l'épaule droit">
-
-        <button class="waves-effect waves-light btn-small">
+        <input type="text" [(ngModel)]="email">
+        <label>Telephone : </label>
+        <input type="text" [(ngModel)]="telephone">
+        <label>Adresse : </label>
+        <input type="text" [(ngModel)]="adresse">
+        <button (click)="enregistrer()"  class="waves-effect waves-light btn-small">
             Enregistrer
         </button>
-        <button class="waves-effect waves-light btn-small" style="margin-left: 10px;">
+        <button (click)="archiver()" class="waves-effect waves-light btn-small" style="margin-left: 10px;">
             Archiver
         </button>
     </div>
