@@ -1,57 +1,3 @@
-<!--<div *ngIf="patient" class="wrapper">
-    <h5>Nom du patient: {{patient.name}}</h5>
-    <div class="divider"></div>
-
-    <div class="row">
-        <ul class="collection with-header col s12 m6 l4">
-            <li class="collection-header"><h4>Historique des activités</h4></li>
-            <li class="collection-item" *ngFor="let hist of historiqueService.historique" (click)="openHistorique(hist)">
-                <p>{{hist.programme_id}} <br>
-                    {{hist.date}}
-                 </p>
-            </li>      
-        </ul>   
-        
-        <div class="col s12 m6 l4">
-        
-            <form class="col s12">
-              <div class="row">
-                <div class="input-field col s12">
-                  <textarea id="textarea1" class="materialize-textarea"></textarea>
-                  <label for="textarea1">Note</label>
-                </div>
-              </div>
-            </form>
-        </div>
-
-        <ul class="collection with-header col s12 m6 l4">
-            <li class="collection-header">
-                <h4>Programme<a class="secondary-content btn-small waves-effect waves-light" (click)="editProgram()"><i class="material-icons">add</i></a>      </h4> 
-            </li> 
-            <!--<li class="collection-item" (click)="editProgram()">Programme 1               
-                 <a class="secondary-content"><i class="material-icons">delete</i></a>
-            </li>
-            <li class="collection-item" (click)="editProgram()">Programme 2               
-                <a class="secondary-content"><i class="material-icons">delete</i></a>
-            </li>
-            <li class="collection-item" (click)="editProgram()">Programme 3               
-                <a class="secondary-content"><i class="material-icons">delete</i></a>
-            </li>
-            <li class="collection-item" (click)="editProgram()">Programme 4               
-                <a class="secondary-content"><i class="material-icons">delete</i></a>
-            </li>
-
-
-            <li class="collection-item" *ngFor="let pro of patientService.programmeList" (click)="editProgram(pro)">{{pro.nom}}          
-                <a class="secondary-content" (click)="deleteProgramme(pro);$event.stopPropagation()"><i class="material-icons">delete</i></a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="col s12">
-        <div>Stats</div>     
-    </div>
-</div>-->
 <script>
     window.onload = function () {
     
@@ -98,7 +44,8 @@
             </div>
             <p>Nom : {{patient.name}}</p>
             <p>Email : {{patient.email}}</p>
-            <p>Diagnostic : Tendinite à l'épaule droite</p>
+            <p>Telephone : {{patient.telephone}}</p>
+            <p>Adresse : {{patient.adresse}}</p>
         </div>
 
         <div class="graph">
@@ -202,9 +149,15 @@
             <div class="card-header">
                 <label>Notes</label>
             </div>
-            <div class="card-content">
-                <textarea style="height: 100%; border: none; padding: 15px; font-size: 13px; line-height: inherit; resize: none;" rows="14" cols="50">{{patientService.selectedPatient.notes}}</textarea>
-            </div>
+            <!--<div class="card-content">-->
+                <!--<textarea style="height: 100%; border: none; padding: 15px; font-size: 13px; line-height: inherit; resize: none;" rows="14" cols="50">
+                    {{patientService.selectedPatient.notes}}
+                </textarea>-->
+                <textarea  [(ngModel)]="patientService.selectedPatient.notes" class="note-text" rows="10">   
+                    
+                </textarea>
+                <button  mat-raised-button (click)="saveNote()">Enregistrer</button>
+            <!--  </div>-->
         </div>
     </div>
 </div>

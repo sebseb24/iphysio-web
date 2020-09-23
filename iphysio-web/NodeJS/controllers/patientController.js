@@ -14,7 +14,8 @@ router.get('/', verifyToken, (req, res) => {
 
 router.get('/:physio_associe_id', (req, res) => {
     Patient.find(
-        { physio_associe: req.params.physio_associe_id },
+        { physio_associe: req.params.physio_associe_id,
+           isActive : true },
         (err, doc) => {
             if (!err) { res.send(doc); }
             else { console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2)); }
@@ -22,10 +23,28 @@ router.get('/:physio_associe_id', (req, res) => {
     )
 });
 
+router.get('/all/:physio_associe_id', (req, res) => {
+    Patient.find(
+        { physio_associe: req.params.physio_associe_id},
+        (err, doc) => {
+            if (!err) { res.send(doc); }
+            else { console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2)); }
+        }
+    )
+});
+
+router.get('/patient/:id', (req, res) => {
+    Patient.findById(req.params.id, (err, doc) => {
+        if(!err) {res.send(doc);}
+        else { console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2));}
+    });
+});
+
 router.post('/', (req, res) => {
     var emp = new Patient({
         name: req.body.name,
-        email: req.body.email
+        email: req.body.email,
+        isActive : true
     });
 
     emp.save((err, doc) => {
@@ -38,15 +57,38 @@ router.put('/:id', (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send('No record with given id :  + ${res.params.id};');
 
-        var emp = new Patient({
+
+        console.log(req.body.notes);
+        console.log(req.params.id);
+
+        var pat = new Patient({
             name: req.body.name,
             email: req.body.email,
+            notes: req.body.notes,
+            telephone : req.body.telephone,
+            adresse : req.body.adresse,
+            isActive : req.body.isActive,
         });
 
-        Patient.findByIdAndUpdate(req.params.id, { $set: emp }, { new: true }, (err, doc) => {
-            if (!err) { res.send(doc); }
-            else { console.log('Error in Patient Update: ' + JSON.stringify(err, undefined, 2)); }
+        
+
+        Patient.findByIdAndUpdate(req.params.id, {$set:{notes:req.body.notes, isActive: req.body.isActive, 
+            name : pat.name, email: pat.email, telephone: pat.telephone, adresse: pat.adresse}}, 
+            function(err, doc)  {
+                if (!err) { 
+                    res.send(doc);
+                    //console.log("gdfgdfgdfgdfg");
+                }
+                else { console.log('Error in Patient Update: ' + JSON.stringify(err, undefined, 2));
+             }
         });
+
+        /*Patient.findByIdAndUpdate(req.params.id, { $set: {notes:req.body.notes} }, { new: true }, (err, doc) => {
+            if (!err) { 
+                res.send(doc);
+             }
+            else { console.log('Error in Patient Update: ' + JSON.stringify(err, undefined, 2)); }
+        });*/
 });
 
 router.delete('/:id', (req, res) => {

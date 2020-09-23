@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PatientsComponent } from './patients/patients.component';
+//import { PatientsComponent } from './patients/patients.component';
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NouveauPatientComponent } from './nouveau-patient/nouveau-patient.component';
@@ -25,13 +25,14 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { HistoriqueActiviteComponent } from './historique-activite/historique-activite.component';
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
+import { PatientArchiveComponent } from './patient-archive/patient-archive.component';
 
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PatientsComponent,
+    
     PatientDetailComponent,
    NouveauPatientComponent,
    ProgrammeExerciceComponent,

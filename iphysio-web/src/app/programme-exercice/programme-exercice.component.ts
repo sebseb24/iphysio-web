@@ -13,38 +13,11 @@ import { ThrowStmt } from '@angular/compiler';
 })
 export class ProgrammeExerciceComponent implements OnInit {
 
-  /*selected = 'option2';
-
-  exerciceFrequence : Number;
-  //dateDebut = new FormControl((new Date()).toISOString());
-  dateDebut : Date;
-  dateFin : Date;
-  exerciceNom : String;
-  exercType : String;*/
-  
-  
-  exercices : any[];
-  
-  
-  /*programme : any;
-
-  lundi : boolean;
-  mardi : boolean;
-  mercredi : boolean;
-  jeudi: boolean;
-  vendredi : boolean;
-  samedi : boolean;
-  dimanche : boolean;*/
-
-
+ 
+  exercices : any[];  
   selectedExercice : any;
-
-
   sauvegarderOptions : String;
-  isNewExercice : boolean;
-
-
-  
+  isNewExercice : boolean;  
 
   constructor(private dialogRef: MatDialogRef<ProgrammeExerciceComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -119,36 +92,6 @@ export class ProgrammeExerciceComponent implements OnInit {
     this.isNewExercice = false;
 
     this.selectedExercice = exer;
-    //this.selectedExercice.index = i;
-
-    /*this.dateDebut = new Date(exer.dateDebut); 
-    this.dateFin = new Date(exer.dateFin);
-    this.exerciceNom = exer.nom;
-    this.exerciceFrequence = exer.repetition;
-    //this.exercType = exer.refExercice.nom;
-    this.lundi = true;
-    this.mardi = true;
-    this.mercredi = true;
-    this.jeudi = true;
-    this.vendredi = true;
-    this.samedi = true;
-    this.dimanche = true;
-
-    console.log(exer);
-
-
-    this.dateDebut = new Date(exer.dateDebut); 
-    this.dateFin = new Date(exer.dateFin);
-    this.exerciceNom = exer.nom;
-    this.exerciceFrequence = exer.repetition;
-    //this.exercType = exer.refExercice.nom;
-    this.lundi = true;
-    this.mardi = true;
-    this.mercredi = true;
-    this.jeudi = true;
-    this.vendredi = true;
-    this.samedi = true;
-    this.dimanche = true;*/
 
     console.log(i);
 
@@ -156,19 +99,6 @@ export class ProgrammeExerciceComponent implements OnInit {
   }
 
   ajoutElement() {
-    /*this.data.exercices.push( {nom : "bonjour",
-                              dateDebut : "2020-02-01",
-                              dateFin : "2020-02-02",
-                              repetition : 2,
-                              refExercice : {nom: "test"},
-                              lundi : true,
-                              mardi : true,
-                              mercredi : true,
-                              jeudi : true,
-                              vendredi : true,
-                              samedi : true,
-                              dimanche : true
-                              });*/
 
     if(this.data.exercices == null) {
       this.data.exercices = [];

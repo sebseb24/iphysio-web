@@ -132,8 +132,21 @@ export class PatientDetailComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      
+      console.log(result);    
     });
+  }
+
+  saveNote() {
+    //console.log("saved note!");
+    console.log(this.patientService.selectedPatient.name);
+    this.patientService.putPatient(this.patientService.selectedPatient).subscribe(
+      (res) => {
+          console.log("done");
+          console.log(res);
+      }, (err) => {
+        console.log(err);
+      }
+    );
   }
 
  

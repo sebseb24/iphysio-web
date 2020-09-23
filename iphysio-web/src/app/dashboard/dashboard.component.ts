@@ -20,8 +20,10 @@ export class DashboardComponent implements OnInit {
   connectedUser = new Physio;
   keyword = 'name';
   data: Patient[];
-  //emptyValue: String = "";
 
+  dispArchive : boolean;
+  dispPatientDetail : boolean;
+ 
   constructor(private dialog: MatDialog, private _authService: AuthService, public patientService: PatientService, public historiqueService: HistoriqueService,private _router: Router) {
 
   }
@@ -51,6 +53,9 @@ export class DashboardComponent implements OnInit {
   }
 
   onSelect(patient: Patient): void {
+
+    this.displayPatientDetail();
+
     this.patientService.selectedPatient = patient;
 
     this.patientService.getProgrammeList(patient._id).subscribe(
@@ -95,8 +100,23 @@ export class DashboardComponent implements OnInit {
   }
   
   onFocused(e){
+    this.refreshPatientList();
     console.log("onChangeSearch : " + e);
-    //this.emptyValue = ''; // [(ngModel)]
+  }
+
+  displayArchive() {
+    this.clearDisplay();
+    this.dispArchive = true;
+  }
+
+  displayPatientDetail() {
+    this.clearDisplay();
+    this.dispPatientDetail = true;
+  }
+
+  clearDisplay() {
+    this.dispPatientDetail = false;
+    this.dispArchive = false;
   }
 
 }

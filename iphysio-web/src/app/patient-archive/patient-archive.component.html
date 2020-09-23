@@ -1,0 +1,13 @@
+<!--<li *ngFor="let hist of historiqueService.historique" (click)="openHistorique(hist)">-->
+
+<div class="archive">
+    <div>Patients</div>
+    <div class="card-content">
+
+    <ul>
+        <li *ngFor="let pat of lstPatient">{{pat.name}} <mat-slide-toggle [(ngModel)]="pat.isActive"></mat-slide-toggle></li>
+    </ul>
+
+    </div>
+    <button (click)="saveAll()">Sauvegarder</button>
+</div>
