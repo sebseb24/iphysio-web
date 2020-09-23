@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PatientsComponent } from './patients/patients.component';
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
@@ -27,6 +27,7 @@ import { HistoriqueActiviteComponent } from './historique-activite/historique-ac
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { EditPatientComponent } from './edit-patient/edit-patient.component';
    ConfirmDialogComponent,
    HistoriqueActiviteComponent,
    EditPatientComponent,
+   routingComponents,
   ],
   imports: [
     BrowserModule,
