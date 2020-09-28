@@ -10,6 +10,10 @@
         <label class="red-text">*</label>
     </label>
     <input type="text" name="email" ngModel placeholder="Adresse courriel" required>
+    <label>Physiothérapeute responsable: </label>
+    <mat-select [(value)]="selectedPhysio" >
+        <mat-option *ngFor="let physio of physios" [value]="physio._id">{{physio.name}}</mat-option>        
+    </mat-select>
 
     <mat-dialog-actions>
         <button class="waves-effect waves-light btn-small" type="submit" [disabled]="!newPatientForm.valid">Sauvegarder</button>

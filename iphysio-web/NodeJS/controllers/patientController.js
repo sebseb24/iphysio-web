@@ -44,7 +44,8 @@ router.post('/', (req, res) => {
     var emp = new Patient({
         name: req.body.name,
         email: req.body.email,
-        isActive : true
+        isActive : true,
+        physio_associe : req.body.physio_associe,
     });
 
     emp.save((err, doc) => {

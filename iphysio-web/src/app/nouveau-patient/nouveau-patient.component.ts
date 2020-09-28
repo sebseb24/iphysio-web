@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, Validators, FormGroup, NgForm, NgModel} from "@angular/forms";
 import { PatientService } from '../patients/patient.service';
 import { Patient } from '../../../NodeJS/models/patients';
+import { Physio } from '../../../NodeJS/models/physios';
+
 
 declare var M: any;
 
@@ -14,12 +16,30 @@ declare var M: any;
 })
 export class NouveauPatientComponent implements OnInit {
 
+
+  physios : Physio[];
+  selectedPhysio : String;
+
+
+
   constructor(private dialogRef: MatDialogRef<NouveauPatientComponent>, private patientService: PatientService) {}
 
   ngOnInit(): void {
+    this.patientService.getPhysios().subscribe((res) => {
+      this.physios = res as Physio[];
+
+      this.selectedPhysio = localStorage.getItem('_id');
+
+
+
+    }, (err) => {
+      console.log(err)});
   }
 
   onSubmit(form: NgForm) {
+    console.log(this.selectedPhysio);
+    form.value.physio_associe = [this.selectedPhysio];
+    //console.log(form);
     this.patientService.postPatient(form.value).subscribe((res) => {
       M.toast({ html: 'Patient créé avec succès !', classes: 'rounded' });
       this.refreshPatientList();
@@ -28,6 +48,7 @@ export class NouveauPatientComponent implements OnInit {
   }
 
   close() {
+
       this.dialogRef.close();
   }
 

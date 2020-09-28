@@ -26,6 +26,8 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { HistoriqueActiviteComponent } from './historique-activite/historique-activite.component';
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
 import { PatientArchiveComponent } from './patient-archive/patient-archive.component';
+import { LineChartComponent } from './line-chart/line-chart.component';
+import { PieChartComponent } from './pie-chart/pie-chart.component';
 
 
 @NgModule({
@@ -42,6 +44,8 @@ import { PatientArchiveComponent } from './patient-archive/patient-archive.compo
    HistoriqueActiviteComponent,
    EditPatientComponent,
    PatientArchiveComponent,
+   LineChartComponent,
+   PieChartComponent,
   ],
   imports: [
     BrowserModule,
