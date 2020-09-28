@@ -6,6 +6,15 @@ const bcrypt = require('bcryptjs');
 
 var { Physio } = require('../models/physios');
 
+router.get('/', (req, res) => {
+    
+    Physio.find({}, (err, doc) => {
+        if (!err) { res.send(doc); }
+        else { console.log('Error in retrieving Physio : ' + JSON.stringify(err, undefined, 2)); }
+    });
+});
+
+
 router.get('/:email', (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send('No record with given id :  + ${res.params.id};');

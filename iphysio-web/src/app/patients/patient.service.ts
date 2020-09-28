@@ -17,6 +17,7 @@ export class PatientService {
   readonly baseURL = 'http://localhost:3000/patients';
   readonly progURL = 'http://localhost:3000/programmes';
   readonly exerURL = 'http://localhost:3000/exercices';
+  readonly physioURL = 'http://localhost:3000/physios';
 
   constructor(private http: HttpClient) { }
 
@@ -68,6 +69,10 @@ export class PatientService {
 
   putProgramExercice(programme : any) {
     return this.http.put(this.progURL, programme);
+  }
+
+  getPhysios() {
+    return this.http.get(this.physioURL + `/`);
   }
 
 
