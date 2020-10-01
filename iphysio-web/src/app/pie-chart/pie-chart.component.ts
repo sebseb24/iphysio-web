@@ -14,17 +14,19 @@ export class PieChartComponent implements OnInit {
     var myDoughnutChart = new Chart("myPieChart", {
       type: 'pie',
       data: {
-        labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
+        labels: ["Flexion bras", "Flexion genou"],
         datasets: [{
           label: "Population (millions)",
-          backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
-          data: [2478,5267,734,784,433]
+          backgroundColor: ["#3e95cd", "#8e5ea2"],
+          data: [2478,5267]
         }]
       },
       options: {
+        maintainAspectRatio: false,
+        responsive: true,
         title: {
           display: true,
-          text: 'Predicted world population (millions) in 2050'
+          text: 'Types d\'exercices',
         }
       }
   });
