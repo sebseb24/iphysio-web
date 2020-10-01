@@ -1,4 +1,4 @@
-<script>
+<!--<script>
     window.onload = function () {
     
     var chart = new CanvasJS.Chart("chartContainer", {
@@ -32,7 +32,7 @@
     chart.render();
     
     }
-    </script>
+    </script>-->
   
 <div *ngIf="patient">
     <div class="grid-container">
@@ -51,6 +51,7 @@
         <div class="graph">
             <div class="card-header">
                 <label>Graphique d'activités</label>
+                <a title="Mettre à jour les graphiques"><i class="material-icons" style="position: relative; float: right; margin-top: 13px; color: #595959; cursor: pointer;">refresh</i></a>
             </div>
             <div id="chartContainer" style=" width: 100%;">
                 <app-line-chart></app-line-chart>
