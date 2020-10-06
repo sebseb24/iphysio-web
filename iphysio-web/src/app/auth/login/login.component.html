@@ -15,13 +15,13 @@
                         </div>
     
                         <div *ngIf="wrongCred" class="warning-div">
-                            <label class="warning-label">Adresse courriel et/ou mot de passe invalide</label>
+                            <label id="idLblBadPass" class="warning-label">Adresse courriel et/ou mot de passe invalide</label>
                         </div>
                     </div>
                    
                     <div class="card-component">
-                        <button class="btn primary-color login-btn" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
-                        <button class="btn primary-color login-btn" type="button" routerLink="/create-user">Créer un compte</button>
+                        <button class="btn primary-color login-btn" name="btnConnexion" type="submit" [disabled]="!loginForm.valid">Se connecter</button>
+                        <button class="btn primary-color login-btn" name="btnCreerUtilisateur" type="button" routerLink="/create-user">Créer un compte</button>
                     </div>
                 </form>
             </div>
