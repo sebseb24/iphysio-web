@@ -12,12 +12,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
-  selector: 'app-messagerie',
-  templateUrl:'./messagerie.component.html',
-  styleUrls: ['./messagerie.component.scss']
+  selector: 'app-connect',
+  templateUrl: './connect.component.html',
+  styleUrls: ['./connect.component.scss']
 })
-export class MessagerieComponent implements OnInit {
-
+export class ConnectComponent implements OnInit {
 
   loginForm: FormGroup;
   nickname = '';
@@ -49,5 +48,4 @@ export class MessagerieComponent implements OnInit {
       }
     });
   }
-
 }

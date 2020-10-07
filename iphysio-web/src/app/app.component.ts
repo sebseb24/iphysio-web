@@ -1,4 +1,10 @@
 import { Component } from '@angular/core';
+import * as firebase from 'firebase';
+
+const config  = { 
+  apiKey: 'AIzaSyCFdqmK7iI-lbmtkEvrXopDrsOIhIzuZRE',
+   databaseURL: 'https://iphysio-55674.firebaseio.com'
+};
 
 @Component({
   selector: 'app-root',
@@ -10,6 +16,6 @@ export class AppComponent {
 
 
   constructor() {
-
+    firebase.initializeApp(config);
   }
 }
