@@ -28,7 +28,6 @@ import { EditPatientComponent } from './edit-patient/edit-patient.component';
 import { PatientArchiveComponent } from './patient-archive/patient-archive.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { PieChartComponent } from './pie-chart/pie-chart.component';
-import { ConnectComponent } from './connect/connect.component';
 import { RoomlistComponent } from './roomlist/roomlist.component';
 import { AddroomComponent } from './addroom/addroom.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
@@ -61,7 +60,6 @@ import { DatePipe } from '@angular/common';
    LineChartComponent,
    PieChartComponent,
    routingComponents,
-   ConnectComponent,
    RoomlistComponent,
    AddroomComponent,
    ChatroomComponent,
