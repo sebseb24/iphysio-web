@@ -2,14 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MessagerieComponent } from './messagerie/messagerie.component';
 import { AddroomComponent } from './addroom/addroom.component';
-import { ConnectComponent } from './connect/connect.component';
 import { RoomlistComponent } from './roomlist/roomlist.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
 
 
 const routes: Routes = [
   { path: 'messagerie', component: MessagerieComponent },
-  { path: 'connect', component: ConnectComponent },
   { path: 'roomlist', component: RoomlistComponent },
   { path: 'addroom', component: AddroomComponent },
   { path: 'chatroom/:roomname', component: ChatroomComponent }
