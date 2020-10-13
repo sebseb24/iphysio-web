@@ -71,6 +71,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color:black;
 }
 
+.custom-button {
+    background-color: #00b4e6;
+    outline: none;
+    color: white;
+}
+
+.custom-button:hover {
+    background-color: #0083A9;
+}
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

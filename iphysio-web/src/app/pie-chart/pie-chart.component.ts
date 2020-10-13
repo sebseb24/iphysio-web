@@ -14,7 +14,7 @@ export class PieChartComponent implements OnInit {
     var myDoughnutChart = new Chart("myPieChart", {
       type: 'pie',
       data: {
-        labels: ["Flexion bras", "Flexion genou"],
+        labels: ["Flexion coude", "Flexion genou"],
         datasets: [{
           label: "Population (millions)",
           backgroundColor: ["#3e95cd", "#8e5ea2"],

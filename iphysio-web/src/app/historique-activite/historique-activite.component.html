@@ -1,14 +1,33 @@
 <div class="row" id="container-div">
     <div class="col s12 m12">
-    <label>Date :</label>
-    <p>{{data.date}}</p>
-    <label>Duree total :</label>
-    <p>{{data.duree}}</p>
-    <h5>Liste des activités</h5>
-    <div *ngFor="let act of data.activite">
-        <div class="divider"></div>
-        <label>nom</label> <p> {{act.nom}}</p>
-        <label>resultat</label> <p>{{act.resultat}}</p> 
+        <ul>
+            <li style="margin-bottom: 20px;">
+                <h3>{{data.programme_id}}</h3>
+            </li>
+            <li>
+                <label>Date :</label>
+                <p>{{data.date}}</p>
+            </li>
+            <li style="margin-bottom: 25px;">
+                <label>Duree total :</label>
+                <p>{{data.duree}}</p>
+            </li>
+            <li>
+                <h5>Liste des activités</h5>
+                <div class="divider"></div>
+                <ul>
+                    <li>
+                        <label style="font-size: 15px; color: black">Exercice</label>
+                        <label style="float: right; font-size: 15px; color: black;">Répétitions</label>
+                    </li>
+                    <div *ngFor="let act of data.activite">
+                        <li>
+                            <label>{{act.nom}}</label>
+                            <label style="float: right;">{{act.resultat}}</label>
+                        </li>
+                    </div>
+                </ul>
+            </li>
+        </ul>
     </div>
-</div>
 </div>

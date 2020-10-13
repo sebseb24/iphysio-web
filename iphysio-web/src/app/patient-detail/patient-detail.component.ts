@@ -40,7 +40,7 @@ export class PatientDetailComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
 
-    //dialogConfig.width = "700px";
+    dialogConfig.width = "700px";
     if (pro != null)
       dialogConfig.data = pro;
     else {

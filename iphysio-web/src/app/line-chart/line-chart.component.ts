@@ -76,7 +76,7 @@ export class LineChartComponent implements OnInit {
       data: {
 
         datasets: [{
-          label: 'Flexion bras',
+          label: 'Flexion coude',
           data: this.resultats,
           barPercentage: 0.9,
           barThickness: 6,

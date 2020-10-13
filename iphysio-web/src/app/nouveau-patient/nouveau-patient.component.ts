@@ -41,14 +41,13 @@ export class NouveauPatientComponent implements OnInit {
     form.value.physio_associe = [this.selectedPhysio];
     //console.log(form);
     this.patientService.postPatient(form.value).subscribe((res) => {
-      M.toast({ html: 'Patient créé avec succès !', classes: 'rounded' });
+      //M.toast({ html: 'Patient créé avec succès ! why ?? ', classes: 'rounded' });
       this.refreshPatientList();
       this.close();
     });
   }
 
   close() {
-
       this.dialogRef.close();
   }
 

@@ -1,9 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {FormControl} from '@angular/forms';
 import { PatientService } from '../patients/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
+
+import { NewExerciceComponent } from './new-exercice/new-exercice.component';
 
 
 @Component({
@@ -20,6 +23,7 @@ export class ProgrammeExerciceComponent implements OnInit {
   isNewExercice : boolean;  
 
   constructor(private dialogRef: MatDialogRef<ProgrammeExerciceComponent>, 
+    private dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public patientService : PatientService) {
       
@@ -87,15 +91,27 @@ export class ProgrammeExerciceComponent implements OnInit {
   }
 
 
+  // showExerciceParam(exer, i) {
+
+  //   this.isNewExercice = false;
+
+  //   this.selectedExercice = exer;
+
+  //   console.log(i);
+
+  //   this.sauvegarderOptions = "Mettre à jour";
+  // }
+
   showExerciceParam(exer, i) {
+    const dialogConfig = new MatDialogConfig();
 
-    this.isNewExercice = false;
 
-    this.selectedExercice = exer;
+    dialogConfig.width = "700px";
 
-    console.log(i);
+    let dialogRef = this.dialog.open(NewExerciceComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
 
-    this.sauvegarderOptions = "Mettre à jour";
+    });
   }
 
   ajoutElement() {
@@ -109,11 +125,22 @@ export class ProgrammeExerciceComponent implements OnInit {
   }
 
 
-  newExercice(ex) {
-    this.isNewExercice = true;
-    this.sauvegarderOptions = "Ajouter";
-    this.selectedExercice = {refExercice : ex.name,
-                            nom : ex.name};
+  newExercice(exercice : any) {
+    const dialogConfig = new MatDialogConfig();
+
+
+    dialogConfig.width = "900px";
+    dialogConfig.data = exercice;
+
+    let dialogRef = this.dialog.open(NewExerciceComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+
+    });
+    
+    // this.isNewExercice = true;
+    // this.sauvegarderOptions = "Ajouter";
+    // this.selectedExercice = {refExercice : ex.name,
+    //                         nom : ex.name};
   }
 
   deleteExercice(index) {
