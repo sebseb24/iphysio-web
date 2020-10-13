@@ -40,16 +40,16 @@ async function testLogin() {
 
     driver.wait( until.elementLocated(By.id('idAjoutPatient')),
        5000).then(ele => { 
-                            ele.getText().then(text => {
-                                 assert(text.includes("Nouveau patient"), "le bouton d'ajout de patient contient le texte : " + text);
-                                 driver.close();
-                            })
-                           
-                        }).catch( err => {
-                            console.log(err);
-                            assert(1==2, "Erreur impossible de se connecter avec l'utilisateur admin admin");
-                            driver.close();
-                        });
+                ele.getText().then(text => {
+                    assert(text.includes("Nouveau patient"), "le bouton d'ajout de patient contient le texte : " + text);
+                    driver.close();
+                })
+                
+            }).catch( err => {
+                console.log(err);
+                assert(1==2, "Erreur impossible de se connecter avec l'utilisateur admin admin");
+                driver.close();
+            });
 }
 
 testBadLogin();
