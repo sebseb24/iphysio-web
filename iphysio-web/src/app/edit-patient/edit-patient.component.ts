@@ -27,7 +27,7 @@ export class EditPatientComponent implements OnInit {
   }
 
   enregistrer() {
-    console.log("sauvegarde effectué");
+    console.log("Sauvegarde effectuée");
     console.log(this.email);
 
     console.log(this.data);

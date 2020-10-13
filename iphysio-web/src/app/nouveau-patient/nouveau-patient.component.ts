@@ -48,7 +48,6 @@ export class NouveauPatientComponent implements OnInit {
   }
 
   close() {
-
       this.dialogRef.close();
   }
 

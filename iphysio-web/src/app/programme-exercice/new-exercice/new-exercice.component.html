@@ -1,0 +1,79 @@
+
+<div>
+    <div style="margin-bottom: 30px;">
+        <h4>
+            <input type="text" style="font-weight: bold;" [(ngModel)]="data.name"/> 
+        </h4>
+    </div>
+
+    <label class="title" style="text-align: left;">Description de l'exercice</label>
+    <div class="grid-container">
+        <div class="description">
+            <textarea name="description">Assoyez-vous bien droit sur une chaise avec le bras allongé le long du corps.  Pliez le coude en gardant la paume de votre main vers le haut.  Redescendez lentement et répétez.</textarea>
+        </div>
+
+        <div class="parametres">
+            <div class="grid-container-parameters">
+                <div class="series">
+                    <label>Séries</label>
+                    <input type="number" />
+                </div>
+
+                <div class="reps">
+                    <label>Reps.</label>
+                    <input type="number" />
+                </div>
+
+                <div class="poids">
+                    <label>Poids</label>
+                    <input type="number" />
+                </div>
+
+                <div class="frequence">
+                    <label>Fréquence</label>
+                    <input type="number" />
+                </div>
+
+                <div class="duree">
+                    <label>Durée</label>
+                    <input type="number" />
+                </div>
+
+                <div class="tenir">
+                    <label>Tenir</label>
+                    <input type="number" />
+                </div>
+
+                <div class="tempo">
+                    <label>Tempo</label>
+                    <input type="number" />
+                </div>
+
+                <div class="repos">
+                    <label>Repos</label>
+                    <input type="number" />
+                </div>
+
+                <div class="autres">
+                    <label>Autres</label>
+                    <input type="text" />
+                </div>
+            </div>
+        </div>
+
+        <div class="photo1" style="text-align: center;">
+            <img src="assets/image/exercices/FlexionCoudeSupination1.png" style="width: 200px; height: 170px;">
+        </div>
+
+        <div class="photo2" style="text-align: center;">
+            <img src="assets/image/exercices/FlexionCoudeSupination2.png" style="width: 200px; height: 170px;">
+        </div>
+    </div>
+
+    <div>
+        <button class="waves-effect waves-light btn-small custom-button"
+            (click)="sauvegarder()" >
+            Ajouter
+        </button>
+    </div>
+</div>

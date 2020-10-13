@@ -1,0 +1,63 @@
+.description { grid-area: description;}
+.parametres { grid-area: parametres; }
+.photo1 { grid-area: photo1; }
+.photo2 { grid-area: photo2; }
+
+.series { grid-area: series; }
+.reps { grid-area: reps; }
+.poids { grid-area: poids; }
+.frequence { grid-area: frequence; }
+.duree { grid-area: duree; }
+.tenir { grid-area: tenir; }
+.tempo { grid-area: tempo; }
+.repos { grid-area: repos; }
+.autres { grid-area: autres; }
+
+.grid-container {
+    display: grid;
+    grid-template-areas:
+        'description description photo1'
+        'parametres parametres photo2';
+    //grid-gap: 10px;
+}
+
+.grid-container-parameters {
+    display: grid;
+    grid-template-areas:
+        'series reps poids frequence duree tenir tempo repos autres';
+    grid-gap: 5px;
+}
+
+
+.grid-container > div {
+    text-align: left;
+    font-size: 20px;
+}
+
+.title {
+    color: #737373;
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 145px;
+    // overflow-y: scroll;
+    // overflow: hidden;
+    resize: none;
+    border: 1px solid #a6a6a6;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 14px;
+    outline: none;
+    color: #737373;
+}
+
+.custom-button {
+    background-color: #00b4e6;
+    outline: none;
+    color: white;
+}
+
+.custom-button:hover {
+    background-color: #0083A9;
+}

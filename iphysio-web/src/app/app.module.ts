@@ -41,6 +41,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DatePipe } from '@angular/common';
+import { NewExerciceComponent } from './programme-exercice/new-exercice/new-exercice.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { DatePipe } from '@angular/common';
    RoomlistComponent,
    AddroomComponent,
    ChatroomComponent,
+   NewExerciceComponent,
   ],
   imports: [
     BrowserModule,

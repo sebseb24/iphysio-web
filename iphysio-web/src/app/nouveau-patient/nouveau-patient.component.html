@@ -1,23 +1,48 @@
 <h2 mat-dialog-title>Nouveau Patient</h2>
 
 <form #newPatientForm="ngForm" (ngSubmit)="onSubmit(newPatientForm)">
-    <label>Nom :
-        <label class="red-text">*</label>
-    </label>
-    <input type="text" name="name" ngModel placeholder="Nom complet" required>
+    <ul>
+        <li style="margin-bottom: 10px;">
+            <label style="color: red;">* Obligatoire</label>
+        </li>
+        <li>
+            <label>Nom :
+                <label class="red-text">*</label>
+            </label>
+            <input type="text" name="name" ngModel placeholder="Nom complet" required>
+        </li>
 
-    <label>Adresse courriel :
-        <label class="red-text">*</label>
-    </label>
-    <input type="text" name="email" ngModel placeholder="Adresse courriel" required>
-    <label>Physiothérapeute responsable: </label>
-    <mat-select [(value)]="selectedPhysio" >
-        <mat-option *ngFor="let physio of physios" [value]="physio._id">{{physio.name}}</mat-option>        
-    </mat-select>
+        <li>
+            <label>Adresse courriel :
+                <label class="red-text">*</label>
+            </label>
+            <input type="text" name="email" ngModel placeholder="Adresse courriel" required>
+        </li>
 
-    <mat-dialog-actions>
-        <button class="waves-effect waves-light btn-small" type="submit" [disabled]="!newPatientForm.valid">Sauvegarder</button>
-        <button class="waves-effect waves-light btn-small" type="button" (click)="close()">Fermer</button>
-    </mat-dialog-actions>
+        <li>
+            <label>Numéro de téléphone :</label>
+            <input type="text" name="phone" ngModel placeholder="Numero de téléphone">
+        </li>
+
+        <li>
+            <label>Adresse : </label>
+            <input type="text" name="adress" ngModel placeholder="Adresse">
+        </li>
+
+        <li>
+            <label>Physiothérapeute responsable: </label>
+            <mat-select [(value)]="selectedPhysio" >
+                <mat-option *ngFor="let physio of physios" [value]="physio._id">{{physio.name}}</mat-option>        
+            </mat-select>
+        </li>
+
+        <li style="margin-bottom: 0;">
+            <mat-dialog-actions>
+                <button class="waves-effect waves-light btn-small custom-button" type="submit" [disabled]="!newPatientForm.valid" style="width: 100%; height: 40px;">Créer</button>
+            </mat-dialog-actions>
+        </li>
+    </ul>
+
+    <!-- <button class="waves-effect waves-light btn-small" type="button" (click)="close()">Fermer</button> -->
 </form>
 
