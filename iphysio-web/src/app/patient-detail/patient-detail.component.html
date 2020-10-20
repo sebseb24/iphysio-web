@@ -1,46 +1,10 @@
-<!--<script>
-    window.onload = function () {
-    
-    var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        theme: "light2",
-        title:{
-            text: "Simple Line Chart"
-        },
-        axisY:{
-            includeZero: false
-        },
-        data: [{        
-            type: "line",
-              indexLabelFontSize: 16,
-            dataPoints: [
-                { y: 450 },
-                { y: 414},
-                { y: 520, indexLabel: "\u2191 highest",markerColor: "red", markerType: "triangle" },
-                { y: 460 },
-                { y: 450 },
-                { y: 500 },
-                { y: 480 },
-                { y: 480 },
-                { y: 410 , indexLabel: "\u2193 lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
-                { y: 500 },
-                { y: 480 },
-                { y: 510 }
-            ]
-        }]
-    });
-    chart.render();
-    
-    }
-    </script>-->
-  
 <div *ngIf="patient">
     <div class="grid-container">
 
         <div class="info">
             <div class="card-header">
                 <label>Informations</label>
-                <a (click)="editPatient(patient)"><i class="material-icons" style="position: relative; float: right; margin-top: 13px; color: #595959; cursor: pointer;">settings</i></a>
+                <a (click)="editPatient(patient)" id="btnEditPatient"><i class="material-icons" style="position: relative; float: right; margin-top: 13px; color: #595959; cursor: pointer;">settings</i></a>
             </div>
             <div style="text-align: center;">
                 <img src="assets/image/empty_user.jpg" style="border-radius: 100%; width: 80px; height: 80px; margin-top: 30px; margin-bottom: 18px;">

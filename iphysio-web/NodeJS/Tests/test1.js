@@ -1,9 +1,11 @@
 const { assert } = require("console");
 const {Builder,  By, Key, util, until} = require("selenium-webdriver");
 
+const siteUrl = "http://localhost:4200";
+
 async function testBadLogin() {
     let driver = await new Builder().forBrowser("chrome").build();
-    await driver.get("http://localhost:4200");
+    await driver.get(siteUrl);
     let username = await driver.findElement(By.name("email"));
     let password = await driver.findElement(By.name("hash"));
 
@@ -29,7 +31,7 @@ async function testBadLogin() {
 async function testLogin() {    
  
     let driver = await new Builder().forBrowser("chrome").build();
-    await driver.get("http://localhost:4200");
+    await driver.get(siteUrl);
     let username = await driver.findElement(By.name("email"));
     let password = await driver.findElement(By.name("hash"));
 
@@ -40,17 +42,69 @@ async function testLogin() {
 
     driver.wait( until.elementLocated(By.id('idAjoutPatient')),
        5000).then(ele => { 
-                            ele.getText().then(text => {
-                                 assert(text.includes("Nouveau patient"), "le bouton d'ajout de patient contient le texte : " + text);
-                                 driver.close();
-                            })
-                           
-                        }).catch( err => {
-                            console.log(err);
-                            assert(1==2, "Erreur impossible de se connecter avec l'utilisateur admin admin");
-                            driver.close();
-                        });
+                ele.getText().then(text => {
+                    assert(text.includes("Nouveau patient"), "le bouton d'ajout de patient contient le texte : " + text);
+                    driver.close();
+                })
+                
+            }).catch( err => {
+                console.log(err);
+                assert(1==2, "Erreur impossible de se connecter avec l'utilisateur admin admin");
+                driver.close();
+            });
 }
+
+async function testArchive() {
+    let driver = await new Builder().forBrowser("chrome").build();
+    await driver.get(siteUrl);
+    let username = await driver.findElement(By.name("email"));
+    let password = await driver.findElement(By.name("hash"));
+
+    await username.sendKeys("admin");
+    await password.sendKeys("admin");
+
+    await driver.findElement(By.name("btnConnexion")).click();
+
+    driver.wait( until.elementLocated(By.id('idAjoutPatient')),
+       5000).then(ele => { 
+                ele.getText().then(text => {
+                    assert(text.includes("Nouveau patient"), "le bouton d'ajout de patient contient le texte : " + text);
+                    
+                    driver.findElement(By.id("autocomplete")).then((el) => {
+
+                        el.findElement(By.xpath("//input")).then( (input) => {
+
+                            input.sendKeys("Billy Mailhot").then(() => {
+                                driver.wait(until.elementLocated(By.xpath("/html/body/app-root/app-dashboard/div[1]/div[2]/div/ng-autocomplete/div[1]/div[2]/ul/li/div/a")), 5000).then((searchResult) => {
+                                    searchResult.click();
+                                }).catch( err => {
+                                    console.log(err);
+                                    assert(1==2, "Erreur impossible de localiser l'utilisateur");
+                                });
+                            });
+
+
+                        });
+                    
+                    
+                        
+
+                    });      
+                
+                
+                
+                })
+                
+            }).catch( err => {
+                console.log(err);
+                assert(1==2, "Erreur impossible de se connecter avec l'utilisateur admin admin");
+                driver.close();
+            });
+
+
+}
+
 
 testBadLogin();
 testLogin();
+testArchive();
