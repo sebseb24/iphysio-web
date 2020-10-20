@@ -23,7 +23,7 @@
       </ng-autocomplete>
 
       <ng-template #itemTemplate let-item>
-        <a [innerHTML]="item.name"></a>
+        <a [innerHTML]="item.name" name="searchResultNomPatient"></a>
       </ng-template>
 
       <ng-template #notFoundTemplate let-notFound>
