@@ -1,3 +1,5 @@
+const { StylesCompileDependency } = require("@angular/compiler");
+const { SelectMultipleControlValueAccessor } = require("@angular/forms");
 const { assert } = require("console");
 const {Builder,  By, Key, util, until} = require("selenium-webdriver");
 
@@ -75,8 +77,96 @@ async function testArchive() {
                         el.findElement(By.xpath("//input")).then( (input) => {
 
                             input.sendKeys("Billy Mailhot").then(() => {
-                                driver.wait(until.elementLocated(By.xpath("/html/body/app-root/app-dashboard/div[1]/div[2]/div/ng-autocomplete/div[1]/div[2]/ul/li/div/a")), 5000).then((searchResult) => {
+                                driver.wait(until.elementLocated(By.xpath("//*[@id=\"autocomplete\"]/div[1]/div[2]/ul/li[1]/div/a")), 5000).then((searchResult) => {
                                     searchResult.click();
+
+                                    driver.wait(until.elementLocated(By.id('btnEditPatient')), 5000).then((ele) => {
+                                        
+                                        driver.findElement(By.xpath('//*[@id="btnEditPatient"]/i')).then((btnEditPatient) => {
+                                            btnEditPatient.click().then(() => {
+                                                driver.findElement(By.id('btnArchiverPatient')).then((btnArchiver) => {
+                                                    btnArchiver.click().then(() => {
+                                                        driver.navigate().refresh().then(() => {
+                                                            driver.findElement(By.xpath('//*[@id=\"autocomplete\"]//input')).then((search) => {
+                                                                search.sendKeys("Billy Mailhot").then(() => {
+                                                                    driver.findElement(By.xpath("//*[@id=\"autocomplete\"]/div[1]/div[2]/ul/li[1]/div/a")).then((result) => {
+                                                                        
+                                                                        assert(1==2, "L'utilisateur devrait être archiver, mais est accessible via la barre de recherche");
+                                                                    
+                                                                    }).catch((NoSuchElementError) => {
+
+                                                                        assert(NoSuchElementError.name =="NoSuchElementError", "Le patient ne semble pas être bien archivé");
+
+                                                                        driver.findElement(By.id('btnPageArchive')).then((element) => {
+                                                                            element.click().then(() => {
+
+                                                                                driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Billy Mailhot')]")), 4000).then(() => {
+                                                                                    driver.findElement(By.xpath("//*[contains(text(), 'Billy Mailhot')]")).then((ele) => {
+
+
+                                                                                        ele.findElement(By.xpath("./*")).then((toggle) => {
+                                                                                            toggle.getAttribute("ng-reflect-model").then((val) => {
+                                                                                                //console.log(val);
+                                                                                                assert(val === "false", "Le togle du patient devrait être à false");
+                                                                                                toggle.click().then(() => {
+                                                                                                    driver.findElement(By.id("btnArchiveSauvegarder")).then((btnSave) => {
+                                                                                                        btnSave.click().then(() => {
+                                                                                                            driver.findElement(By.id("autocomplete")).then((el) => {
+                                                                                                               el.findElement(By.xpath("//input")).then( (input) => {
+                                                                                                                   input.clear();
+                                                                                                                   input.sendKeys("Billy Mailhot").then(() => {
+                                                                                                                        driver.wait(until.elementLocated(By.xpath("//*[@id=\"autocomplete\"]/div[1]/div[2]/ul/li[1]/div/a")), 5000).then((searchResult) => {
+                                                                                                                            //console.log("ca marche");
+                                                                                                                            searchResult.click().then(() => {
+                                                                                                                                driver.close();
+                                                                                                                            });
+                                                                                                                        }).catch(err => {
+                                                                                                                            assert(1==2, "Erreur impossible de localiser l'utilisateur apres archive et désarchive du patient par la barre de recherche");
+                                                                                                                        });
+                                                                                                                   });
+                                                                                                               });
+                                                                                                            });
+
+                                                                                                                
+                                                                                        
+                                                                                                                    
+                                                                                                                        
+                                                                                        
+                                                                                                        });
+                                                                                                    });
+                                                                                                });
+                                                                                            });
+                                                                                        });
+                                                                                    });
+                                                                                });
+
+                                                                            });
+
+                                                                        }).catch(error => {
+
+                                                                        })
+
+
+                                                                    });
+                                                                });
+                                                            });
+                                                        });
+                                                    });
+
+
+                                                });
+                                            });
+
+                                            
+                                        });
+                                        
+
+                                    }).catch(err => {
+                                        console.log(err);
+                                    });
+
+
+
                                 }).catch( err => {
                                     console.log(err);
                                     assert(1==2, "Erreur impossible de localiser l'utilisateur");
@@ -101,10 +191,58 @@ async function testArchive() {
                 driver.close();
             });
 
+}
+
+async function testAjoutPatient() {
+    let driver = await new Builder().forBrowser("chrome").build();
+    await connectUser(driver);
+    console.log("promise resolved 2");
+    driver.findElement(By.id('idAjoutPatient')).then((btnAjoutPatient) => {
+    btnAjoutPatient.click();
+    });
+        
+
+
+
+
+
 
 }
 
+async function connectUser(driver) {   
+
+    return new Promise(async (resolve, reject) => {
+      
+    driver.get(siteUrl);
+    let username = await driver.findElement(By.name("email"));
+    let password = await driver.findElement(By.name("hash"));
+
+    await username.sendKeys("admin");
+    await password.sendKeys("admin");
+
+    await driver.findElement(By.name("btnConnexion")).click();
+
+    driver.wait( until.elementLocated(By.id('idAjoutPatient')),
+       5000).then(() => {
+        console.log("promised resolved 1");
+        resolve("Hello");
+    }).catch(err => {
+        reject(new Error(err));
+    });
+});
+
+    
+  
+
+  
+}
+
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 testBadLogin();
 testLogin();
 testArchive();
+testAjoutPatient();
