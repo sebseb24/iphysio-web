@@ -9,3 +9,7 @@
 [1021/160046.882:ERROR:exception_snapshot_win.cc(99)] thread ID 1720 not found in process
 [1021/160046.882:ERROR:exception_snapshot_win.cc(99)] thread ID 3128 not found in process
 [1021/184410.276:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1022/151713.299:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1023/131520.071:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1023/133013.881:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1023/143240.189:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

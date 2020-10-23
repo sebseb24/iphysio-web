@@ -2,6 +2,7 @@ const { StylesCompileDependency } = require("@angular/compiler");
 const { SelectMultipleControlValueAccessor } = require("@angular/forms");
 const { assert } = require("console");
 const {Builder,  By, Key, util, until} = require("selenium-webdriver");
+const crypto = require("crypto");
 
 const siteUrl = "http://localhost:4200";
 
@@ -100,7 +101,7 @@ async function testArchive() {
                                                                         driver.findElement(By.id('btnPageArchive')).then((element) => {
                                                                             element.click().then(() => {
 
-                                                                                driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Billy Mailhot')]")), 4000).then(() => {
+                                                                                driver.wait(until.elementLocated(By.xpath("//*[contains(text(), 'Billy Mailhot')]")), 5000).then(() => {
                                                                                     driver.findElement(By.xpath("//*[contains(text(), 'Billy Mailhot')]")).then((ele) => {
 
 
@@ -116,7 +117,7 @@ async function testArchive() {
                                                                                                                    input.clear();
                                                                                                                    input.sendKeys("Billy Mailhot").then(() => {
                                                                                                                         driver.wait(until.elementLocated(By.xpath("//*[@id=\"autocomplete\"]/div[1]/div[2]/ul/li[1]/div/a")), 5000).then((searchResult) => {
-                                                                                                                            //console.log("ca marche");
+                                                                                                                            
                                                                                                                             searchResult.click().then(() => {
                                                                                                                                 driver.close();
                                                                                                                             });
@@ -143,6 +144,7 @@ async function testArchive() {
                                                                             });
 
                                                                         }).catch(error => {
+                                                                            console.log(error);
 
                                                                         })
 
@@ -197,16 +199,89 @@ async function testAjoutPatient() {
     let driver = await new Builder().forBrowser("chrome").build();
     await connectUser(driver);
     console.log("promise resolved 2");
-    driver.findElement(By.id('idAjoutPatient')).then((btnAjoutPatient) => {
-    btnAjoutPatient.click();
+    let btnAjoutPatient = await driver.findElement(By.id('idAjoutPatient'));
+    await btnAjoutPatient.click();
+
+    let btnNewPatientCreer1 = await driver.findElement(By.id('btnNewPatientCreer'));
+    await testAjoutPatientValidateNotCreatable(btnNewPatientCreer1);
+    let inpFullName = await driver.findElement(By.id('inpNewPatientFullName'));
+
+    let seleniumPatientName = "Selenium-Test-Name-Patient-" + crypto.randomBytes(16).toString("hex");
+    await inpFullName.sendKeys(seleniumPatientName);
+
+    let btnNewPatientCreer2 = await driver.findElement(By.id('btnNewPatientCreer'));
+    await testAjoutPatientValidateNotCreatable(btnNewPatientCreer2);
+
+    let inpEmail = await driver.findElement(By.id('inpNewPatientEmail'));
+
+    await inpEmail.sendKeys(crypto.randomBytes(16).toString("hex") + "@Selenium-Test-Email.com");
+
+    let btnNewPatientCreer3 = await driver.findElement(By.id('btnNewPatientCreer'));
+    await testAjoutPatientValidateCreatable(btnNewPatientCreer3);
+    await validatePatientIsAccessable(driver, seleniumPatientName);
+}
+
+async function validatePatientIsAccessable(driver, name) {
+    return new Promise(async (resolve, reject) => {
+        driver.findElement(By.xpath('//*[@id=\"autocomplete\"]//input')).then((search) => {
+            search.clear().then(() => {
+                search.sendKeys(name).then(() => {
+                    driver.wait(until.elementLocated(By.xpath("//*[@id=\"autocomplete\"]/div[1]/div[2]/ul/li[1]/div/a")), 5000).then((searchResult) => {
+                        
+                        searchResult.click().then(() => {
+                            resolve("Patient est accessible");
+                        }).catch(err => {
+                            reject(new Error(err));
+                        });
+                    }).catch(err => {
+                        assert(1==2, "Erreur impossible de localiser l'utilisateur apres l'ajout du nouveau patient");
+                        reject(new Error(err));
+                        
+                    });
+                });
+
+            });
+
+        });
     });
         
+       
+           
 
+}
 
+async function testAjoutPatientValidateNotCreatable(btnNewPatientCreer) {
+    return new Promise(async (resolve, reject) => {
+        btnNewPatientCreer.click().then(() => {
+            assert(1==2, "Ajout patient, tous les champs obligatoire doivent être entré pour la création d'un nouveau patient");
 
+            reject(new Error("Ajout patient, tous les champs obligatoire doivent être entré pour la création d'un nouveau patient"));
 
+        }).catch((err) => {
+            assert(err.name =="ElementNotInteractableError", "Le bouton de création de patient doit être désactivé");
 
+            if(err.name != "ElementNotInteractableError") {
+                reject(new Error(err));
+            } else {
+                resolve("Patient non creatable");
+            }
+        });
+    });
+}
 
+async function testAjoutPatientValidateCreatable(btnNewPatientCreer) {
+    return new Promise(async (resolve, reject) => {
+        btnNewPatientCreer.click().then(() => {
+                       
+            resolve("Patient creatable");
+
+        }).catch((err) => {
+            
+            assert(1==2, "Ajout patient, impossible d'ajouter un patient");           
+            reject(new Error(err));
+            
+        });
+    });
 }
 
 async function connectUser(driver) {   
