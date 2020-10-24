@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import * as firebase from 'firebase';
 
+import { AccountService } from './auth/_services';
+import { User } from './auth/_models';
+
 const config  = { 
   apiKey: 'AIzaSyCFdqmK7iI-lbmtkEvrXopDrsOIhIzuZRE',
    databaseURL: 'https://iphysio-55674.firebaseio.com'
@@ -13,9 +16,15 @@ const config  = {
 })
 export class AppComponent {
   title = 'iPhysio';
+  user: User;
 
 
-  constructor() {
+  constructor(private accountService: AccountService) {
+    this.accountService.user.subscribe(x => this.user = x);
     firebase.initializeApp(config);
   }
+
+  logout() {
+    this.accountService.logout();
+}
 }

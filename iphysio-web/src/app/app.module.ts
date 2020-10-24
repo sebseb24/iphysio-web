@@ -43,11 +43,19 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { DatePipe } from '@angular/common';
 import { NewExerciceComponent } from './programme-exercice/new-exercice/new-exercice.component';
 
+// used to create fake backend
+import { fakeBackendProvider } from './auth/_helpers';
+
+import { JwtInterceptor, ErrorInterceptor } from './auth/_helpers';
+import { AlertComponent } from './auth/_components';
+import { HomeComponent } from './auth/home';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    
+    AlertComponent,
+    HomeComponent,
     PatientDetailComponent,
    NouveauPatientComponent,
    ProgrammeExerciceComponent,
@@ -103,7 +111,16 @@ import { NewExerciceComponent } from './programme-exercice/new-exercice/new-exer
     DemoMaterialModule,
     MatNativeDateModule
   ],
-  providers: [DatePipe, { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }, AuthGuard, { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true }],
+  providers: [DatePipe,
+     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },
+      AuthGuard,
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+
+    // provider used to create fake backend
+      fakeBackendProvider
+  ],
   bootstrap: [AppComponent],
 
   entryComponents: [NouveauPatientComponent]

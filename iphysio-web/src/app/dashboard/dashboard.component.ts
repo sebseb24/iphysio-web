@@ -9,6 +9,8 @@ import { Historique } from '../../../NodeJS/models/historique';
 import { HistoriqueService } from '../../../NodeJS/services/historique.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AccountService } from '../auth/_services';
+import { User } from '../auth/_models';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,8 +25,9 @@ export class DashboardComponent implements OnInit {
 
   dispArchive : boolean;
   dispPatientDetail : boolean;
+  user: User;
  
-  constructor(private dialog: MatDialog, private _authService: AuthService, public patientService: PatientService, public historiqueService: HistoriqueService,private _router: Router) {
+  constructor(private accountService: AccountService, private dialog: MatDialog, private _authService: AuthService, public patientService: PatientService, public historiqueService: HistoriqueService,private _router: Router) {
 
   }
 
@@ -51,6 +54,10 @@ export class DashboardComponent implements OnInit {
   onLogout() {
     this._authService.logoutUser();
   }
+
+  logout() {
+    this.accountService.logout();
+}
 
   onSelect(patient: Patient): void {
 
