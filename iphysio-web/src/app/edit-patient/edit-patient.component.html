@@ -3,22 +3,22 @@
         <ul style="margin-bottom: 0">
             <li>
                 <label>Nom :</label>
-                <input type="text" [(ngModel)]="nom" >
+                <input type="text" [(ngModel)]="nom" id="inpEditNom">
             </li>
             <li>
                 <label>Email :</label>
-                <input type="text" [(ngModel)]="email">
+                <input type="text" [(ngModel)]="email" id="inpEditEmail">
             </li>
             <li>
                 <label>Telephone : </label>
-                <input type="text" [(ngModel)]="telephone">
+                <input type="text" [(ngModel)]="telephone" id="inpEditTelephone">
             </li>
             <li>
                 <label>Adresse : </label>
-                <input type="text" [(ngModel)]="adresse">
+                <input type="text" [(ngModel)]="adresse" id="inpEditAdresse">
             </li>
             <li>
-                <button (click)="enregistrer()"  class="waves-effect waves-light btn-small custom-button" style="width: 100%; height: 60px;">
+                <button id="btnEditEnregistrer" (click)="enregistrer()"  class="waves-effect waves-light btn-small custom-button" style="width: 100%; height: 60px;">
                     Enregistrer
                 </button>
             </li>
