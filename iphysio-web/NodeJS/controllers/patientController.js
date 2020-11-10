@@ -84,12 +84,7 @@ router.put('/:id', (req, res) => {
              }
         });
 
-        /*Patient.findByIdAndUpdate(req.params.id, { $set: {notes:req.body.notes} }, { new: true }, (err, doc) => {
-            if (!err) { 
-                res.send(doc);
-             }
-            else { console.log('Error in Patient Update: ' + JSON.stringify(err, undefined, 2)); }
-        });*/
+        
 });
 
 router.delete('/:id', (req, res) => {

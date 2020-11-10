@@ -10,55 +10,33 @@ import { PatientService } from '../../patients/patient.service';
 export class NewExerciceComponent implements OnInit {
 
   selectedExercice : any;
+  public btnSauvegardeMsg : String
 
   constructor(
     private dialogRef: MatDialogRef<NewExerciceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     public patientService : PatientService
-    ) { }
+    ) { 
+      this.selectedExercice = data.exercice;
+
+
+      if(data.option.isNewExercice == true){
+        this.btnSauvegardeMsg = "Ajouter";
+      }
+      else {
+        this.btnSauvegardeMsg = "Modifier"
+      }
+    }
 
   ngOnInit(): void {
   }
 
   ajoutElement() {
 
-    // if(this.data.exercices == null) {
-    //   this.data.exercices = [];
-    // }
-
-    // this.data.exercices.push(this.selectedExercice);
-    // console.log(this.data.exercices);
+    this.data.exercice = this.selectedExercice;
+    this.dialogRef.close("OK");
   }
 
-  sauvegarder() {
 
-    if(this.data._id == null) {
-      // on veut post un nouveau programme d'exercice
-      console.log("Ajout d'un programme pour le patient " + this.patientService.selectedPatient._id);
-      this.patientService.postProgramExercice(this.patientService.selectedPatient._id, {
-        nom : this.data.nom,
-        exercices : this.data.exercices
-      }).subscribe(
-        (res) => {
-          console.log("fini");
-          this.dialogRef.close();
-
-        }, (err) => {
-          console.log(err);
-          this.dialogRef.close();
-        }
-      )
-    } else {
-
-      console.log(this.data);
-      this.patientService.putProgramExercice(this.data).subscribe((res) => {
-        console.log(res);
-        this.dialogRef.close();
-      }, (err) => {
-        console.log(err);
-        this.dialogRef.close();
-      })
-    }    
-  }
 
 }
