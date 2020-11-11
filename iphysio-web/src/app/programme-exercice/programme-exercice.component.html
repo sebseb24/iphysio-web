@@ -6,7 +6,7 @@
 
             <div>
                 <label>Nom du programme</label>
-                <input type="text" [(ngModel)]="data.nom"/>
+                <input type="text" [(ngModel)]="data.nom" id="inpNomProgramme"/>
             </div>
     
         </div>
@@ -16,7 +16,7 @@
                 <div class="card-header">
                     <label>Banque d'exercices</label>
                 </div>
-                <ul>
+                <ul id="lstBanqueExercice">
                     <div class="input-field">
                         <i class="material-icons prefix">search</i>
                         <input type="text" />        
@@ -29,12 +29,13 @@
     
             <div class="grid-child grid-programme">
                 <div class="card-header">
-                    <label>Programme</label>
+                    <label>Exercices du programme</label>
                 </div>
-                <ul>
+                <ul id="lstExercicePrg">
                     <li class="list-exercices" *ngFor="let exer of data.exercices; let i = index;" (click)="showExerciceParam(exer, i)">
-                        {{exer.nom}}
+                        <div>{{exer.nom}}</div>
                         <a class="secondary-content" (click)="deleteExercice(i)" style="color: red"><i class="material-icons">close</i></a>
+                        <label>{{exer.refExercice}}</label>
                     </li>
                 </ul>
             </div>
@@ -42,7 +43,7 @@
         
         <div>
             <button class="waves-effect waves-light btn-small custom-button"
-                (click)="sauvegarder()" >
+                (click)="sauvegarder()" id="btnPrgExerciceSauvegarder">
                 Sauvegarder
             </button>
         </div>

@@ -19,8 +19,6 @@ export class ProgrammeExerciceComponent implements OnInit {
  
   exercices : any[];  
   selectedExercice : any;
-  sauvegarderOptions : String;
-  isNewExercice : boolean;  
 
   constructor(private dialogRef: MatDialogRef<ProgrammeExerciceComponent>, 
     private dialog: MatDialog,
@@ -90,57 +88,54 @@ export class ProgrammeExerciceComponent implements OnInit {
   saveCurrentExercice() {
   }
 
-
-  // showExerciceParam(exer, i) {
-
-  //   this.isNewExercice = false;
-
-  //   this.selectedExercice = exer;
-
-  //   console.log(i);
-
-  //   this.sauvegarderOptions = "Mettre à jour";
-  // }
-
   showExerciceParam(exer, i) {
     const dialogConfig = new MatDialogConfig();
 
+    this.selectedExercice = exer;   
 
-    dialogConfig.width = "700px";
+    dialogConfig.data = {};
+    dialogConfig.data.exercice = this.selectedExercice;
+    
+    dialogConfig.data.option = {};
+    dialogConfig.data.option.isNewExercice = false;
+
+    dialogConfig.width = "900px";
 
     let dialogRef = this.dialog.open(NewExerciceComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
 
     });
   }
-
-  ajoutElement() {
-
-    if(this.data.exercices == null) {
-      this.data.exercices = [];
-    }
-
-    this.data.exercices.push(this.selectedExercice);
-    console.log(this.data.exercices);
-  }
-
 
   newExercice(exercice : any) {
     const dialogConfig = new MatDialogConfig();
 
-
     dialogConfig.width = "900px";
-    dialogConfig.data = exercice;
+
+     //this.sauvegarderOptions = "Ajouter";
+     this.selectedExercice = {refExercice : exercice.name,
+                             nom : exercice.name};
+
+    dialogConfig.data = {};
+    dialogConfig.data.option = {};
+    dialogConfig.data.option.isNewExercice = true;
+
+    dialogConfig.data.exercice = this.selectedExercice;//exercice;
 
     let dialogRef = this.dialog.open(NewExerciceComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
+          console.log(result);
+          if(result == "OK") {
+            if(this.data.exercices == null) {
+            this.data.exercices = [];
+            }
+
+            this.data.exercices.push(this.selectedExercice);
+          }
 
     });
     
-    // this.isNewExercice = true;
-    // this.sauvegarderOptions = "Ajouter";
-    // this.selectedExercice = {refExercice : ex.name,
-    //                         nom : ex.name};
+
   }
 
   deleteExercice(index) {

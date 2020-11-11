@@ -81,7 +81,7 @@ async function testArchive() {
                                 driver.wait(until.elementLocated(By.xpath("//*[@id=\"autocomplete\"]/div[1]/div[2]/ul/li[1]/div/a")), 5000).then((searchResult) => {
                                     searchResult.click();
 
-                                    driver.wait(until.elementLocated(By.id('btnEditPatient')), 5000).then((ele) => {
+                                    driver.wait(until.elementLocated(By.id('btnEditPatient')), 10000).then((ele) => {
                                         
                                         driver.findElement(By.xpath('//*[@id="btnEditPatient"]/i')).then((btnEditPatient) => {
                                             btnEditPatient.click().then(() => {
@@ -236,7 +236,7 @@ async function validatePatientIsAccessable(driver, name) {
         driver.findElement(By.xpath('//*[@id=\"autocomplete\"]//input')).then((search) => {
             search.clear().then(() => {
                 search.sendKeys(name).then(() => {
-                    driver.wait(until.elementLocated(By.xpath("//*[@id=\"autocomplete\"]/div[1]/div[2]/ul/li[1]/div/a")), 5000).then((searchResult) => {
+                    driver.wait(until.elementLocated(By.xpath("//*[@id=\"autocomplete\"]/div[1]/div[2]/ul/li[1]/div/a")), 10000).then((searchResult) => {
                         
                         searchResult.click().then(() => {
                             resolve("Patient est accessible");
@@ -375,6 +375,8 @@ async function testEditPatient() {
         console.log("Edit patient error: " + error);
     });
 
+    
+
     let lblPatientName = await (await driver.findElement(By.id('lblPatientName'))).getText().catch((err) => {
         console.log("Edit patient error: " + error);
     });
@@ -390,11 +392,14 @@ async function testEditPatient() {
     assert(lblPatientEmail == "jean.tambien@gmail.com", "Edit Patient, Validation du email après modification" + lblPatientEmail);
     assert(lblPatientTelephone == "+1 (444) 4444-3333", "Edit Patient, Validation du numéro de téléphone après modification" + lblPatientTelephone);
 
-
+    //await driver.get(siteUrl);
+    /*await sleep(5000); // weird davoir à mettre ça
     await driver.get(siteUrl);
-    await sleep(1000); // weird davoir à mettre ça
-    //await driver.navigate().refresh();
+    await driver.navigate().refresh();
+    await driver.wait( until.elementLocated(By.id('idAjoutPatient')),
+        5000);*/
 
+    await sleep(5000);
     await validatePatientIsAccessable(driver, "Joe Kekun").catch((err) => {
         assert(1==2, "Edit Patient Joe Kekun is not accessible");
     });
@@ -447,16 +452,91 @@ async function testEditPatient() {
     await btnEditEnregistrer2.click().catch((err) => {
         console.log("Edit patient error: " + error);
     });
-
-
-
-
     driver.close();
 
+}
+
+
+async function testProgrammeExercice(patientName) {
+    
+    let driver = await new Builder().forBrowser("chrome").build();
+    await connectUser(driver);    
+    let btnAjoutPatient = await driver.findElement(By.id('idAjoutPatient'));
+    await validatePatientIsAccessable(driver, patientName).catch(() => {
+        assert(1==2, "testProgrammeExercice, impossible d'acceder à la page du patient: " + patientName);
+    });
+
+    let btnAddProgram = await driver.findElement(By.xpath('//*[@id="btnAddProgram"]/i')).catch((err) => {
+        console.log("Impossible d'acceder au bouton d'ajout de programme, veuillez verifier")
+    });
+
+    await btnAddProgram.click().catch((err) => {
+        console.log("error cant click on btnAddProgram" + err);
+    });
+
+    let mouvementBras = await driver.wait( until.elementLocated(By.xpath('//*[@id="lstBanqueExercice"]//*[contains(text(), "Mouvement bras")]')), 5000);
 
 
 
+    await mouvementBras.click().catch((err) => {
+        console.log("testProgrammeExercice, cant click sur l'exercice de la banque : " + err);
+    });
 
+    let btnSauvegarderExercice = await driver.wait( until.elementLocated(By.id("btnSauvegarderExercice")), 5000);
+
+    await sleep(1000);
+
+    await btnSauvegarderExercice.click().catch((err) => {
+        console.log("testProgrammeExercice, cant click on add exercice : " + err);
+    });
+
+    await driver.wait( until.elementLocated(By.xpath('//*[@id="lstExercicePrg"]//*[contains(text(), "Mouvement bras")]')), 5000).catch((err) => {
+        assert(1==2, "Programme exercice le mouvement bras n'a pas été ajouté à la liste d'exercice");
+    });
+
+    inpNomProgramme = await driver.wait(until.elementLocated(By.id("inpNomProgramme"))).catch((err) => {
+        console.log("testProgrammeExercice, impossible de trouver le input du nom de programme : " + err);
+    });
+
+    await inpNomProgramme.sendKeys("Selenium");
+
+    let btnPrgExerciceSauvegarder = await driver.wait(until.elementLocated(By.id('btnPrgExerciceSauvegarder')),3000).catch((err) => {
+        console.log("testProgramExercice, btnPrgExerciceSauvegarder : " + err);
+    });
+
+    btnPrgExerciceSauvegarder.click().catch((err) => {
+        console.log("testProgramExercice, btnPrgExerciceSauvegarder : " + err);
+    });
+
+    let prgSelenium = await driver.wait( until.elementLocated(By.xpath('//*[@id="lstProgrammeExercice"]//*[contains(text(), "Selenium")]')), 5000).catch((err) => {
+        assert(1==2, "Programme exercice impossible de localiser le programme Selenium");
+    });
+
+    let delPrgSelenium = await driver.wait( until.elementLocated(By.xpath('//*[@id="lstProgrammeExercice"]//*[contains(text(), "Selenium")]/..//a')), 5000).catch((err) => {
+        console.log("testProgrammeExercice : " + err);
+    });
+
+    await delPrgSelenium.click().catch((err) => {
+        console.log(err);
+    });
+
+    let btnConfirm = await driver.wait( until.elementLocated(By.id('confirm-button')), 5000).catch((err) => {
+        console.log("testProgrammeExercice : " + err);
+    });
+
+    await btnConfirm.click().catch((err) => {
+        console.log("testProgrammeExercice : + " + err);
+    });
+
+    await sleep(1000);
+
+    await driver.wait( until.elementLocated(By.xpath('//*[@id="lstProgrammeExercice"]//*[contains(text(), "Selenium")]')), 3000).then(() => {
+        assert(1==2, "Programme exercice le programme Selenium est sensé être supprimé");
+    }).catch((err) => {
+        driver.close();
+    });
+
+    
 }
 
 
@@ -468,4 +548,5 @@ testBadLogin();
 testLogin();
 testArchive();
 testAjoutPatient();
-testEditPatient();
+//testEditPatient();
+testProgrammeExercice("Germain Patoine");

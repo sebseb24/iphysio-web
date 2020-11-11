@@ -70,11 +70,11 @@
         <div class="programs">
             <div class="card-header">
                 <label>Programmes</label>
-                <a (click)="editProgram()"><i class="material-icons" style="position: relative; float: right; margin-top: 13px; color: #00b4e6; cursor: pointer;">add_box</i></a>
+                <a (click)="editProgram()" id="btnAddProgram"><i class="material-icons" style="position: relative; float: right; margin-top: 13px; color: #00b4e6; cursor: pointer;">add_box</i></a>
             </div>
 
             <div class="card-content">
-                <ul>
+                <ul id="lstProgrammeExercice">
                     <li *ngFor="let pro of patientService.programmeList" (click)="editProgram(pro)">
                         <label class="hist-label" style="margin-left: 10px; position: relative; top: -6px;">{{pro.nom}}</label>          
                         <a class="secondary-content" (click)="deleteProgramme(pro);$event.stopPropagation()"><i class="material-icons" style="color: red">clear</i></a>
