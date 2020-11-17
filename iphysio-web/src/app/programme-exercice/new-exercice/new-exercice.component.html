@@ -2,162 +2,54 @@
 <div>
     <div style="margin-bottom: 30px;">
         <h4>
-            <input type="text" style="font-weight: bold;" [(ngModel)]="data.exercice.nom"/> 
+            <input type="text" style="font-weight: bold;" [(ngModel)]="selectedExercice.parametres.nom"/> 
         </h4>
     </div>
-
     <label class="title" style="text-align: left;">Description de l'exercice</label>
     <div class="grid-container">
         <div class="description">
-            <textarea name="description">Assoyez-vous bien droit sur une chaise avec le bras allongé le long du corps.  Pliez le coude en gardant la paume de votre main vers le haut.  Redescendez lentement et répétez.</textarea>
+            <textarea name="description" [(ngModel)]="selectedExercice.parametres.description"></textarea>
         </div>
-
         <div class="parametres">
             <div class="grid-container-parameters">
-                <div class="series">
-                    <label>Séries</label>
-                    <input type="number" [(ngModel)]="selectedExercice.serie"/>
-                </div>
-
-                <div *ngIf="selectedExercice.refExercice!='Étirement du trapèze'" class="reps">
-                    <label>Reps.</label>
-                    <input type="number" [(ngModel)]="selectedExercice.repetition"/>
-                </div>
-
-                <div class="poids">
-                    <label>Poids</label>
-                    <input type="number" [(ngModel)]="selectedExercice.poids"/>
-                </div>
-
-                <div class="frequence">
-                    <label>Fréquence</label>
-                    <input type="number" [(ngModel)]="selectedExercice.frequence"/>
-                </div>
-
+                <div *ngIf="selectedExercice.refExercice.name!='Étirement du trapèze'" class="reps">
+                    <label>Répétition</label>
+                    <input type="number" [(ngModel)]="selectedExercice.parametres.repetition"/>
+                </div>  
                 <div class="duree">
                     <label>Durée</label>
-                    <input type="number" [(ngModel)]="selectedExercice.duree"/>
+                    <input type="number" [(ngModel)]="selectedExercice.parametres.duree"/>
                 </div>
-
                 <div *ngIf="selectedExercice.refExercice=='Étirement du trapèze'" class="tenir">
                     <label>Tenir</label>
-                    <input type="number" [(ngModel)]="selectedExercice.tenir"/>
+                    <input type="number" [(ngModel)]="selectedExercice.parametres.tenir"/>
                 </div>
-
                 <div class="tempo">
                     <label>Tempo</label>
-                    <input type="number" [(ngModel)]="selectedExercice.tempo"/>
-                </div>
-
-                <div class="repos">
-                    <label>Repos</label>
-                    <input type="number" [(ngModel)]="selectedExercice.repos"/>
-                </div>
-
-                <div *ngIf="selectedExercice.refExercice=='non implémenté'" class="autres">
-                    <label>Autres</label>
-                    <input type="text" />
-                </div> 
-                
-
-               
-                <!--<div class="col m4" *ngIf="selectedExercice">
-                    <div class="row"> 
-                               
-                            <div class="col s6">
-                                <label>Repetition par jours</label>
-                                <input type="number" [(ngModel)]="selectedExercice.repetition">
-                            </div>
-                        
-        
-                        <div>
-                                <div class="col s4">
-                                    <mat-form-field>
-                                        <mat-label>Date de début</mat-label>
-                                        <input matInput [matDatepicker]="datedebut"  [(ngModel)]="selectedExercice.dateDebut">
-                                        <mat-datepicker-toggle matSuffix [for]="datedebut"></mat-datepicker-toggle>
-                                        <mat-datepicker #datedebut></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col s4"></div>
-                                <div class="col s4">
-                                    <mat-form-field>
-                                        <mat-label>Date de fin</mat-label>
-                                        <input matInput [matDatepicker]="datefin" [(ngModel)]="selectedExercice.dateFin">
-                                        <mat-datepicker-toggle matSuffix [for]="datefin"></mat-datepicker-toggle>
-                                        <mat-datepicker #datefin></mat-datepicker>
-                                    </mat-form-field>
-                                </div>
-                        </div>
-                        
-        
-                        <div class="radiogroup">
-                            <mat-checkbox [(ngModel)]="selectedExercice.dimanche">Dimanche</mat-checkbox>
-                            <mat-checkbox [(ngModel)]="selectedExercice.lundi">Lundi</mat-checkbox>
-                            <mat-checkbox [(ngModel)]="selectedExercice.mardi">Mardi</mat-checkbox>
-                            <mat-checkbox [(ngModel)]="selectedExercice.mercredi">Mercredi</mat-checkbox>
-                            <mat-checkbox [(ngModel)]="selectedExercice.jeudi">Jeudi</mat-checkbox>
-                            <mat-checkbox [(ngModel)]="selectedExercice.vendredi">Vendredi</mat-checkbox>
-                            <mat-checkbox [(ngModel)]="selectedExercice.samedi">Samedi</mat-checkbox>
-                        </div>
-        
-                        <div *ngIf="selectedExercice.refExercice=='Mouvement bras'">
-                            <p>Bras où l'exercice doit être éffectué</p>
-                                <mat-checkbox [(ngModel)]="selectedExercice.brasGauche">Gauche</mat-checkbox>
-                                <mat-checkbox [(ngModel)]="selectedExercice.brasDroit">Droit</mat-checkbox>
-                        </div>
-        
-                        <div *ngIf="selectedExercice.refExercice=='Étirement du trapèze'" >
-                            <div class="col s6">
-                                <p>Séries</p>
-                                <input type="number" [(ngModel)]="selectedExercice.series" >
-                            </div>
-                            <div class="col s6">
-                                <p>Temps (en seconde)</p>
-                                <input type="number" [(ngModel)]="selectedExercice.tempSerie" >
-                            </div>            
-                        </div>
-        
-                        <div *ngIf="selectedExercice.refExercice=='Flexion du coude'">
-                            <div class="col s4">
-                                <p>Séries</p>
-                                <input type="number" [(ngModel)]="selectedExercice.serie" >
-                            </div>
-                            <div class="col s4">
-                                <p>Temps (en seconde)</p>
-                                <input type="number" [(ngModel)]="selectedExercice.tempSerie" >
-                            </div>   
-                            <div class="col s4">
-                                <p>Angle à maintenir</p>
-                                <input type="number" [(ngModel)]="selectedExercice.angle" > <label>degré</label>               
-                            </div>           
-                        </div>
-                    </div>
-                </div>-->
-        
+                    <input type="number" [(ngModel)]="selectedExercice.parametres.tempo"/>
+                </div>       
             </div>
             <div class="jourSemaine">
-                <div class="lundi"><mat-checkbox  [(ngModel)]="selectedExercice.dimanche">Dimanche</mat-checkbox></div>
-                <div class="mardi"><mat-checkbox  [(ngModel)]="selectedExercice.lundi">Lundi</mat-checkbox></div>
-                <div class="mercredi"><mat-checkbox  [(ngModel)]="selectedExercice.mardi">Mardi</mat-checkbox></div>
-                <div class="jeudi"><mat-checkbox  [(ngModel)]="selectedExercice.mercredi">Mercredi</mat-checkbox></div>
-                <div class="vendredi"><mat-checkbox  [(ngModel)]="selectedExercice.jeudi">Jeudi</mat-checkbox></div> 
-                <div class="samedi"><mat-checkbox  [(ngModel)]="selectedExercice.vendredi">Vendredi</mat-checkbox></div>
-                <div class="dimanche"><mat-checkbox  [(ngModel)]="selectedExercice.samedi">Samedi</mat-checkbox></div>
+                <div class="lundi"><mat-checkbox  [(ngModel)]="selectedExercice.parametres.dimanche">Dimanche</mat-checkbox></div>
+                <div class="mardi"><mat-checkbox  [(ngModel)]="selectedExercice.parametres.lundi">Lundi</mat-checkbox></div>
+                <div class="mercredi"><mat-checkbox  [(ngModel)]="selectedExercice.parametres.mardi">Mardi</mat-checkbox></div>
+                <div class="jeudi"><mat-checkbox  [(ngModel)]="selectedExercice.parametres.mercredi">Mercredi</mat-checkbox></div>
+                <div class="vendredi"><mat-checkbox  [(ngModel)]="selectedExercice.parametres.jeudi">Jeudi</mat-checkbox></div> 
+                <div class="samedi"><mat-checkbox  [(ngModel)]="selectedExercice.parametres.vendredi">Vendredi</mat-checkbox></div>
+                <div class="dimanche"><mat-checkbox  [(ngModel)]="selectedExercice.parametres.samedi">Samedi</mat-checkbox></div>
             </div>
             <mat-form-field style="padding-right: 5px;">
                 <mat-label>Date de début</mat-label>
-                <input matInput [matDatepicker]="datedebut"  [(ngModel)]="selectedExercice.dateDebut">
+                <input matInput [matDatepicker]="datedebut"  [(ngModel)]="selectedExercice.parametres.dateDebut">
                 <mat-datepicker-toggle matSuffix [for]="datedebut"></mat-datepicker-toggle>
                 <mat-datepicker #datedebut></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
                 <mat-label>Date de fin</mat-label>
-                <input matInput [matDatepicker]="datefin" [(ngModel)]="selectedExercice.dateFin">
+                <input matInput [matDatepicker]="datefin" [(ngModel)]="selectedExercice.parametres.dateFin">
                 <mat-datepicker-toggle matSuffix [for]="datefin"></mat-datepicker-toggle>
                 <mat-datepicker #datefin></mat-datepicker>
             </mat-form-field>
-
         </div>
 
         <div class="photo1" style="text-align: center;">

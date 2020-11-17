@@ -19,7 +19,6 @@ export class NewExerciceComponent implements OnInit {
     ) { 
       this.selectedExercice = data.exercice;
 
-
       if(data.option.isNewExercice == true){
         this.btnSauvegardeMsg = "Ajouter";
       }

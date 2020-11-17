@@ -36,6 +36,13 @@ export class ProgrammeExerciceComponent implements OnInit {
     if(this.data._id == null) {
       // on veut post un nouveau programme d'exercice
       console.log("Ajout d'un programme pour le patient " + this.patientService.selectedPatient._id);
+
+
+      //if(this.data.exercices == null) {
+      //  this.data.exercices = [];
+        //this.data.exercices.parametres = {};
+      //}
+
       this.patientService.postProgramExercice(this.patientService.selectedPatient._id, {
         nom : this.data.nom,
         exercices : this.data.exercices
@@ -73,6 +80,9 @@ export class ProgrammeExerciceComponent implements OnInit {
       (res) => {
         this.exercices = res as any[];
         console.log(this.exercices);
+
+
+
       },
       (err) => {
         if(err instanceof HttpErrorResponse) {
@@ -113,9 +123,17 @@ export class ProgrammeExerciceComponent implements OnInit {
     dialogConfig.width = "900px";
 
      //this.sauvegarderOptions = "Ajouter";
-     this.selectedExercice = {refExercice : exercice.name,
-                             nom : exercice.name};
+     this.selectedExercice = {};
+     this.selectedExercice.parametres = {
+          exerciceId : exercice._id,
+          nom : exercice.name,
+          description : exercice.description
+      };
 
+      this.selectedExercice.refExercice = {};
+      this.selectedExercice.refExercice.name = exercice.name;
+
+                             
     dialogConfig.data = {};
     dialogConfig.data.option = {};
     dialogConfig.data.option.isNewExercice = true;

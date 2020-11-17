@@ -33,9 +33,9 @@
                 </div>
                 <ul id="lstExercicePrg">
                     <li class="list-exercices" *ngFor="let exer of data.exercices; let i = index;" (click)="showExerciceParam(exer, i)">
-                        <div>{{exer.nom}}</div>
+                        <div>{{exer.parametres.nom}}</div>
                         <a class="secondary-content" (click)="deleteExercice(i)" style="color: red"><i class="material-icons">close</i></a>
-                        <label>{{exer.refExercice}}</label>
+                        <label>{{exer.refExercice.name}}</label>
                     </li>
                 </ul>
             </div>
