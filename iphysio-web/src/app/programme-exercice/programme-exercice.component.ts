@@ -110,6 +110,7 @@ export class ProgrammeExerciceComponent implements OnInit {
     dialogConfig.data.option.isNewExercice = false;
 
     dialogConfig.width = "900px";
+    dialogConfig.height = "inherit";
 
     let dialogRef = this.dialog.open(NewExerciceComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
@@ -121,6 +122,7 @@ export class ProgrammeExerciceComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.width = "900px";
+    dialogConfig.height = "inherit";
 
      //this.sauvegarderOptions = "Ajouter";
      this.selectedExercice = {};
@@ -131,7 +133,7 @@ export class ProgrammeExerciceComponent implements OnInit {
       };
 
       this.selectedExercice.refExercice = {};
-      this.selectedExercice.refExercice.name = exercice.name;
+      this.selectedExercice.refExercice = exercice;
 
                              
     dialogConfig.data = {};
@@ -161,5 +163,9 @@ export class ProgrammeExerciceComponent implements OnInit {
 
     this.data.exercices.splice(index, 1);
   }
+
+  annuler() {
+    this.dialogRef.close();
+  } 
 
 }

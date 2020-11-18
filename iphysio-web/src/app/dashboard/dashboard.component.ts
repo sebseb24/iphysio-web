@@ -37,6 +37,7 @@ export class DashboardComponent implements OnInit {
   openDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "500px";
+    dialogConfig.height = "inherit"
     //dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
 

@@ -56,4 +56,9 @@ export class NouveauPatientComponent implements OnInit {
       this.patientService.patients = res as Patient[];
     });
   }
+
+  annuler() {
+    console.log("jannule");
+    this.dialogRef.close();
+  } 
 }

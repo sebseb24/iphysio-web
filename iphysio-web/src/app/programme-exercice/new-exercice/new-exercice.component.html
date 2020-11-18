@@ -12,21 +12,46 @@
         </div>
         <div class="parametres">
             <div class="grid-container-parameters">
-                <div *ngIf="selectedExercice.refExercice.name!='Étirement du trapèze'" class="reps">
+                <div *ngIf="selectedExercice.refExercice && selectedExercice.refExercice.type=='repetition'" class="reps">
                     <label>Répétition</label>
                     <input type="number" [(ngModel)]="selectedExercice.parametres.repetition"/>
                 </div>  
-                <div class="duree">
-                    <label>Durée</label>
+                <div class="duree" *ngIf="selectedExercice.refExercice.type=='chrono'">
+                    <label>Durée (en secondes)</label>
                     <input type="number" [(ngModel)]="selectedExercice.parametres.duree"/>
                 </div>
-                <div *ngIf="selectedExercice.refExercice=='Étirement du trapèze'" class="tenir">
-                    <label>Tenir</label>
+                <div *ngIf="selectedExercice.refExercice.type=='hold'" class="tenir">
+                    <label>Temps (en secondes)</label>
                     <input type="number" [(ngModel)]="selectedExercice.parametres.tenir"/>
                 </div>
-                <div class="tempo">
+                <div class="tempo" *ngIf="selectedExercice.refExercice.type=='repetition' || selectedExercice.refExercice.type=='chrono' ">
                     <label>Tempo</label>
-                    <input type="number" [(ngModel)]="selectedExercice.parametres.tempo"/>
+                    <!--<input type="number" [(ngModel)]="selectedExercice.parametres.tempo"/>-->
+                    <mat-select [(ngModel)]="selectedExercice.parametres.tempo.value" (ngModelChange)="onTempoChange($event)">
+                        <mat-option *ngFor="let option of TempoOptions" [value]="option.value">
+                            {{option.viewValue}}
+                            <label>({{option.detail}})</label>
+                          </mat-option>
+                    </mat-select>
+                </div>
+                <div class="angle" style="border: 1px solid grey;padding-left: 5px; padding-right: 5px;">
+                    <div *ngIf="selectedExercice.refExercice.type!='hold'">
+                        <label >Angle de début (en degré)</label>
+                        <input type="number" [(ngModel)]="selectedExercice.parametres.angle.debut"/>
+                    </div>
+                    <div *ngIf="selectedExercice.refExercice.type!='hold'">
+                        <label >Angle de fin (en degré)</label>
+                        <input type="number" [(ngModel)]="selectedExercice.parametres.angle.fin"/>
+                    </div>
+                    <div *ngIf="selectedExercice.refExercice.type=='hold'">
+                        <label>Angle à maintenir</label>
+                        <input type="number" [(ngModel)]="selectedExercice.parametres.angle.hold"/>
+                    </div>
+                    <div>
+                        
+                        <mat-checkbox style="padding-left: 5px;"[(ngModel)]="selectedExercice.parametres.angle.isAntiClockWise">Sens antihoraire</mat-checkbox>
+                    </div>
+                    
                 </div>       
             </div>
             <div class="jourSemaine">
@@ -66,5 +91,6 @@
             (click)="ajoutElement()" >
             {{btnSauvegardeMsg}}
         </button>
+        <button class="waves-effect waves-light btn-small custom-button" style="margin-left: 5px;"(click)="annuler()">Annuler</button>
     </div>
 </div>

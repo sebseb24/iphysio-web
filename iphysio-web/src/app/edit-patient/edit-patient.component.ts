@@ -64,4 +64,8 @@ export class EditPatientComponent implements OnInit {
     )
   }
 
+  annuler() {
+    this.dialogRef.close();
+  } 
+
 }

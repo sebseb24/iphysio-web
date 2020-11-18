@@ -35,7 +35,8 @@
                     <li class="list-exercices" *ngFor="let exer of data.exercices; let i = index;" (click)="showExerciceParam(exer, i)">
                         <div>{{exer.parametres.nom}}</div>
                         <a class="secondary-content" (click)="deleteExercice(i)" style="color: red"><i class="material-icons">close</i></a>
-                        <label>{{exer.refExercice.name}}</label>
+                        <label *ngIf="exer.refExercice">{{exer.refExercice.name}}</label>
+                        <label *ngIf="!exer.refExercice">Aucun exercice lié</label>
                     </li>
                 </ul>
             </div>
@@ -45,6 +46,10 @@
             <button class="waves-effect waves-light btn-small custom-button"
                 (click)="sauvegarder()" id="btnPrgExerciceSauvegarder">
                 Sauvegarder
+            </button>
+            <button  class="waves-effect waves-light btn-small custom-button"
+            (click)="sauvegarder()" id="btnPrgExerciceAnnuler">
+            Annuler
             </button>
         </div>
     </div>
