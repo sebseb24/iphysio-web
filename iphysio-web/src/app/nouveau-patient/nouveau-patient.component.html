@@ -35,14 +35,13 @@
                 <mat-option *ngFor="let physio of physios" [value]="physio._id">{{physio.name}}</mat-option>        
             </mat-select>
         </li>
-
-        <li style="margin-bottom: 0;">
-            <mat-dialog-actions>
-                <button id="btnNewPatientCreer" class="waves-effect waves-light btn-small custom-button" type="submit" [disabled]="!newPatientForm.valid" style="width: 100%; height: 40px;">Créer</button>
-            </mat-dialog-actions>
-        </li>
     </ul>
-
-    <!-- <button class="waves-effect waves-light btn-small" type="button" (click)="close()">Fermer</button> -->
+    <div>
+        <button id="btnNewPatientCreer" class="waves-effect waves-light btn-small custom-button" type="submit" [disabled]="!newPatientForm.valid" >Créer</button> <!--style="width: 100%; height: 40px;"-->
+        
+        <button id="btnEditAnnuler" type="button" (click)="annuler()"  class="waves-effect waves-light btn-small custom-button" style="margin-left: 5px;">
+            Annuler
+        </button>
+    </div>
 </form>
 

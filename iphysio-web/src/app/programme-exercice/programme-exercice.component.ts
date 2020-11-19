@@ -36,6 +36,13 @@ export class ProgrammeExerciceComponent implements OnInit {
     if(this.data._id == null) {
       // on veut post un nouveau programme d'exercice
       console.log("Ajout d'un programme pour le patient " + this.patientService.selectedPatient._id);
+
+
+      //if(this.data.exercices == null) {
+      //  this.data.exercices = [];
+        //this.data.exercices.parametres = {};
+      //}
+
       this.patientService.postProgramExercice(this.patientService.selectedPatient._id, {
         nom : this.data.nom,
         exercices : this.data.exercices
@@ -73,6 +80,9 @@ export class ProgrammeExerciceComponent implements OnInit {
       (res) => {
         this.exercices = res as any[];
         console.log(this.exercices);
+
+
+
       },
       (err) => {
         if(err instanceof HttpErrorResponse) {
@@ -100,6 +110,7 @@ export class ProgrammeExerciceComponent implements OnInit {
     dialogConfig.data.option.isNewExercice = false;
 
     dialogConfig.width = "900px";
+    dialogConfig.height = "inherit";
 
     let dialogRef = this.dialog.open(NewExerciceComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
@@ -111,11 +122,20 @@ export class ProgrammeExerciceComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.width = "900px";
+    dialogConfig.height = "inherit";
 
      //this.sauvegarderOptions = "Ajouter";
-     this.selectedExercice = {refExercice : exercice.name,
-                             nom : exercice.name};
+     this.selectedExercice = {};
+     this.selectedExercice.parametres = {
+          exerciceId : exercice._id,
+          nom : exercice.name,
+          description : exercice.description
+      };
 
+      this.selectedExercice.refExercice = {};
+      this.selectedExercice.refExercice = exercice;
+
+                             
     dialogConfig.data = {};
     dialogConfig.data.option = {};
     dialogConfig.data.option.isNewExercice = true;
@@ -143,5 +163,9 @@ export class ProgrammeExerciceComponent implements OnInit {
 
     this.data.exercices.splice(index, 1);
   }
+
+  annuler() {
+    this.dialogRef.close();
+  } 
 
 }

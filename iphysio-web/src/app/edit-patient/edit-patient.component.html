@@ -17,14 +17,17 @@
                 <label>Adresse : </label>
                 <input type="text" [(ngModel)]="adresse" id="inpEditAdresse">
             </li>
-            <li>
-                <button id="btnEditEnregistrer" (click)="enregistrer()"  class="waves-effect waves-light btn-small custom-button" style="width: 100%; height: 60px;">
-                    Enregistrer
-                </button>
-            </li>
             <li style="text-align: center; margin-bottom: 0;">
                 <u (click)="archiver()" id="btnArchiverPatient" style="color: red; cursor: pointer; margin-bottom: 0;">Archiver le patient</u>
             </li>
-        </ul>    
+        </ul>  
+        <div>
+            <button id="btnEditEnregistrer" (click)="enregistrer()"  class="waves-effect waves-light btn-small custom-button" >
+                Enregistrer
+            </button>
+            <button id="btnEditAnnuler" (click)="annuler()"  class="waves-effect waves-light btn-small custom-button" style="margin-left: 5px;">
+                Annuler
+            </button>
+        </div>  
     </div>
 </div>

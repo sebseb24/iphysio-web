@@ -7,10 +7,14 @@ const bcrypt = require('bcryptjs');
 var { Exercice } = require('../models/exercices');
 
 router.get('/', (req, res) => {
-    Exercice.find((err, docs) => {
+
+
+    Exercice.find({isActive : true},(err, docs) => {
         if (!err) {res.send(docs); }
         else { console.log('Error in Retrieving Exercices : ' + JSON.stringify(err, undefined, 2)); }
-    });
+    } );
+
+
 });
 
 router.post('/', (req, res) => {
