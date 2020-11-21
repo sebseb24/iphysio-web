@@ -36,7 +36,7 @@ var Patient = mongoose.model('Patient', {
     telephone : {type : String},
     adresse : { type : String},
     isActive : {type : Boolean},
-    historique_activite : [ExerciceStatistique]
+    patientId : {type : String}
 }, 'patients');
 
 module.exports = { Patient };

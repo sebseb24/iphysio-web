@@ -26,7 +26,6 @@
                 </div>
                 <div class="tempo" *ngIf="selectedExercice.refExercice.type=='repetition' || selectedExercice.refExercice.type=='chrono' ">
                     <label>Tempo</label>
-                    <!--<input type="number" [(ngModel)]="selectedExercice.parametres.tempo"/>-->
                     <mat-select [(ngModel)]="selectedExercice.parametres.tempo.value" (ngModelChange)="onTempoChange($event)">
                         <mat-option *ngFor="let option of TempoOptions" [value]="option.value">
                             {{option.viewValue}}
@@ -34,25 +33,40 @@
                           </mat-option>
                     </mat-select>
                 </div>
-                <div class="angle" style="border: 1px solid grey;padding-left: 5px; padding-right: 5px;">
+                <div class="angle" style="padding-left: 5px; padding-right: 5px;">
                     <div *ngIf="selectedExercice.refExercice.type!='hold'">
-                        <label >Angle de début (en degré)</label>
+                        <label >Angle de début {{descMoves[0]}} (en degré)</label>
                         <input type="number" [(ngModel)]="selectedExercice.parametres.angle.debut"/>
                     </div>
                     <div *ngIf="selectedExercice.refExercice.type!='hold'">
-                        <label >Angle de fin (en degré)</label>
+                        <label >Angle de fin {{descMoves[0]}} (en degré)</label>
                         <input type="number" [(ngModel)]="selectedExercice.parametres.angle.fin"/>
                     </div>
                     <div *ngIf="selectedExercice.refExercice.type=='hold'">
-                        <label>Angle à maintenir</label>
+                        <label>Angle à maintenir {{descMoves[0]}}</label>
                         <input type="number" [(ngModel)]="selectedExercice.parametres.angle.hold"/>
                     </div>
-                    <div>
-                        
-                        <mat-checkbox style="padding-left: 5px;"[(ngModel)]="selectedExercice.parametres.angle.isAntiClockWise">Sens antihoraire</mat-checkbox>
+                    <div>                        
+                        <mat-checkbox [(ngModel)]="selectedExercice.parametres.angle.isAntiClockWise">Sens antihoraire</mat-checkbox>
+                    </div>                    
+                </div> 
+                <div *ngIf="selectedExercice.refExercice.movements.length > 1"  style="padding-left: 5px; padding-right: 5px;">
+                    <div *ngIf="selectedExercice.refExercice.type!='hold'">
+                        <label >Angle de début {{descMoves[1]}} (en degré) </label>
+                        <input type="number" [(ngModel)]="selectedExercice.parametres.angle2.debut"/>
                     </div>
-                    
-                </div>       
+                    <div *ngIf="selectedExercice.refExercice.type!='hold'">
+                        <label >Angle de fin {{descMoves[1]}} (en degré)</label>
+                        <input type="number" [(ngModel)]="selectedExercice.parametres.angle2.fin"/>
+                    </div>
+                    <div *ngIf="selectedExercice.refExercice.type=='hold'">
+                        <label>Angle à maintenir {{descMoves[1]}}</label>
+                        <input type="number" [(ngModel)]="selectedExercice.parametres.angle2.hold"/>
+                    </div>
+                    <div>                        
+                        <mat-checkbox [(ngModel)]="selectedExercice.parametres.angle2.isAntiClockWise">Sens antihoraire</mat-checkbox>
+                    </div>                    
+                </div>        
             </div>
             <div class="jourSemaine">
                 <div class="lundi"><mat-checkbox  [(ngModel)]="selectedExercice.parametres.dimanche">Dimanche</mat-checkbox></div>
