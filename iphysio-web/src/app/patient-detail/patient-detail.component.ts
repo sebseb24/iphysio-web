@@ -28,11 +28,14 @@ export class PatientDetailComponent implements OnInit {
   constructor(private dialog: MatDialog,
       public patientService : PatientService,
       public historiqueService : HistoriqueService,
-      private dialogService : DialogService) { }
+      private dialogService : DialogService) {
+        
+       }
 
   ngOnInit(): void {
     this.selectedPatient = this.patientService.getSelectedPatient();
     this.refreshHistoriqueList();
+    
   }
  
   editProgram(pro ? : any) {

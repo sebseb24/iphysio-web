@@ -19,19 +19,6 @@ router.get('/', security.verifyToken, (req, res) => {
 
 router.get('/:patientId', (req, res) => {
 
-    /*Programme.find({ patientId : req.params.patientId}, (err, pro) => {
-
-        if (!err) { res.send(pro); }
-        else { 
-            console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2));
-            res.status(400).send('Error in retrieving programmes : ' + JSON.stringify(err, undefined, 2));
-        }
-
-    });*/
-
-   
-
-
     Programme.aggregate([
         {
           '$match': {
@@ -50,7 +37,7 @@ router.get('/:patientId', (req, res) => {
           }
         }, {
           '$lookup': {
-            'from': 'exercices', 
+            'from': 'exercicesPhysiotec', 
             'localField': 'exerciceId', 
             'foreignField': '_id', 
             'as': 'exerciceInfo'

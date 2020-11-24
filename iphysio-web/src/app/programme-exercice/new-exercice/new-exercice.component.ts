@@ -60,11 +60,11 @@ export class NewExerciceComponent implements OnInit {
         this.selectedExercice.parametres.tempo = {value : 1, min : 2, max : 999999999};
        
         this.selectedExercice.parametres.angle = {};
-        this.selectedExercice.parametres.angle = {isAntiClockWise : true, debut : 180, fin : 90};
+        this.selectedExercice.parametres.angle = {isClockWise : true, debut : 180, fin : 90};
 
         if(this.selectedExercice.refExercice.movements.length > 1) {
           this.selectedExercice.parametres.angle2 = {};
-          this.selectedExercice.parametres.angle2 = {isAntiClockWise : true, debut : 180, fin : 90};
+          this.selectedExercice.parametres.angle2 = {isClockWise : true, debut : 180, fin : 90};
         }
 
         if(this.selectedExercice.refExercice.type == "repetition") {
@@ -86,7 +86,7 @@ export class NewExerciceComponent implements OnInit {
 
         if(!this.selectedExercice.parametres.angle) {
           this.selectedExercice.parametres.angle = {};
-          this.selectedExercice.parametres.angle = {isAntiClockWise : true, debut : 180, fin : 90, membre : "brasGauche"};
+          this.selectedExercice.parametres.angle = {isClockWise : true, debut : 180, fin : 90, membre : "brasGauche"};
         } 
 
         this.btnSauvegardeMsg = "Modifier"

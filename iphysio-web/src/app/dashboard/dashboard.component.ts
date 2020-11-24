@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NouveauPatientComponent } from '../nouveau-patient/nouveau-patient.component';
 import { AuthService } from '../auth/auth.service';
@@ -9,6 +9,8 @@ import { Historique } from '../../../NodeJS/models/historique';
 import { HistoriqueService } from '../../../NodeJS/services/historique.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { LineChartComponent } from '../line-chart/line-chart.component';
+import { Chart } from 'node_modules/chart.js';
 
 @Component({
   selector: 'app-dashboard',
@@ -23,15 +25,19 @@ export class DashboardComponent implements OnInit {
 
   dispArchive : boolean;
   dispPatientDetail : boolean;
+
+  //chartBar : LineChartComponent
+  //@Input() chart: LineChartComponent;
  
   constructor(private dialog: MatDialog, private _authService: AuthService, public patientService: PatientService, public historiqueService: HistoriqueService,private _router: Router) {
-
+    //this.chartBar = new LineChartComponent(historiqueService, patientService);
   }
 
   ngOnInit(): void {
     this.connectedUser.name = localStorage.getItem('username');
     this.connectedUser._id = localStorage.getItem('_id');
     this.refreshPatientList();
+    
   }
 
   openDialog() {
@@ -74,9 +80,163 @@ export class DashboardComponent implements OnInit {
       this.historiqueService.getHistoriqueList(this.patientService.selectedPatient._id).subscribe(
         (res) => {
           this.historiqueService.historique = res as Historique[];
+
+          
+
+          let stackedDate = new Date();
+          stackedDate.setDate(stackedDate.getDate() - 4);
+          stackedDate.setHours(2);
+      
+          let resultats = [{ x: new Date(), y: 1 },
+          { x: new Date().setDate(new Date().getDate() - 3), y: 6 },
+          { x: new Date().setDate(new Date().getDate() - 4), y: 3 },
+          { x: new Date().setDate(new Date().getDate() - 5), y: 2 },
+          { x: new Date().setDate(new Date().getDate() - 4), y: 2 },
+          { x: stackedDate, y: 2 },]
+      
+          let resultats2 = [{ x: new Date(), y: 1 },
+            { x: new Date().setDate(new Date().getDate() - 1), y: 9 },
+            { x: new Date().setDate(new Date().getDate() - 4), y: 3 },
+            { x: new Date().setDate(new Date().getDate() - 5), y: 2 },
+            { x: new Date().setDate(new Date().getDate() - 4), y: 2 },
+            { x: stackedDate, y: 2 },]
+
+            let dataGenou = {
+              label: 'Flexion genou',
+              data: resultats2,
+              barPercentage: 0.9,
+              barThickness: 6,
+              minBarLength: 2,
+              backgroundColor: 'rgba(34, 99, 132, 1)',
+              borderColor: 'rgba(34, 99, 132, 1)',
+              borderWidth: 1
+            }  
+
+
+
+
+          
+          let start = new Date(),
+          end = new Date();
+          end.setDate(end.getDate() + 1);
+      
+      
+          start.setDate(start.getDate() - 7); // set to 'now' minus 7 days.
+          start.setHours(0, 0, 0, 0); // set to midnight.
+
+          var canvas = document.getElementById('myChart');
+
+
+
+
+          /*var myLineChart = new Chart("myChart",  {
+            type: 'bar',
+            data: {
+      
+              datasets: []
+            },
+            options: {
+              responsive: true,
+              title: {
+                display: true,
+                text: 'Durée (en secondes) lors d\'un exercice',
+              },
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true,
+                    min: 0,
+                    max: 60
+                  }
+                }],
+                xAxes: [{
+                  type: 'time',
+                  distribution: 'series',
+      
+                  time: {
+                    unit: "day"
+                  },
+                  ticks: {
+                    min: start,
+                    max: end,
+                  }
+                }]
+              }
+            }
+          });*/
+
+          
+
+          
+
+          
+
+          //let chartTemp = $("#myChart").data('chart');
+
+          //let chartBilly = Chart.getChart("myChart");
+          
+          //this.formatStats(chartBilly);
+
+
+
+
+
+
+          //this.formatStats(canvas.getContext('2d'));
+          //this.formatStats(myLineChart);
+          //myLineChart.data.datasets.push(dataGenou);
+          //myLineChart.update();
+
+          //this.chart.refreshHistoriqueList(this.patientService.selectedPatient._id);
         },
         (err) => {
         });
+  }
+  barColors = ['rgba(0,128,0, 1)',
+  'rgba(238,146,55, 1)',
+  'rgba(0,0,0, 1)',
+  'rgba(204,0,204, 1)' ]
+
+  formatStats(myChart) {
+
+    myChart.data.datasets = [];
+    //myChart.update();
+
+
+    let indexCouleur = 0;
+    for(let hist of this.historiqueService.historique) {
+
+      let result = []; 
+
+        for(let i = 0; i < hist.date.length; i++) {
+          let dureeString = hist.duree[i].substring(0, hist.duree[i].length - 1);
+          let duree = Number(dureeString);
+        
+          
+          //result.push({x: new Date().setDate(hist.date[i]), y : duree});
+          result.push({x: new Date(hist.date[i]), y : duree});
+        }
+        
+      console.log(result);
+      let model = {
+        label: hist._id,
+        data: result,
+        barPercentage: 0.9,
+        barThickness: 6,
+        minBarLength: 2,
+        backgroundColor: this.barColors[indexCouleur],
+        borderColor: 'rgba(34, 99, 132, 1)',
+        borderWidth: 1
+      }  
+
+      myChart.data.datasets.push(model);
+      myChart.update();
+      indexCouleur++;
+
+     
+
+
+    }
   }
 
   refreshPatientList() {
