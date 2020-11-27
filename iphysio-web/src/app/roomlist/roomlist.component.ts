@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
+
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
 
 export const snapshotToArray = (snapshot: any) => {
   const returnArr = [];

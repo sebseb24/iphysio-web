@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import * as firebase from 'firebase';
+//import * as firebase from 'firebase';
+
+import firebase from "firebase/app";
+import "firebase/auth";
+import "firebase/database";
 
 const config  = { 
   apiKey: 'AIzaSyCFdqmK7iI-lbmtkEvrXopDrsOIhIzuZRE',
@@ -16,6 +20,7 @@ export class AppComponent {
 
 
   constructor() {
+    //firebase.initializeApp(config);
     firebase.initializeApp(config);
   }
 }

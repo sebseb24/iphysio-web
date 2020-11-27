@@ -2,13 +2,15 @@ const { splitClasses } = require('@angular/compiler');
 const express = require('express');
 var router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
+var security = require('./security');
+
 //require('mongoose').set('debug', true);
 
 var { Patient } = require('../models/patients');
 var { Programme } = require('../models/programme');
 
 // => localhost:3000/Patients/
-router.get('/', (req, res) => {
+router.get('/', security.verifyToken, (req, res) => {
     Patient.find((err, docs) => {
         if (!err) {res.send(docs); }
         else { console.log('Error in Retrieving Patients : ' + JSON.stringify(err, undefined, 2)); }
@@ -16,19 +18,6 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:patientId', (req, res) => {
-
-    /*Programme.find({ patientId : req.params.patientId}, (err, pro) => {
-
-        if (!err) { res.send(pro); }
-        else { 
-            console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2));
-            res.status(400).send('Error in retrieving programmes : ' + JSON.stringify(err, undefined, 2));
-        }
-
-    });*/
-
-   
-
 
     Programme.aggregate([
         {
@@ -48,7 +37,7 @@ router.get('/:patientId', (req, res) => {
           }
         }, {
           '$lookup': {
-            'from': 'exercices', 
+            'from': 'exercicesPhysiotec', 
             'localField': 'exerciceId', 
             'foreignField': '_id', 
             'as': 'exerciceInfo'

@@ -552,7 +552,7 @@ function sleep(ms) {
 
 testBadLogin();
 testLogin();
-testArchive();
-testAjoutPatient();
-testEditPatient();
-testProgrammeExercice("Germain Patoine", "Plier le bras gauche");
+//testArchive();
+//testAjoutPatient();
+//testEditPatient();
+//testProgrammeExercice("Germain Patoine", "Plier le bras gauche");

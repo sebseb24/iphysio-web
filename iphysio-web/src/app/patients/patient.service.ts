@@ -13,7 +13,6 @@ export class PatientService {
   programmeList : any[];
   patients: Patient[];
 
-
   readonly baseURL = 'http://localhost:3000/patients';
   readonly progURL = 'http://localhost:3000/programmes';
   readonly exerURL = 'http://localhost:3000/exercices';
