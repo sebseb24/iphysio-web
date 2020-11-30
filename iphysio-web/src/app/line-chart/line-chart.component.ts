@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
+import { GraphService } from 'NodeJS/services/graph.service';
 import { Chart } from 'node_modules/chart.js';
 import { HistoriqueService } from '../../../NodeJS/services/historique.service';
 import { PatientService } from '../patients/patient.service';
@@ -14,7 +15,8 @@ export class LineChartComponent implements OnInit {
 
 
   constructor(public historiqueService: HistoriqueService,
-    public patientService: PatientService) {
+    public patientService: PatientService,
+    public graphService : GraphService) {
 
     let stackedDate = new Date();
     stackedDate.setDate(stackedDate.getDate() - 4);
@@ -153,6 +155,12 @@ export class LineChartComponent implements OnInit {
         }
       }
     });
+
+    this.graphService.tempsExercice = this.myChart;
+
+    //localStorage.setItem('dataMyChart', this.myChart);
+
+
 
     //this.myChart.data.datasets.push(dataGenou);
     //this.myChart.data.datasets.push(dataBras);

@@ -11,12 +11,17 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LineChartComponent } from '../line-chart/line-chart.component';
 import { Chart } from 'node_modules/chart.js';
+import * as $ from 'jquery';
+import { ChatroomComponent } from '../chatroom/chatroom.component';
+import { GraphService } from 'NodeJS/services/graph.service';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
+
+
 export class DashboardComponent implements OnInit {
 
   connectedUser = new Physio;
@@ -25,11 +30,17 @@ export class DashboardComponent implements OnInit {
 
   dispArchive : boolean;
   dispPatientDetail : boolean;
+  
+  myChart : Chart;
+
+  
 
   //chartBar : LineChartComponent
   //@Input() chart: LineChartComponent;
  
-  constructor(private dialog: MatDialog, private _authService: AuthService, public patientService: PatientService, public historiqueService: HistoriqueService,private _router: Router) {
+  constructor(private dialog: MatDialog, private _authService: AuthService, 
+    public patientService: PatientService, public historiqueService: HistoriqueService,private _router: Router,
+    public graphService : GraphService) {
     //this.chartBar = new LineChartComponent(historiqueService, patientService);
   }
 
@@ -37,6 +48,46 @@ export class DashboardComponent implements OnInit {
     this.connectedUser.name = localStorage.getItem('username');
     this.connectedUser._id = localStorage.getItem('_id');
     this.refreshPatientList();
+
+    /*let start = new Date(),
+    end = new Date();
+    end.setDate(end.getDate() + 1);
+
+    this.myChart = new Chart("myChart", {
+      type: 'bar',
+      data: {
+
+        datasets: []
+      },
+      options: {
+        responsive: true,
+        title: {
+          display: true,
+          text: 'Durée (en secondes) lors d\'un exercice',
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              min: 0,
+              max: 60
+            }
+          }],
+          xAxes: [{
+            type: 'time',
+            distribution: 'series',
+
+            time: {
+              unit: "day"
+            },
+            ticks: {
+              min: start,
+              max: end,
+            }
+          }]
+        }
+      }
+    });*/
     
   }
 
@@ -124,7 +175,7 @@ export class DashboardComponent implements OnInit {
           start.setDate(start.getDate() - 7); // set to 'now' minus 7 days.
           start.setHours(0, 0, 0, 0); // set to midnight.
 
-          var canvas = document.getElementById('myChart');
+          //var canvas = document.getElementById('myChart');
 
 
 
@@ -176,6 +227,8 @@ export class DashboardComponent implements OnInit {
           //let chartBilly = Chart.getChart("myChart");
           
           //this.formatStats(chartBilly);
+          //this.formatStats(this.myChart);
+          this.formatStats(this.graphService.tempsExercice);
 
 
 
