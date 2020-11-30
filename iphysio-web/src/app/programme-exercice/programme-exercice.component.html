@@ -27,11 +27,11 @@
                 </ul>
             </div>
     
-            <div class="grid-child grid-programme">
+            <div class="grid-child grid-programme" >
                 <div class="card-header">
                     <label>Exercices du programme</label>
                 </div>
-                <ul id="lstExercicePrg">
+                <ul id="lstExercicePrg" style="height: 500px;">
                     <li class="list-exercices" *ngFor="let exer of data.exercices; let i = index;" (click)="showExerciceParam(exer, i)">
                         <div>{{exer.parametres.nom}}</div>
                         <a class="secondary-content" (click)="deleteExercice(i)" style="color: red"><i class="material-icons">close</i></a>
