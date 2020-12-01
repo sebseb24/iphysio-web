@@ -64,6 +64,17 @@ export class PatientDetailComponent implements OnInit {
     });
   }
 
+  refreshStats() {
+    this.patientService.getStatistics(this.patientService.selectedPatient._id).subscribe(
+      (res) => {
+        this.patientService.statsList = res as any[];
+        console.log("STATS! : " + this.patientService.statsList)
+      }, (err) => {
+        console.log(err);
+      }
+    )
+  }
+
   refreshHistoriqueList() {
     /*this.historiqueService.getHistoriqueList(this.patientService.selectedPatient._id).subscribe(
       (res) => {

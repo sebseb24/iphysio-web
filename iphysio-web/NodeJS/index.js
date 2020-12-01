@@ -10,6 +10,7 @@ var physioController = require('./controllers/physioController.js');
 var programmeController = require('./controllers/programmeController.js');
 var exerciceController = require('./controllers/exerciceController.js');
 var historiqueController = require('./controllers/historiqueController.js');
+var statisticsController = require('./controllers/statisticsController.js');
 
 const mongoose = require('mongoose');
 
@@ -36,3 +37,4 @@ app.use('/patients', patientController);
 app.use('/programmes', programmeController);
 app.use('/exercices', exerciceController);
 app.use('/historique', historiqueController);
+app.use('/statistics', statisticsController);

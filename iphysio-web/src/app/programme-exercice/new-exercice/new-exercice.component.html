@@ -16,8 +16,9 @@
                     <label>Répétition</label>
                     <input type="number" [(ngModel)]="selectedExercice.parametres.repetition"/>
                 </div>  
-                <div class="duree" *ngIf="selectedExercice.refExercice.type=='chrono'">
-                    <label>Durée (en secondes)</label>
+                <div class="duree" *ngIf="selectedExercice.refExercice.type=='chrono' || selectedExercice.refExercice.type=='amplitude'">
+                    <label *ngIf="selectedExercice.refExercice.type=='chrono'">Durée (en secondes)</label>
+                    <label *ngIf="selectedExercice.refExercice.type=='amplitude'">Durée max sans progression (en secondes)</label>
                     <input type="number" [(ngModel)]="selectedExercice.parametres.duree"/>
                 </div>
                 <div *ngIf="selectedExercice.refExercice.type=='hold'" class="tenir">
@@ -33,7 +34,7 @@
                           </mat-option>
                     </mat-select>
                 </div>
-                <div class="angle" style="padding-left: 5px; padding-right: 5px;">
+                <div class="angle" style="padding-left: 5px; padding-right: 5px;" >
                     <div *ngIf="selectedExercice.refExercice.type!='hold'">
                         <label >Angle de début {{descMoves[0]}} (en degré)</label>
                         <input type="number" [(ngModel)]="selectedExercice.parametres.angle.debut"/>

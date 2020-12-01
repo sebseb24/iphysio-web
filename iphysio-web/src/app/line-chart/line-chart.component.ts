@@ -157,6 +157,7 @@ export class LineChartComponent implements OnInit {
     });
 
     this.graphService.tempsExercice = this.myChart;
+    this.graphService.tempsExercice.update();
 
     //localStorage.setItem('dataMyChart', this.myChart);
 

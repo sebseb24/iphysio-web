@@ -60,17 +60,19 @@ export class NewExerciceComponent implements OnInit {
         this.selectedExercice.parametres.tempo = {value : 1, min : 2, max : 999999999};
        
         this.selectedExercice.parametres.angle = {};
-        this.selectedExercice.parametres.angle = {isClockWise : true, debut : 180, fin : 90};
+        this.selectedExercice.parametres.angle = {isClockWise : true, debut : 160, fin : 90};
 
         if(this.selectedExercice.refExercice.movements.length > 1) {
           this.selectedExercice.parametres.angle2 = {};
-          this.selectedExercice.parametres.angle2 = {isClockWise : true, debut : 180, fin : 90};
+          this.selectedExercice.parametres.angle2 = {isClockWise : true, debut : 160, fin : 90};
         }
 
         if(this.selectedExercice.refExercice.type == "repetition") {
             this.selectedExercice.parametres.repetition = 1;
         } else if(this.selectedExercice.refExercice.type == "chrono") {
             this.selectedExercice.parametres.duree = 30;
+        } else if(this.selectedExercice.refExercice.type == "amplitude") {
+            this.selectedExercice.parametres.duree= 5;
         }
 
 
