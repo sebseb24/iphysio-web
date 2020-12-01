@@ -6,6 +6,7 @@ import { DatePipe } from '@angular/common';
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/database";
+import { Physio } from '../auth/auth.model';
 
 export const snapshotToArray = (snapshot: any) => {
   const returnArr = [];
@@ -41,18 +42,20 @@ export class RoomlistComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.enterChatRoom('Physio');
   }
 
   enterChatRoom(roomname: string) {
-    const chat = { roomname: '', nickname: '', message: '', date: '', type: '' };
-    chat.roomname = roomname;
-    chat.nickname = this.nickname;
-    chat.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
-    chat.message = `${this.nickname} enter the room`;
-    chat.type = 'join';
-    const newMessage = firebase.database().ref('chats/').push();
-    newMessage.set(chat);
+    //const chat = { roomname: '', nickname: '', message: '', date: '', type: '' };
+    //chat.roomname = roomname;
+    //chat.nickname = this.nickname;
+    //chat.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
+    //chat.message = `${this.nickname} enter the room`;
+    //chat.type = 'join';
+    //const newMessage = firebase.database().ref('chats/').push();
+    //newMessage.set(chat);
 
+    //firebase.database().ref('roomusers/').remove();
     firebase.database().ref('roomusers/').orderByChild('roomname').equalTo(roomname).on('value', (resp: any) => {
       let roomuser = [];
       roomuser = snapshotToArray(resp);
