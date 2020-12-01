@@ -30,11 +30,14 @@ export class PatientDetailComponent implements OnInit {
       public historiqueService : HistoriqueService,
       private dialogService : DialogService) {
         
+        
+        
        }
 
   ngOnInit(): void {
     this.selectedPatient = this.patientService.getSelectedPatient();
     this.refreshHistoriqueList();
+    
     
   }
  
@@ -63,6 +66,8 @@ export class PatientDetailComponent implements OnInit {
       )
     });
   }
+
+  
 
   refreshHistoriqueList() {
     /*this.historiqueService.getHistoriqueList(this.patientService.selectedPatient._id).subscribe(

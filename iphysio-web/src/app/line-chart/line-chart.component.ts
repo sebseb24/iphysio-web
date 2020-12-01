@@ -85,7 +85,7 @@ export class LineChartComponent implements OnInit {
     end.setDate(end.getDate() + 1);
 
 
-    start.setDate(start.getDate() - 7); // set to 'now' minus 7 days.
+    start.setDate(start.getDate() - 2); // set to 'now' minus 7 days.
     start.setHours(0, 0, 0, 0); // set to midnight.
     
     let dataGenou = {
@@ -142,21 +142,28 @@ export class LineChartComponent implements OnInit {
           }],
           xAxes: [{
             type: 'time',
-            distribution: 'series',
+            offset: true,    
+            distribution :'series',   
 
             time: {
               unit: "day"
             },
             ticks: {
-              min: start,
-              max: end,
+
+              min : start,
+              max : end
+              
             }
           }]
         }
       }
     });
 
+
+    //xAxes -> distribution 'series'
+
     this.graphService.tempsExercice = this.myChart;
+    this.graphService.tempsExercice.update();
 
     //localStorage.setItem('dataMyChart', this.myChart);
 
