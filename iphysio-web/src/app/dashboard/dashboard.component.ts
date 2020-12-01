@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LineChartComponent } from '../line-chart/line-chart.component';
 import { Chart } from 'node_modules/chart.js';
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import { ChatroomComponent } from '../chatroom/chatroom.component';
 import { GraphService } from 'NodeJS/services/graph.service';
 
