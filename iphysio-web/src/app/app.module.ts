@@ -27,7 +27,7 @@ import { HistoriqueActiviteComponent } from './historique-activite/historique-ac
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
 import { PatientArchiveComponent } from './patient-archive/patient-archive.component';
 import { LineChartComponent } from './line-chart/line-chart.component';
-import { PieChartComponent } from './pie-chart/pie-chart.component';
+import { PieChartComponent } from './graphs/pie-chart/pie-chart.component';
 import { RoomlistComponent } from './roomlist/roomlist.component';
 import { AddroomComponent } from './addroom/addroom.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
@@ -42,6 +42,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { DatePipe } from '@angular/common';
 import { NewExerciceComponent } from './programme-exercice/new-exercice/new-exercice.component';
+import { MovementsGraphComponent } from './graphs/movements-graph/movements-graph.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { NewExerciceComponent } from './programme-exercice/new-exercice/new-exer
    AddroomComponent,
    ChatroomComponent,
    NewExerciceComponent,
+   MovementsGraphComponent,
   ],
   imports: [
     BrowserModule,

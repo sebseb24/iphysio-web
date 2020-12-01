@@ -4,13 +4,42 @@ var router = express.Router();
 var { Historique } = require('../models/historique');
 
 router.get('/:patientId', (req, res) => {
-    Historique.find(
+
+
+    Historique.aggregate([
+        {
+          '$match': {
+            'patientId': req.params.patientId 
+          }
+        }, {
+          '$group': {
+            '_id': '$exerciceName', 
+            'date': {
+              '$push': '$date'
+            }, 
+            'duree': {
+              '$push': '$duree'
+            }, 
+            'nbrRepetitionOrHoldTime': {
+              '$push': '$nbrRepetitionOrHoldTime'
+            }
+          }
+        }
+      ], (err, doc) => {
+        if (!err) { res.send(doc); }
+        else { console.log('Error in retrieving Historique : ' + JSON.stringify(err, undefined, 2)); }
+    })
+
+    /*Historique.find(
         { patient_id: req.params.patientId },
         (err, doc) => {
             if (!err) { res.send(doc); }
             else { console.log('Error in retrieving Historique : ' + JSON.stringify(err, undefined, 2)); }
         }
-    )
+    )*/
+
+
+
 });
 
 // doesn't work, Err : document must have an _id before saving

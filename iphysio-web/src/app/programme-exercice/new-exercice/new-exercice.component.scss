@@ -13,6 +13,8 @@
 .repos { grid-area: repos; }
 .autres { grid-area: autres; }
 
+
+
 .grid-container {
     display: grid;
     grid-template-areas:
@@ -21,11 +23,17 @@
     //grid-gap: 10px;
 }
 
+
 .grid-container-parameters {
     display: grid;
     grid-template-areas:
         'series reps poids frequence duree tenir tempo repos autres';
     grid-gap: 5px;
+}
+
+.jourSemaine > div{
+    display: inline;
+    padding-right: 5px;
 }
 
 

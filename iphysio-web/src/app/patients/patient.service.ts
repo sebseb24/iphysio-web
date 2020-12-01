@@ -12,12 +12,13 @@ export class PatientService {
   selectedPatient: Patient;
   programmeList : any[];
   patients: Patient[];
-
+  statsList : any[];
 
   readonly baseURL = 'http://localhost:3000/patients';
   readonly progURL = 'http://localhost:3000/programmes';
   readonly exerURL = 'http://localhost:3000/exercices';
   readonly physioURL = 'http://localhost:3000/physios';
+  readonly statURL = 'http://localhost:3000/statistics';
 
   constructor(private http: HttpClient) { }
 
@@ -73,6 +74,10 @@ export class PatientService {
 
   getPhysios() {
     return this.http.get(this.physioURL + `/`);
+  }
+
+  getStatistics(patientId : string) {
+    return this.http.get(this.statURL + `/${patientId}`);
   }
 
 

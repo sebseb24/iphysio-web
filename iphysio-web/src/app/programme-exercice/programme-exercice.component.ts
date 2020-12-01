@@ -19,8 +19,6 @@ export class ProgrammeExerciceComponent implements OnInit {
  
   exercices : any[];  
   selectedExercice : any;
-  sauvegarderOptions : String;
-  isNewExercice : boolean;  
 
   constructor(private dialogRef: MatDialogRef<ProgrammeExerciceComponent>, 
     private dialog: MatDialog,
@@ -38,6 +36,13 @@ export class ProgrammeExerciceComponent implements OnInit {
     if(this.data._id == null) {
       // on veut post un nouveau programme d'exercice
       console.log("Ajout d'un programme pour le patient " + this.patientService.selectedPatient._id);
+
+
+      //if(this.data.exercices == null) {
+      //  this.data.exercices = [];
+        //this.data.exercices.parametres = {};
+      //}
+
       this.patientService.postProgramExercice(this.patientService.selectedPatient._id, {
         nom : this.data.nom,
         exercices : this.data.exercices
@@ -75,6 +80,9 @@ export class ProgrammeExerciceComponent implements OnInit {
       (res) => {
         this.exercices = res as any[];
         console.log(this.exercices);
+
+
+
       },
       (err) => {
         if(err instanceof HttpErrorResponse) {
@@ -90,57 +98,64 @@ export class ProgrammeExerciceComponent implements OnInit {
   saveCurrentExercice() {
   }
 
-
-  // showExerciceParam(exer, i) {
-
-  //   this.isNewExercice = false;
-
-  //   this.selectedExercice = exer;
-
-  //   console.log(i);
-
-  //   this.sauvegarderOptions = "Mettre à jour";
-  // }
-
   showExerciceParam(exer, i) {
     const dialogConfig = new MatDialogConfig();
 
+    this.selectedExercice = exer;   
 
-    dialogConfig.width = "700px";
+    dialogConfig.data = {};
+    dialogConfig.data.exercice = this.selectedExercice;
+    
+    dialogConfig.data.option = {};
+    dialogConfig.data.option.isNewExercice = false;
+
+    dialogConfig.width = "900px";
+    dialogConfig.height = "inherit";
 
     let dialogRef = this.dialog.open(NewExerciceComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
 
     });
   }
-
-  ajoutElement() {
-
-    if(this.data.exercices == null) {
-      this.data.exercices = [];
-    }
-
-    this.data.exercices.push(this.selectedExercice);
-    console.log(this.data.exercices);
-  }
-
 
   newExercice(exercice : any) {
     const dialogConfig = new MatDialogConfig();
 
-
     dialogConfig.width = "900px";
-    dialogConfig.data = exercice;
+    dialogConfig.height = "inherit";
+
+     //this.sauvegarderOptions = "Ajouter";
+     this.selectedExercice = {};
+     this.selectedExercice.parametres = {
+          exerciceId : exercice._id,
+          nom : exercice.name,
+          description : exercice.description
+      };
+
+      this.selectedExercice.refExercice = {};
+      this.selectedExercice.refExercice = exercice;
+
+                             
+    dialogConfig.data = {};
+    dialogConfig.data.option = {};
+    dialogConfig.data.option.isNewExercice = true;
+
+    dialogConfig.data.exercice = this.selectedExercice;//exercice;
 
     let dialogRef = this.dialog.open(NewExerciceComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
+          console.log(result);
+          if(result == "OK") {
+            if(this.data.exercices == null) {
+            this.data.exercices = [];
+            }
+
+            this.data.exercices.push(this.selectedExercice);
+          }
 
     });
     
-    // this.isNewExercice = true;
-    // this.sauvegarderOptions = "Ajouter";
-    // this.selectedExercice = {refExercice : ex.name,
-    //                         nom : ex.name};
+
   }
 
   deleteExercice(index) {
@@ -148,5 +163,9 @@ export class ProgrammeExerciceComponent implements OnInit {
 
     this.data.exercices.splice(index, 1);
   }
+
+  annuler() {
+    this.dialogRef.close();
+  } 
 
 }

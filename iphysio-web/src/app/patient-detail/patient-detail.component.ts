@@ -28,17 +28,22 @@ export class PatientDetailComponent implements OnInit {
   constructor(private dialog: MatDialog,
       public patientService : PatientService,
       public historiqueService : HistoriqueService,
-      private dialogService : DialogService) { }
+      private dialogService : DialogService) {
+        
+        
+        
+       }
 
   ngOnInit(): void {
     this.selectedPatient = this.patientService.getSelectedPatient();
     this.refreshHistoriqueList();
+    
+    
   }
  
   editProgram(pro ? : any) {
 
     const dialogConfig = new MatDialogConfig();
-
 
     dialogConfig.width = "700px";
     if (pro != null)
@@ -61,6 +66,8 @@ export class PatientDetailComponent implements OnInit {
       )
     });
   }
+
+  
 
   refreshHistoriqueList() {
     /*this.historiqueService.getHistoriqueList(this.patientService.selectedPatient._id).subscribe(

@@ -2,17 +2,18 @@ const jwt = require('jsonwebtoken');
 const express = require('express');
 var router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
+var security = require('./security');
 
 var { Patient } = require('../models/patients');
 
-router.get('/', verifyToken, (req, res) => {
+router.get('/', security.verifyToken, (req, res) => {
     Patient.find((err, docs) => {
         if (!err) {res.send(docs); }
         else { console.log('Error in Retrieving Patients : ' + JSON.stringify(err, undefined, 2)); }
     });
 });
 
-router.get('/:physio_associe_id', (req, res) => {
+router.get('/:physio_associe_id', security.verifyToken, (req, res) => {
     Patient.find(
         { physio_associe: req.params.physio_associe_id,
            isActive : true },
@@ -23,7 +24,7 @@ router.get('/:physio_associe_id', (req, res) => {
     )
 });
 
-router.get('/all/:physio_associe_id', (req, res) => {
+router.get('/all/:physio_associe_id', security.verifyToken, (req, res) => {
     Patient.find(
         { physio_associe: req.params.physio_associe_id},
         (err, doc) => {
@@ -33,19 +34,22 @@ router.get('/all/:physio_associe_id', (req, res) => {
     )
 });
 
-router.get('/patient/:id', (req, res) => {
+router.get('/patient/:id', security.verifyToken, (req, res) => {
     Patient.findById(req.params.id, (err, doc) => {
         if(!err) {res.send(doc);}
         else { console.log('Error in retrieving Patient : ' + JSON.stringify(err, undefined, 2));}
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/', security.verifyToken, (req, res) => {
     var emp = new Patient({
         name: req.body.name,
         email: req.body.email,
         isActive : true,
+        telephone : req.body.telephone,
+        adresse : req.body.adresse,
         physio_associe : req.body.physio_associe,
+        patientId : "NA"
     });
 
     emp.save((err, doc) => {
@@ -54,7 +58,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', security.verifyToken, (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send('No record with given id :  + ${res.params.id};');
 
@@ -84,15 +88,10 @@ router.put('/:id', (req, res) => {
              }
         });
 
-        /*Patient.findByIdAndUpdate(req.params.id, { $set: {notes:req.body.notes} }, { new: true }, (err, doc) => {
-            if (!err) { 
-                res.send(doc);
-             }
-            else { console.log('Error in Patient Update: ' + JSON.stringify(err, undefined, 2)); }
-        });*/
+        
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', security.verifyToken, (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send('No record with given id :  + ${res.params.id};');
 
@@ -102,7 +101,7 @@ router.delete('/:id', (req, res) => {
         });
 });
 
-function verifyToken(req, res, next) {
+/*function verifyToken(req, res, next) {
     if(!req.headers.authorization) {
         return res.status(401).send('Unauthorized request');
     }
@@ -119,6 +118,6 @@ function verifyToken(req, res, next) {
 
     req.userId = payload.subject;
     next();
-}
+}*/
 
 module.exports = router;
