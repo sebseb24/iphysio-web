@@ -82,7 +82,7 @@ export class ChatroomComponent implements OnInit {
     });
   }
 
-  exitChat() {
+  exitChat() {/*
     const chat = { roomname: '', nickname: '', message: '', date: '', type: '' };
     chat.roomname = this.roomname;
     chat.nickname = this.nickname;
@@ -101,8 +101,8 @@ export class ChatroomComponent implements OnInit {
         userRef.update({status: 'offline'});
       }
     });
-
+    
     this.router.navigate(['/roomlist']);
-  }
+  */}
 
 }
