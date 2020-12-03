@@ -24,11 +24,7 @@
       <mat-drawer-container >
         <mat-drawer mode="side" opened class="left-drawer">
           <div class="users-pane">
-            <mat-card class="users-card">
-              <button type="button" mat-button matSuffix mat-icon-button aria-label="Exit" (click)="exitChat()">
-                <mat-icon>logout</mat-icon>
-              </button>
-            </mat-card>
+
             <mat-card class="users-card" *ngFor="let user of users">
               <mat-icon>person</mat-icon> <span class="username">{{user.nickname}}</span>
             </mat-card>
@@ -56,7 +52,7 @@
           <footer >
             <form class="message-form" [formGroup]="chatForm" (ngSubmit)="onFormSubmit(chatForm.value)">
               <mat-form-field class="message-form-field">
-                <input matInput placeholder="Enter message here" formControlName="message"
+                <input matInput placeholder="Entrez votre message ici" formControlName="message"
                         [errorStateMatcher]="matcher">
                 <mat-error>
                   <span *ngIf="!chatForm.get('message').valid && chatForm.get('message').touched">Enter your message</span>

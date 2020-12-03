@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 var Historique = mongoose.model('Historique', {
-    _id: { type: String },
     patient_id: { type: String },
     date: { type: String },
     duree: { type: String },
