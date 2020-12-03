@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { NouveauPatientComponent } from '../nouveau-patient/nouveau-patient.component';
 import { AuthService } from '../auth/auth.service';
@@ -9,10 +9,7 @@ import { Historique } from '../../../NodeJS/models/historique';
 import { HistoriqueService } from '../../../NodeJS/services/historique.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { LineChartComponent } from '../line-chart/line-chart.component';
 import { Chart } from 'node_modules/chart.js';
-import * as $ from 'jquery';
-import { ChatroomComponent } from '../chatroom/chatroom.component';
 import { GraphService } from 'NodeJS/services/graph.service';
 
 @Component({
@@ -110,12 +107,6 @@ export class DashboardComponent implements OnInit {
           stackedDate.setDate(stackedDate.getDate() - 4);
           stackedDate.setHours(2);
       
-          let resultats = [{ x: new Date(), y: 1 },
-          { x: new Date().setDate(new Date().getDate() - 3), y: 6 },
-          { x: new Date().setDate(new Date().getDate() - 4), y: 3 },
-          { x: new Date().setDate(new Date().getDate() - 5), y: 2 },
-          { x: new Date().setDate(new Date().getDate() - 4), y: 2 },
-          { x: stackedDate, y: 2 },]
       
           let resultats2 = [{ x: new Date(), y: 1 },
             { x: new Date().setDate(new Date().getDate() - 1), y: 9 },
@@ -124,16 +115,6 @@ export class DashboardComponent implements OnInit {
             { x: new Date().setDate(new Date().getDate() - 4), y: 2 },
             { x: stackedDate, y: 2 },]
 
-            let dataGenou = {
-              label: 'Flexion genou',
-              data: resultats2,
-              barPercentage: 0.9,
-              barThickness: 6,
-              minBarLength: 2,
-              backgroundColor: 'rgba(34, 99, 132, 1)',
-              borderColor: 'rgba(34, 99, 132, 1)',
-              borderWidth: 1
-            }  
 
           
           let start = new Date(),
@@ -146,7 +127,7 @@ export class DashboardComponent implements OnInit {
           this.formatStats(this.graphService.tempsExercice);
 
         },
-        (err) => {
+        () => {
         });
 
         this.refreshStats(patient._id);
