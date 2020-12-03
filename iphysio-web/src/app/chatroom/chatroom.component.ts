@@ -4,6 +4,9 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { ErrorStateMatcher } from '@angular/material/core';
 //import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
+import { Patient } from '../../../NodeJS/models/patients';
+import { PatientService } from '../patients/patient.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -37,6 +40,7 @@ export class ChatroomComponent implements OnInit {
 
   @ViewChild('chatcontent') chatcontent: ElementRef;
   scrolltop: number = null;
+  patientsList: Patient[];
 
   chatForm: FormGroup;
   nickname = '';
@@ -49,7 +53,9 @@ export class ChatroomComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              public datepipe: DatePipe) {
+              public datepipe: DatePipe,
+              public patientService: PatientService,
+              private _router: Router) {
                 this.nickname = localStorage.getItem('nickname');
                 this.roomname = this.route.snapshot.params.roomname;
                 firebase.database().ref('chats/').on('value', resp => {
@@ -61,12 +67,16 @@ export class ChatroomComponent implements OnInit {
                   const roomusers = snapshotToArray(resp2);
                   this.users = roomusers.filter(x => x.status === 'online');
                 });
+
+                this.refreshPatientList();
+                console.log("les moves s'en viennent, mais elles s'en viennent tu vraiment ? ");
               }
 
   ngOnInit(): void {
           this.chatForm = this.formBuilder.group({
              'message' : [null, Validators.required]
           });
+          
   }
 
   onFormSubmit(form: any) {
@@ -105,4 +115,43 @@ export class ChatroomComponent implements OnInit {
     this.router.navigate(['/roomlist']);
   }
 
+  // openDialog() {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.width = "500px";
+  //   dialogConfig.height = "inherit";
+  //   //dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
+
+  //   dialogConfig.data = {
+  //     id: 1,
+  //     title: 'Angular For Beginners'
+  //   };
+
+  //   this.dialog.open(NouveauPatientComponent, dialogConfig);
+  // }
+
+  // displayArchive() {
+  //   this.clearDisplay();
+  //   this.dispArchive = true;
+  // }
+
+  refreshPatientList() {
+    this.patientService.getPatientList(localStorage.getItem('_id')).subscribe(
+      (res) => {
+        // this.patientService.patients = res as Patient[];
+        this.patientsList = this.patientService.patients;
+      },
+      (err) => {
+        if(err instanceof HttpErrorResponse) {
+          if(err.status === 401 || err.status === 500) {
+            localStorage.removeItem('token');
+            this._router.navigate(['/login']);
+          }
+        }
+      });
+  }
+
+  openConversation(patient) {
+    
+  }
 }

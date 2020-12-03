@@ -11,7 +11,10 @@
     
     <div class="sidebar-user">
       <ul>
-        <li><a  routerLink="/"><i class="material-icons sidebar-menu-icon">home</i>Accueil</a></li>
+        <li><a routerLink="/">Accueil</a></li>
+        <li (click)="openDialog()" id="idAjoutPatient"><i class="material-icons sidebar-menu-icon">add_circle_outline</i>Nouveau patient</li>
+        <!-- <li><i class="material-icons sidebar-menu-icon">assignment</i>Programmes d'exercices</li> -->
+        <li (click)="displayArchive()" id="btnPageArchive"><i class="material-icons sidebar-menu-icon">archive</i>Archive</li>
       </ul>
     </div>
   </div>
