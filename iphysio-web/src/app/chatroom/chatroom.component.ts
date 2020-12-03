@@ -43,11 +43,10 @@ export class ChatroomComponent implements OnInit {
   patientsList: Patient[];
 
   chatForm: FormGroup;
-  nickname = '';
-  roomname = '';
-  message = '';
   users = [];
   chats = [];
+  physioId = localStorage.getItem('_id');
+  public userSelected: Patient;
   matcher = new MyErrorStateMatcher();
 
   constructor(private router: Router,
@@ -56,18 +55,6 @@ export class ChatroomComponent implements OnInit {
               public datepipe: DatePipe,
               public patientService: PatientService,
               private _router: Router) {
-                this.nickname = localStorage.getItem('nickname');
-                this.roomname = this.route.snapshot.params.roomname;
-                firebase.database().ref('chats/').on('value', resp => {
-                  this.chats = [];
-                  this.chats = snapshotToArray(resp);
-                  setTimeout(() => this.scrolltop = this.chatcontent.nativeElement.scrollHeight, 500);
-                });
-                firebase.database().ref('roomusers/').orderByChild('roomname').equalTo(this.roomname).on('value', (resp2: any) => {
-                  const roomusers = snapshotToArray(resp2);
-                  this.users = roomusers.filter(x => x.status === 'online');
-                });
-
                 this.refreshPatientList();
                 console.log("les moves s'en viennent, mais elles s'en viennent tu vraiment ? ");
               }
@@ -80,39 +67,18 @@ export class ChatroomComponent implements OnInit {
   }
 
   onFormSubmit(form: any) {
-    const chat = form;
-    chat.roomname = this.roomname;
-    chat.nickname = this.nickname;
-    chat.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
-    chat.type = 'message';
-    const newMessage = firebase.database().ref('chats/').push();
-    newMessage.set(chat);
+    let chat = form;
+
+    chat.fromId = this.physioId;
+    chat.timestamp = Math.trunc(Date.now()/1000);
+    chat.toId = this.userSelected.patientId;
+    let newMessageFrom = firebase.database().ref('user-messages/' + chat.toId + '/' + chat.fromId + '/').push();
+    let newMessageTo = firebase.database().ref('user-messages/' + chat.fromId + '/' + chat.toId + '/').push();
+    newMessageFrom.set(chat);
+    newMessageTo.set(chat);
     this.chatForm = this.formBuilder.group({
       'message' : [null, Validators.required]
     });
-  }
-
-  exitChat() {
-    const chat = { roomname: '', nickname: '', message: '', date: '', type: '' };
-    chat.roomname = this.roomname;
-    chat.nickname = this.nickname;
-    chat.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
-    chat.message = `${this.nickname} leave the room`;
-    chat.type = 'exit';
-    const newMessage = firebase.database().ref('chats/').push();
-    newMessage.set(chat);
-
-    firebase.database().ref('roomusers/').orderByChild('roomname').equalTo(this.roomname).on('value', (resp: any) => {
-      let roomuser = [];
-      roomuser = snapshotToArray(resp);
-      const user = roomuser.find(x => x.nickname === this.nickname);
-      if (user !== undefined) {
-        const userRef = firebase.database().ref('roomusers/' + user.key);
-        userRef.update({status: 'offline'});
-      }
-    });
-
-    this.router.navigate(['/roomlist']);
   }
 
   // openDialog() {
@@ -130,15 +96,11 @@ export class ChatroomComponent implements OnInit {
   //   this.dialog.open(NouveauPatientComponent, dialogConfig);
   // }
 
-  // displayArchive() {
-  //   this.clearDisplay();
-  //   this.dispArchive = true;
-  // }
 
   refreshPatientList() {
     this.patientService.getPatientList(localStorage.getItem('_id')).subscribe(
       (res) => {
-        // this.patientService.patients = res as Patient[];
+        this.patientService.patients = res as Patient[];
         this.patientsList = this.patientService.patients;
       },
       (err) => {
@@ -152,6 +114,13 @@ export class ChatroomComponent implements OnInit {
   }
 
   openConversation(patient) {
-    
+    this.userSelected = patient;
+    let path = 'user-messages/' + localStorage.getItem('_id') + '/' + patient.patientId + '/';
+    firebase.database().ref(path).on('value', resp => {
+      this.chats = [];
+      this.chats = snapshotToArray(resp) as any[];
+      console.log(this.chats)
+      setTimeout(() => this.scrolltop = this.chatcontent.nativeElement.scrollHeight, 500);
+    });
   }
 }
