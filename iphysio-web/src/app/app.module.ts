@@ -17,7 +17,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
 import {DemoMaterialModule} from './material-module';
 import { LoginComponent } from './auth/login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { CreateUserComponent } from './auth/create-user/create-user.component';
 import { AuthGuard } from './auth/auth.guard';
 import { TokenInterceptorService } from './auth/token-interceptor.service';
@@ -26,10 +26,8 @@ import { AutocompleteLibModule } from 'angular-ng-autocomplete';
 import { HistoriqueActiviteComponent } from './historique-activite/historique-activite.component';
 import { EditPatientComponent } from './edit-patient/edit-patient.component';
 import { PatientArchiveComponent } from './patient-archive/patient-archive.component';
-import { LineChartComponent } from './line-chart/line-chart.component';
+import { LineChartComponent } from './graphs/line-chart/line-chart.component';
 import { PieChartComponent } from './graphs/pie-chart/pie-chart.component';
-import { RoomlistComponent } from './roomlist/roomlist.component';
-import { AddroomComponent } from './addroom/addroom.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -53,7 +51,7 @@ import { MovementsGraphComponent } from './graphs/movements-graph/movements-grap
    NouveauPatientComponent,
    ProgrammeExerciceComponent,
    LoginComponent,
-   DashboardComponent,
+   SidemenuComponent,
    CreateUserComponent,
    ConfirmDialogComponent,
    HistoriqueActiviteComponent,
@@ -62,8 +60,6 @@ import { MovementsGraphComponent } from './graphs/movements-graph/movements-grap
    LineChartComponent,
    PieChartComponent,
    routingComponents,
-   RoomlistComponent,
-   AddroomComponent,
    ChatroomComponent,
    NewExerciceComponent,
    MovementsGraphComponent,
@@ -95,7 +91,7 @@ import { MovementsGraphComponent } from './graphs/movements-graph/movements-grap
       },
       {
         path: '',
-        component: DashboardComponent,
+        component: SidemenuComponent,
         canActivate: [AuthGuard]
       }
 

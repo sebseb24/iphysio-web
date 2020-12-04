@@ -2,7 +2,6 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-//import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
 import { Patient } from '../../../NodeJS/models/patients';
 import { PatientService } from '../patients/patient.service';

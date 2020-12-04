@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
 import { GraphService } from 'NodeJS/services/graph.service';
 import { Chart } from 'node_modules/chart.js';
-import { HistoriqueService } from '../../../NodeJS/services/historique.service';
-import { PatientService } from '../patients/patient.service';
+import { HistoriqueService } from '../../../../NodeJS/services/historique.service';
+import { PatientService } from '../../patients/patient.service';
 
 @Component({
   selector: 'app-line-chart',
@@ -11,8 +11,6 @@ import { PatientService } from '../patients/patient.service';
   styleUrls: ['./line-chart.component.scss']
 })
 export class LineChartComponent implements OnInit {
-
-
 
   constructor(public historiqueService: HistoriqueService,
     public patientService: PatientService,

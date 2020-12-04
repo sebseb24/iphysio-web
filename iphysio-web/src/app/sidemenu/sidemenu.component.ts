@@ -13,13 +13,13 @@ import { Chart } from 'node_modules/chart.js';
 import { GraphService } from 'NodeJS/services/graph.service';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  selector: 'app-sidemenu',
+  templateUrl: './sidemenu.component.html',
+  styleUrls: ['./sidemenu.component.scss']
 })
 
 
-export class DashboardComponent implements OnInit {
+export class SidemenuComponent implements OnInit {
 
   connectedUser = new Physio;
   keyword = 'name';
