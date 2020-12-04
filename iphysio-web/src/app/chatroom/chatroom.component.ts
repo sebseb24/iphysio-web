@@ -56,7 +56,6 @@ export class ChatroomComponent implements OnInit {
               public patientService: PatientService,
               private _router: Router) {
                 this.refreshPatientList();
-                console.log("les moves s'en viennent, mais elles s'en viennent tu vraiment ? ");
               }
 
   ngOnInit(): void {
@@ -71,7 +70,7 @@ export class ChatroomComponent implements OnInit {
 
     chat.fromId = this.physioId;
     chat.timestamp = Math.trunc(Date.now()/1000);
-    chat.toId = this.userSelected.patientId;
+    chat.toId = this.userSelected._id;
     let newMessageFrom = firebase.database().ref('user-messages/' + chat.toId + '/' + chat.fromId + '/').push();
     let newMessageTo = firebase.database().ref('user-messages/' + chat.fromId + '/' + chat.toId + '/').push();
     newMessageFrom.set(chat);
@@ -116,18 +115,15 @@ export class ChatroomComponent implements OnInit {
   openConversation(patient) {
     this.userSelected = patient;
 
-
     for(let patient of this.patientsList) {
       patient.active = false;
     }
 
-
     patient.active = !patient.active;   
-    let path = 'user-messages/' + localStorage.getItem('_id') + '/' + patient.patientId + '/';
+    let path = 'user-messages/' + localStorage.getItem('_id') + '/' + patient._id + '/';
     firebase.database().ref(path).on('value', resp => {
       this.chats = [];
       this.chats = snapshotToArray(resp) as any[];
-      console.log(this.chats)
       setTimeout(() => this.scrolltop = this.chatcontent.nativeElement.scrollHeight, 500);
     });
   }
