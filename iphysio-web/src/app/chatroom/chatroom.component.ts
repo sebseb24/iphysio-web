@@ -115,6 +115,14 @@ export class ChatroomComponent implements OnInit {
 
   openConversation(patient) {
     this.userSelected = patient;
+
+
+    for(let patient of this.patientsList) {
+      patient.active = false;
+    }
+
+
+    patient.active = !patient.active;   
     let path = 'user-messages/' + localStorage.getItem('_id') + '/' + patient.patientId + '/';
     firebase.database().ref(path).on('value', resp => {
       this.chats = [];

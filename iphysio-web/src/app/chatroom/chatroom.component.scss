@@ -6,14 +6,21 @@
   
   
   .left-drawer {
-    width: 200px;
+    width: 225px;
   }
   
   .users-pane {
     height: 50px;
+    cursor: pointer;
   }
-  
-  
+
+  .users-card:hover {
+    background-color: #f2f2f2;
+  }
+
+  .user-selected {
+    background-color: #f2f2f2;
+  }
   
   .username {
     position: absolute;
@@ -21,7 +28,7 @@
     margin-left: 10px;
   }
   
-  footer.sticky-footer {
+  /*footer.sticky-footer {
     position: fixed;
     bottom: 0;
     left: 0;
@@ -29,7 +36,7 @@
     padding: 10px;
     background-color: #ffffff;
     border-top: solid 1px #efefef;
-  }
+  }*/
   
   .message-form {
     margin-left: 200px;
@@ -44,6 +51,10 @@
     float: left;
     width: 98%;
     margin: 5px 0 0 2%;
+  }
+
+  .chat-pane {
+    width: 800px;
   }
   
   .chat-message {
@@ -220,5 +231,29 @@
   margin-left: 17%;
   padding-top: 65px;
 }
-.container{max-width:100%; margin:auto;}
+
+/*mat-drawer-container {
+  height: 100%;
+}*/
+
+
+.container{
+  max-width:100%; 
+  margin:auto;
+  height: 100%;
+
+}
   
+footer {
+  padding-top: 5px;
+  margin-top: 5px;
+}
+
+.page-footer {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  background-image: linear-gradient(to right, #0083A9 , #00b4e6);
+  padding: 10px;
+  bottom: 0;
+}

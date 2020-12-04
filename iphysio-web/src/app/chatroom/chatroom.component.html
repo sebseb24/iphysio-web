@@ -23,11 +23,13 @@
 <div class="dashboard-body">
     
   <div class="container">
-    <div class="example-container mat-elevation-z8">
+    <!--<div class="example-container mat-elevation-z8">-->
       <mat-drawer-container >
         <mat-drawer mode="side" opened class="left-drawer">
           <div class="users-pane">
-            <mat-card class="users-card" *ngFor="let patient of patientsList" (click)="openConversation(patient)">
+            <mat-card class="users-card" *ngFor="let patient of patientsList"
+             (click)="openConversation(patient)"
+             [ngClass]="{'user-selected': patient.active}">
               <mat-icon>person</mat-icon> <span class="username">{{patient.name}}</span>
             </mat-card>
           </div>
@@ -65,9 +67,16 @@
           </footer>
         </mat-drawer-content>
       </mat-drawer-container>
-    </div>
-  
+    <!-- </div> -->
+    <footer  class="page-footer">
+      <div class="container-left">
+        <label style="color: white">© 2020 <b>iPhysio</b> Tous droits réservés</label>
+      </div>
+      <div class="container-right">
+        <label style="color: white">Conçu et développé par <b>EPMUS</b></label>
+      </div>
+  </footer>
           
   </div>
-
+  
 </div>
