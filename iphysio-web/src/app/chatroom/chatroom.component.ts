@@ -4,6 +4,9 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { ErrorStateMatcher } from '@angular/material/core';
 //import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
+import { Patient } from '../../../NodeJS/models/patients';
+import { PatientService } from '../patients/patient.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -37,72 +40,87 @@ export class ChatroomComponent implements OnInit {
 
   @ViewChild('chatcontent') chatcontent: ElementRef;
   scrolltop: number = null;
+  patientsList: Patient[];
 
   chatForm: FormGroup;
-  nickname = '';
-  roomname = '';
-  message = '';
   users = [];
   chats = [];
+  physioId = localStorage.getItem('_id');
+  public userSelected: Patient;
   matcher = new MyErrorStateMatcher();
 
   constructor(private router: Router,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
-              public datepipe: DatePipe) {
-                this.nickname = localStorage.getItem('nickname');
-                this.roomname = this.route.snapshot.params.roomname;
-                firebase.database().ref('chats/').on('value', resp => {
-                  this.chats = [];
-                  this.chats = snapshotToArray(resp);
-                  setTimeout(() => this.scrolltop = this.chatcontent.nativeElement.scrollHeight, 500);
-                });
-                firebase.database().ref('roomusers/').orderByChild('roomname').equalTo(this.roomname).on('value', (resp2: any) => {
-                  const roomusers = snapshotToArray(resp2);
-                  this.users = roomusers.filter(x => x.status === 'online');
-                });
+              public datepipe: DatePipe,
+              public patientService: PatientService,
+              private _router: Router) {
+                this.refreshPatientList();
+                console.log("les moves s'en viennent, mais elles s'en viennent tu vraiment ? ");
               }
 
   ngOnInit(): void {
           this.chatForm = this.formBuilder.group({
              'message' : [null, Validators.required]
           });
+          
   }
 
   onFormSubmit(form: any) {
-    const chat = form;
-    chat.roomname = this.roomname;
-    chat.nickname = this.nickname;
-    chat.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
-    chat.type = 'message';
-    const newMessage = firebase.database().ref('chats/').push();
-    newMessage.set(chat);
+    let chat = form;
+
+    chat.fromId = this.physioId;
+    chat.timestamp = Math.trunc(Date.now()/1000);
+    chat.toId = this.userSelected.patientId;
+    let newMessageFrom = firebase.database().ref('user-messages/' + chat.toId + '/' + chat.fromId + '/').push();
+    let newMessageTo = firebase.database().ref('user-messages/' + chat.fromId + '/' + chat.toId + '/').push();
+    newMessageFrom.set(chat);
+    newMessageTo.set(chat);
     this.chatForm = this.formBuilder.group({
       'message' : [null, Validators.required]
     });
   }
 
-  exitChat() {/*
-    const chat = { roomname: '', nickname: '', message: '', date: '', type: '' };
-    chat.roomname = this.roomname;
-    chat.nickname = this.nickname;
-    chat.date = this.datepipe.transform(new Date(), 'dd/MM/yyyy HH:mm:ss');
-    chat.message = `${this.nickname} leave the room`;
-    chat.type = 'exit';
-    const newMessage = firebase.database().ref('chats/').push();
-    newMessage.set(chat);
+  // openDialog() {
+  //   const dialogConfig = new MatDialogConfig();
+  //   dialogConfig.width = "500px";
+  //   dialogConfig.height = "inherit";
+  //   //dialogConfig.disableClose = true;
+  //   dialogConfig.autoFocus = true;
 
-    firebase.database().ref('roomusers/').orderByChild('roomname').equalTo(this.roomname).on('value', (resp: any) => {
-      let roomuser = [];
-      roomuser = snapshotToArray(resp);
-      const user = roomuser.find(x => x.nickname === this.nickname);
-      if (user !== undefined) {
-        const userRef = firebase.database().ref('roomusers/' + user.key);
-        userRef.update({status: 'offline'});
-      }
+  //   dialogConfig.data = {
+  //     id: 1,
+  //     title: 'Angular For Beginners'
+  //   };
+
+  //   this.dialog.open(NouveauPatientComponent, dialogConfig);
+  // }
+
+
+  refreshPatientList() {
+    this.patientService.getPatientList(localStorage.getItem('_id')).subscribe(
+      (res) => {
+        this.patientService.patients = res as Patient[];
+        this.patientsList = this.patientService.patients;
+      },
+      (err) => {
+        if(err instanceof HttpErrorResponse) {
+          if(err.status === 401 || err.status === 500) {
+            localStorage.removeItem('token');
+            this._router.navigate(['/login']);
+          }
+        }
+      });
+  }
+
+  openConversation(patient) {
+    this.userSelected = patient;
+    let path = 'user-messages/' + localStorage.getItem('_id') + '/' + patient.patientId + '/';
+    firebase.database().ref(path).on('value', resp => {
+      this.chats = [];
+      this.chats = snapshotToArray(resp) as any[];
+      console.log(this.chats)
+      setTimeout(() => this.scrolltop = this.chatcontent.nativeElement.scrollHeight, 500);
     });
-    
-    this.router.navigate(['/roomlist']);
-  */}
-
+  }
 }

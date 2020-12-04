@@ -6,8 +6,8 @@ import "firebase/auth";
 import "firebase/database";
 
 const config  = { 
-  apiKey: 'AIzaSyCFdqmK7iI-lbmtkEvrXopDrsOIhIzuZRE',
-   databaseURL: 'https://iphysio-55674.firebaseio.com'
+  apiKey: 'AIzaSyAs1W_Z266lEL9W58Yyiyqb2LIaRzLVUiI',
+   databaseURL: 'https://iphysio-223df-default-rtdb.firebaseio.com/'
 };
 
 @Component({

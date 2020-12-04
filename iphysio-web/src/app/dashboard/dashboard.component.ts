@@ -250,10 +250,6 @@ export class DashboardComponent implements OnInit {
   }
 
   formatMovementChart(myChart) {
-
-
-
-    console.log("les moves s'en vienne");
     let indexCouleur = 0;
 
     //let formattedExer = [];
