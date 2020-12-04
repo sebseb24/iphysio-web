@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {FormControl} from '@angular/forms';
-import { PatientService } from '../patients/patient.service';
+import { PatientService } from '../../../NodeJS/services/patients/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ThrowStmt } from '@angular/compiler';
 

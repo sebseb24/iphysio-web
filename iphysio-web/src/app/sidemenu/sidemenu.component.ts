@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { NouveauPatientComponent } from '../nouveau-patient/nouveau-patient.component';
+import { NouveauPatientComponent } from '../popups/nouveau-patient/nouveau-patient.component';
 import { AuthService } from '../auth/auth.service';
 import { Physio } from '../../../NodeJS/models/physios';
 import { Patient } from '../../../NodeJS/models/patients';
-import { PatientService } from '../patients/patient.service';
+import { PatientService } from '../../../NodeJS/services/patients/patient.service';
 import { Historique } from '../../../NodeJS/models/historique';
-import { HistoriqueService } from '../../../NodeJS/services/historique.service';
+import { HistoriqueService } from '../../../NodeJS/services/historique/historique.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Chart } from 'node_modules/chart.js';
-import { GraphService } from 'NodeJS/services/graph.service';
+import { GraphService } from 'NodeJS/services/graph/graph.service';
 
 @Component({
   selector: 'app-sidemenu',

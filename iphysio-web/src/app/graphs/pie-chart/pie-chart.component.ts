@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GraphService } from 'NodeJS/services/graph.service';
+import { GraphService } from 'NodeJS/services/graph/graph.service';
 import { Chart } from 'node_modules/chart.js';
 
 @Component({

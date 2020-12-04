@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } from 'constants';
-import { GraphService } from 'NodeJS/services/graph.service';
+import { GraphService } from 'NodeJS/services/graph/graph.service';
 import { Chart } from 'node_modules/chart.js';
-import { HistoriqueService } from '../../../../NodeJS/services/historique.service';
-import { PatientService } from '../../patients/patient.service';
+import { HistoriqueService } from '../../../../NodeJS/services/historique/historique.service';
+import { PatientService } from '../../../../NodeJS/services/patients/patient.service';
 
 @Component({
   selector: 'app-line-chart',

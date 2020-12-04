@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Historique } from '../models/historique';
+import { Historique } from '../../models/historique';
 
 @Injectable({
   providedIn: 'root'

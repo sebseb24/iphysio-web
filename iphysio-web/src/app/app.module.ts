@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 //import { PatientsComponent } from './patients/patients.component';
 import { PatientDetailComponent } from './patient-detail/patient-detail.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NouveauPatientComponent } from './nouveau-patient/nouveau-patient.component';
+import { NouveauPatientComponent } from './popups/nouveau-patient/nouveau-patient.component';
 
 import {MatDialogModule} from '@angular/material/dialog';
 import { ProgrammeExerciceComponent } from './programme-exercice/programme-exercice.component';
@@ -21,11 +21,11 @@ import { SidemenuComponent } from './sidemenu/sidemenu.component';
 import { CreateUserComponent } from './auth/create-user/create-user.component';
 import { AuthGuard } from './auth/auth.guard';
 import { TokenInterceptorService } from './auth/token-interceptor.service';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './popups/confirm-dialog/confirm-dialog.component';
 import { AutocompleteLibModule } from 'angular-ng-autocomplete';
-import { HistoriqueActiviteComponent } from './historique-activite/historique-activite.component';
-import { EditPatientComponent } from './edit-patient/edit-patient.component';
-import { PatientArchiveComponent } from './patient-archive/patient-archive.component';
+import { HistoriqueActiviteComponent } from './popups/historique-activite/historique-activite.component';
+import { EditPatientComponent } from './popups/edit-patient/edit-patient.component';
+import { ArchiveComponent } from './archive/archive.component';
 import { LineChartComponent } from './graphs/line-chart/line-chart.component';
 import { PieChartComponent } from './graphs/pie-chart/pie-chart.component';
 import { ChatroomComponent } from './chatroom/chatroom.component';
@@ -56,7 +56,7 @@ import { MovementsGraphComponent } from './graphs/movements-graph/movements-grap
    ConfirmDialogComponent,
    HistoriqueActiviteComponent,
    EditPatientComponent,
-   PatientArchiveComponent,
+   ArchiveComponent,
    LineChartComponent,
    PieChartComponent,
    routingComponents,

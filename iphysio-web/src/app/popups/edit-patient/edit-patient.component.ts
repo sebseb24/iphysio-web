@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { PatientService } from '../patients/patient.service';
+import { PatientService } from '../../../../NodeJS/services/patients/patient.service';
 
 @Component({
   selector: 'app-edit-patient',

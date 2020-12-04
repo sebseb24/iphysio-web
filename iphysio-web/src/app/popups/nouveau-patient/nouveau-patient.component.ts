@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, Validators, FormGroup, NgForm, NgModel} from "@angular/forms";
-import { PatientService } from '../patients/patient.service';
-import { Patient } from '../../../NodeJS/models/patients';
-import { Physio } from '../../../NodeJS/models/physios';
+import { PatientService } from '../../../../NodeJS/services/patients/patient.service';
+import { Patient } from '../../../../NodeJS/models/patients';
+import { Physio } from '../../../../NodeJS/models/physios';
 
 
 declare var M: any;

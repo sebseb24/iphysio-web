@@ -3,15 +3,15 @@ import { Patient } from '../../../NodeJS/models/patients';
 
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { ProgrammeExerciceComponent } from '../programme-exercice/programme-exercice.component';
-import { PatientService} from '../patients/patient.service';
+import { PatientService} from '../../../NodeJS/services/patients/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { DialogService } from '../shared/dialog.service';
+import { DialogService } from '../popups/confirm-dialog/dialog.service';
 
 import { Historique } from '../../../NodeJS/models/historique';
-import { HistoriqueService } from '../../../NodeJS/services/historique.service';
+import { HistoriqueService } from '../../../NodeJS/services/historique/historique.service';
 
-import { HistoriqueActiviteComponent } from '../historique-activite/historique-activite.component';
-import { EditPatientComponent } from '../edit-patient/edit-patient.component';
+import { HistoriqueActiviteComponent } from '../popups/historique-activite/historique-activite.component';
+import { EditPatientComponent } from '../popups/edit-patient/edit-patient.component';
 
 
 @Component({

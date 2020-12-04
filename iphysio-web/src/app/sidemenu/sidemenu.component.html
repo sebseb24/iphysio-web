@@ -56,7 +56,7 @@
 
   <div class="dashboard-background"></div>
 
-  <app-patient-archive *ngIf="dispArchive"></app-patient-archive>
+  <app-archive *ngIf="dispArchive"></app-archive>
   <app-patient-detail *ngIf="dispPatientDetail" [patient]="patientService.selectedPatient"></app-patient-detail>
 
   <footer *ngIf="patientService.selectedPatient" class="page-footer">

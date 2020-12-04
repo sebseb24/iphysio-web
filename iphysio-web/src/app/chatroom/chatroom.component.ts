@@ -4,7 +4,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { ErrorStateMatcher } from '@angular/material/core';
 import { DatePipe } from '@angular/common';
 import { Patient } from '../../../NodeJS/models/patients';
-import { PatientService } from '../patients/patient.service';
+import { PatientService } from '../../../NodeJS/services/patients/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import firebase from "firebase/app";

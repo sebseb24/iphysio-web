@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PatientService } from 'src/app/patients/patient.service';
+import { PatientService } from '../../../../NodeJS/services/patients/patient.service';
 import { Chart } from 'node_modules/chart.js';
-import { GraphService } from 'NodeJS/services/graph.service';
+import { GraphService } from 'NodeJS/services/graph/graph.service';
 
 @Component({
   selector: 'app-movements-graph',
