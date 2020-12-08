@@ -1,4 +1,5 @@
 # iphysio-web
+# Configuration initiale du projet
 
-Install Node.js for npm
+Installataion de Node.js pour utiliser npm : 
 https://nodejs.org/en/
