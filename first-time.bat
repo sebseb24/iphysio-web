@@ -1,3 +1,2 @@
 cd ./iphysio-web/
-npm update
-npm install -g nodemon
+npm install -g nodemon @angular/cli
