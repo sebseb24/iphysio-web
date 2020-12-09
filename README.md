@@ -1,11 +1,11 @@
 # iphysio-web
 # Configuration initiale du projet
 
-Installation de Node.js pour utiliser npm : https://nodejs.org/en/
+1. Installation de Node.js pour utiliser npm : https://nodejs.org/en/
 
-Lancer le script first-time.bat pour installer nodemon et le CLI d'Angular.  Si le script ne se lance pas, vérifiez que NPM est bien installé grâce à la commande npm -v
+2. Lancer le script first-time.bat pour installer nodemon et le CLI d'Angular.  Si le script ne se lance pas, vérifiez que NPM est bien installé grâce à la commande npm -v
 
-Redémarrez l'ordinateur
+3. Redémarrez l'ordinateur
 
 # Pour compiler le projet :
 
