@@ -60,10 +60,6 @@ https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads
 
  
 
-Sous Windows: 
 
-Dans la barre de recherche écriver “variable” : 
 
- 
 
-Shape
