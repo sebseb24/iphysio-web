@@ -22,3 +22,48 @@ Ouvrir un navigateur et accéder à la page localhost:4200
   - Dans une invite de commande, aller dans (...)/iphysio-web/NodeJS et lancer la commande :  npm i --save cors express mongoose body-parser bcrypt
 
 
+# Selenium - Tests automatisés
+
+Installation et configurations de Selenium avant son utilisation 
+
+Selenium est un outil permettant d’automatiser des tests sur l’interface utilisateur d’un site web. Il permet d’automatiquement cliquer à des endroits sur une page ou de remplir des formulaires. 
+
+Étape 1. Installer Selenium 
+
+L’installation de selenium peut varier selon votre environnement de développement 
+
+NodeJS : 
+
+Sous le répertoire de votre projet 
+
+npm install selenium-webdriver 
+
+Étape 2. Télécharger les web drivers 
+
+Téléchargé le web driver du navigateur avec lequel vous allez effectuer les tests et selon la version du navigateur que vous utiliserez. 
+
+Chrome :  
+
+https://sites.google.com/a/chromium.org/chromedriver/downloads 
+
+Firefox : 
+
+https://github.com/mozilla/geckodriver/releases 
+
+Edge : 
+
+https://developer.microsoft.com/en-us/microsoft-edge/tools/webdriver/#downloads 
+
+ 
+
+Étape 3. Ajouter le chemin vers les web driver dans la variable d’environnement PATH 
+
+ 
+
+Sous Windows: 
+
+Dans la barre de recherche écriver “variable” : 
+
+ 
+
+Shape
