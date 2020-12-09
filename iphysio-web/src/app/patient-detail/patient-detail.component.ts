@@ -4,10 +4,8 @@ import { Patient } from '../../../NodeJS/models/patients';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { ProgrammeExerciceComponent } from '../programme-exercice/programme-exercice.component';
 import { PatientService} from '../../../NodeJS/services/patients/patient.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { DialogService } from '../popups/confirm-dialog/dialog.service';
 
-import { Historique } from '../../../NodeJS/models/historique';
 import { HistoriqueService } from '../../../NodeJS/services/historique/historique.service';
 
 import { HistoriqueActiviteComponent } from '../popups/historique-activite/historique-activite.component';
@@ -28,17 +26,12 @@ export class PatientDetailComponent implements OnInit {
   constructor(private dialog: MatDialog,
       public patientService : PatientService,
       public historiqueService : HistoriqueService,
-      private dialogService : DialogService) {
-        
-        
+      private dialogService : DialogService) {       
         
        }
 
   ngOnInit(): void {
-    this.selectedPatient = this.patientService.getSelectedPatient();
-    this.refreshHistoriqueList();
-    
-    
+    this.selectedPatient = this.patientService.getSelectedPatient();    
   }
  
   editProgram(pro ? : any) {
@@ -55,7 +48,7 @@ export class PatientDetailComponent implements OnInit {
     let dialogRef =this.dialog.open(ProgrammeExerciceComponent, dialogConfig);
 
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.patientService.getProgrammeList(this.patientService.selectedPatient._id).subscribe(
         (res) => {
             console.log("done");
@@ -65,31 +58,14 @@ export class PatientDetailComponent implements OnInit {
         }
       )
     });
-  }
-
-  
-
-  refreshHistoriqueList() {
-    /*this.historiqueService.getHistoriqueList(this.patientService.selectedPatient._id).subscribe(
-      (res) => {
-        this.historiqueService.historique = res as Historique[];
-      },
-      (err) => {
-      });*/
-  }
+  }  
 
   deleteProgramme(pro) {
-    /*if(confirm("voulez vous vraiment supprimer " + pro.nom)) {
-      console.log("programme supprimé");
-      
-      
-
-    }*/
 
     this.dialogService.openConfirmDialog("Voulez vous vraiment supprimer " + pro.nom + " ?").afterClosed().subscribe( res => {
       if (res) {
 
-        this.patientService.deleteProgrammeExercice(pro._id).subscribe( res => {
+        this.patientService.deleteProgrammeExercice(pro._id).subscribe( () => {
           console.log("delete avec succes");
           this.refreshProgrammeList();
   
@@ -123,7 +99,7 @@ export class PatientDetailComponent implements OnInit {
     let dialogRef =this.dialog.open(HistoriqueActiviteComponent, dialogConfig);
 
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       
     });
   }
@@ -144,7 +120,6 @@ export class PatientDetailComponent implements OnInit {
   }
 
   saveNote() {
-    //console.log("saved note!");
     console.log(this.patientService.selectedPatient.name);
     this.patientService.putPatient(this.patientService.selectedPatient).subscribe(
       (res) => {

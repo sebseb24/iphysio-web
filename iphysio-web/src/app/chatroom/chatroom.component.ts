@@ -79,21 +79,6 @@ export class ChatroomComponent implements OnInit {
     });
   }
 
-  // openDialog() {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.width = "500px";
-  //   dialogConfig.height = "inherit";
-  //   //dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-
-  //   dialogConfig.data = {
-  //     id: 1,
-  //     title: 'Angular For Beginners'
-  //   };
-
-  //   this.dialog.open(NouveauPatientComponent, dialogConfig);
-  // }
-
 
   refreshPatientList() {
     this.patientService.getPatientList(localStorage.getItem('_id')).subscribe(

@@ -1,4 +1,3 @@
-const jwt = require('jsonwebtoken');
 const express = require('express');
 var router = express.Router();
 var ObjectId = require('mongoose').Types.ObjectId;
@@ -62,10 +61,6 @@ router.put('/:id', security.verifyToken, (req, res) => {
     if (!ObjectId.isValid(req.params.id))
         return res.status(400).send('No record with given id :  + ${res.params.id};');
 
-
-        console.log(req.body.notes);
-        console.log(req.params.id);
-
         var pat = new Patient({
             name: req.body.name,
             email: req.body.email,
@@ -73,16 +68,13 @@ router.put('/:id', security.verifyToken, (req, res) => {
             telephone : req.body.telephone,
             adresse : req.body.adresse,
             isActive : req.body.isActive,
-        });
-
-        
+        });        
 
         Patient.findByIdAndUpdate(req.params.id, {$set:{notes:req.body.notes, isActive: req.body.isActive, 
             name : pat.name, email: pat.email, telephone: pat.telephone, adresse: pat.adresse}}, 
             function(err, doc)  {
                 if (!err) { 
                     res.send(doc);
-                    //console.log("gdfgdfgdfgdfg");
                 }
                 else { console.log('Error in Patient Update: ' + JSON.stringify(err, undefined, 2));
              }
@@ -101,23 +93,5 @@ router.delete('/:id', security.verifyToken, (req, res) => {
         });
 });
 
-/*function verifyToken(req, res, next) {
-    if(!req.headers.authorization) {
-        return res.status(401).send('Unauthorized request');
-    }
-
-    let token = req.headers.authorization.split(' ')[1];
-    if(token === 'null') {
-        return res.status(401).send('Unauthorized request');
-    }
-
-    let payload = jwt.verify(token, 'secretKey');
-    if(!payload) {
-        return res.status(401).send('Unauthorized request');
-    }
-
-    req.userId = payload.subject;
-    next();
-}*/
 
 module.exports = router;

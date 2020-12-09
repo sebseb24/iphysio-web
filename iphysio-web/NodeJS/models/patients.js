@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-const MovementStatistics = new mongoose.Schema({
+/*const MovementStatistics = new mongoose.Schema({
 
     angleAvg : [Number],
     position0_X : [Number],
@@ -26,7 +26,7 @@ const ExerciceStatistique = new mongoose.Schema({
     exerciceStartTime : Number,
     exerciceEndTime : Number,
     movements : [MovementStatistics]
-});
+});*/
 
 var Patient = mongoose.model('Patient', {
     name: { type: String },

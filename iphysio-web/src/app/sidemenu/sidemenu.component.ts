@@ -45,7 +45,7 @@ export class SidemenuComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.width = "500px";
     dialogConfig.height = "inherit"
-    //dialogConfig.disableClose = true;
+
     dialogConfig.autoFocus = true;
 
     dialogConfig.data = {
@@ -67,7 +67,7 @@ export class SidemenuComponent implements OnInit {
     this.patientService.selectedPatient = patient;
 
     if(this.graphService.tempsExercice) {
-    //this.graphService.tempsExercice.clear();
+
     this.graphService.tempsExercice.data.datasets = [];
     this.graphService.tempsExercice.update();
     }
@@ -77,15 +77,6 @@ export class SidemenuComponent implements OnInit {
       this.graphService.movementChart.update();
     }
 
-    /*if(this.graphService.pieChart) {
-      this.graphService.pieChart.data.labels = ["No data to display"];
-      this.graphService.pieChart.data.datasets = [{
-        label: "No data",
-        backgroundColor: ["#3e95cd"],
-        data: [1]
-      }];
-      this.graphService.pieChart.update();
-    }*/
 
     this.patientService.getProgrammeList(patient._id).subscribe(
       (res) => {
@@ -144,8 +135,6 @@ export class SidemenuComponent implements OnInit {
   formatStats(myChart) {
 
     myChart.data.datasets = [];
-    //myChart.update();
-
 
     let indexCouleur = 0;
     for(let hist of this.historiqueService.historique) {
@@ -201,8 +190,6 @@ export class SidemenuComponent implements OnInit {
     this.patientService.getStatistics(patientId).subscribe(
       (res) => {
         this.patientService.statsList = res as any[];
-        //console.log(this.patientService.statsList);
-
         this.formatMovementChart(this.graphService.movementChart);
 
         if(this.patientService.statsList.length > 0) {
@@ -234,11 +221,9 @@ export class SidemenuComponent implements OnInit {
 
     let tempLabels = [];
 
-    //myChart.data.labels = [];
 
     for(let i = 0; i < this.patientService.statsList.length; i++) {
-      //myChart.data.labels.push(this.patientService.statsList[i]._id);
-      //this.myDoughnutChart.data.labels.push("Flexion genou");
+
       tempLabels.push(this.patientService.statsList[i]._id);
       datasets[0].backgroundColor.push(this.barColors[i]);
       datasets[0].data.push(this.patientService.statsList[i].exerciceEndTime.length);
@@ -252,17 +237,12 @@ export class SidemenuComponent implements OnInit {
   formatMovementChart(myChart) {
     let indexCouleur = 0;
 
-    //let formattedExer = [];
-
     for(let stat of this.patientService.statsList) {
        console.log(stat.exerciceName);
 
        let result = []; 
 
-
-       // on comment à 2 car on veut skip l'initialisation
-       
-
+       // on commence à 2 car on veut skip l'initialisation
        for(let move = 0; move < stat.movement.length; move++) {
         let moy = 0;
         for(let i = 2; i < stat.movement[move][0].timestampState.length; i++) {
@@ -272,11 +252,8 @@ export class SidemenuComponent implements OnInit {
   
   
            let deltaTime = endMoveTime - startMoveTime;
-           moy += deltaTime;
-  
-           
-  
-           //
+           moy += deltaTime; 
+ 
   
          }
          moy = moy/(stat.movement[move][0].timestampState.length)
@@ -290,9 +267,6 @@ export class SidemenuComponent implements OnInit {
         result.push({x: new Date(stat.exerciceEndTime[move]), y : moy});
        }
 
-
-
-      //formattedExer.push({exercice : stat.exerciceName, moy : result});
 
     let model = {
       fill: false,
@@ -314,23 +288,6 @@ export class SidemenuComponent implements OnInit {
 
     }
 
-    /*let groupedExers = [];
-
-    for(let i =0; i < formattedExer.length; i++) {
-      let current = formattedExer[i].exerciceName;
-
-      for(let j = i + 1; i < formattedExer.length; j++) {
-
-        if(current == formattedExer[j]) {
-          groupedExers.push({exercice: current, })
-        }
-      }
-    }*/
-
-
-
-
-
   }
  
  
@@ -340,7 +297,6 @@ export class SidemenuComponent implements OnInit {
   
   onFocused(e){
     this.refreshPatientList();
-    console.log("onChangeSearch : " + e);
   }
 
   displayArchive() {

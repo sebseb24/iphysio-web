@@ -2,13 +2,12 @@
 <div class="topbar-wrapper">
   <div class="topbar-nav-wrapper">
     <a  routerLink="/chatroom/chatroom"><i class="material-icons topbar-nav-button">mail</i></a>
-    <a (click)="onLogout()"><i class="material-icons topbar-nav-button">logout</i></a> <!--account_circle-->
+    <a (click)="onLogout()"><i class="material-icons topbar-nav-button">logout</i></a> 
   </div>
 
   <div class="topbar-search-wrapper">
     <i class="material-icons" style="display: inline-block; color: black; margin-left: 10px; position: absolute; line-height: 43px; ">search</i>
 
-    <!--<input type="text" class="topbar-search-input" placeholder="Trouver un patient">-->
     <div class="ng-autocomplete">
       <ng-autocomplete
         class="topbar-search-input"
@@ -45,7 +44,6 @@
     <ul>
       <li routerLink="/"><i class="material-icons sidebar-menu-icon">home</i>Accueil</li>
       <li (click)="openDialog()" id="idAjoutPatient"><i class="material-icons sidebar-menu-icon">add_circle_outline</i>Nouveau patient</li>
-      <!-- <li><i class="material-icons sidebar-menu-icon">assignment</i>Programmes d'exercices</li> -->
       <li (click)="displayArchive()" id="btnPageArchive"><i class="material-icons sidebar-menu-icon">archive</i>Archive</li>
     </ul>
   </div>
