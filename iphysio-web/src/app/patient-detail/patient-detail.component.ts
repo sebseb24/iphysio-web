@@ -10,6 +10,8 @@ import { HistoriqueService } from '../../../NodeJS/services/historique/historiqu
 
 import { HistoriqueActiviteComponent } from '../popups/historique-activite/historique-activite.component';
 import { EditPatientComponent } from '../popups/edit-patient/edit-patient.component';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { GraphService } from 'NodeJS/services/graph/graph.service';
 
 
 @Component({
@@ -26,6 +28,7 @@ export class PatientDetailComponent implements OnInit {
   constructor(private dialog: MatDialog,
       public patientService : PatientService,
       public historiqueService : HistoriqueService,
+      public graphService : GraphService,
       private dialogService : DialogService) {       
         
        }
@@ -130,6 +133,28 @@ export class PatientDetailComponent implements OnInit {
       }
     );
   }
+
+  dateStartChange(type: string, event: MatDatepickerInputEvent<Date>) {
+
+    this.graphService.movementChart.options.scales.xAxes[0].ticks.min = event.value;
+
+    this.graphService.movementChart.update();
+    this.graphService.tempsExercice.update();
+
+  }
+
+  dateEndChange(type: string, event: MatDatepickerInputEvent<Date>) {
+    console.log(type + ":"  + event.value);
+
+    this.graphService.movementChart.options.scales.xAxes[0].ticks.max = event.value;
+    this.graphService.movementChart.update();
+    this.graphService.tempsExercice.options.scales.xAxes[0].ticks.max = event.value;
+    this.graphService.tempsExercice.update();
+
+  }
+
+
+
 
  
 

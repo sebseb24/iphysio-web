@@ -23,6 +23,20 @@
             <div class="card-header">
                 <label>Graphique d'activités</label>
                 <a title="Mettre à jour les graphiques"><i class="material-icons" style="position: relative; float: right; margin-top: 13px; color: #595959; cursor: pointer;">refresh</i></a>
+                <div>
+                <label>début</label>
+                <input matInput [matDatepicker]="picker" id="idInpDateGraph" (dateChange)="dateStartChange('change', $event)">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <label>fin</label>
+                <input matInput [matDatepicker]="picker2" id="idInpDateEndGraph" (dateChange)="dateEndChange('change', $event)">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+                </div>
+                
+                
+                
+                
             </div>
             <div id="chartContainer" style=" width: 100%; text-align: center;">
                 <app-line-chart style="margin-right: 100px;"></app-line-chart>
