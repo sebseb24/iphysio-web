@@ -1,10 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
-import {FormControl} from '@angular/forms';
-import { PatientService } from '../patients/patient.service';
+import { PatientService } from '../../../NodeJS/services/patients/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ThrowStmt } from '@angular/compiler';
 
 import { NewExerciceComponent } from './new-exercice/new-exercice.component';
 
@@ -34,21 +32,12 @@ export class ProgrammeExerciceComponent implements OnInit {
   sauvegarder() {
 
     if(this.data._id == null) {
-      // on veut post un nouveau programme d'exercice
-      console.log("Ajout d'un programme pour le patient " + this.patientService.selectedPatient._id);
-
-
-      //if(this.data.exercices == null) {
-      //  this.data.exercices = [];
-        //this.data.exercices.parametres = {};
-      //}
-
+ 
       this.patientService.postProgramExercice(this.patientService.selectedPatient._id, {
         nom : this.data.nom,
         exercices : this.data.exercices
       }).subscribe(
-        (res) => {
-          console.log("fini");
+        () => {
           this.dialogRef.close();
 
         }, (err) => {
@@ -58,9 +47,7 @@ export class ProgrammeExerciceComponent implements OnInit {
       )
     } else {
 
-      console.log(this.data);
       this.patientService.putProgramExercice(this.data).subscribe((res) => {
-        console.log(res);
         this.dialogRef.close();
       }, (err) => {
         console.log(err);
@@ -79,26 +66,19 @@ export class ProgrammeExerciceComponent implements OnInit {
     this.patientService.getExerciceList().subscribe(
       (res) => {
         this.exercices = res as any[];
-        console.log(this.exercices);
-
-
 
       },
       (err) => {
         if(err instanceof HttpErrorResponse) {
           if(err.status === 401 || err.status === 500) {
-            //localStorage.removeItem('token');
-            //this._router.navigate(['/login']);
+
             console.log(err);
           }
         }
       });
   }
 
-  saveCurrentExercice() {
-  }
-
-  showExerciceParam(exer, i) {
+  showExerciceParam(exer) {
     const dialogConfig = new MatDialogConfig();
 
     this.selectedExercice = exer;   
@@ -113,7 +93,7 @@ export class ProgrammeExerciceComponent implements OnInit {
     dialogConfig.height = "inherit";
 
     let dialogRef = this.dialog.open(NewExerciceComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
 
     });
   }
@@ -124,7 +104,6 @@ export class ProgrammeExerciceComponent implements OnInit {
     dialogConfig.width = "900px";
     dialogConfig.height = "inherit";
 
-     //this.sauvegarderOptions = "Ajouter";
      this.selectedExercice = {};
      this.selectedExercice.parametres = {
           exerciceId : exercice._id,
@@ -140,11 +119,11 @@ export class ProgrammeExerciceComponent implements OnInit {
     dialogConfig.data.option = {};
     dialogConfig.data.option.isNewExercice = true;
 
-    dialogConfig.data.exercice = this.selectedExercice;//exercice;
+    dialogConfig.data.exercice = this.selectedExercice;
 
     let dialogRef = this.dialog.open(NewExerciceComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-          console.log(result);
+      
           if(result == "OK") {
             if(this.data.exercices == null) {
             this.data.exercices = [];
@@ -159,7 +138,6 @@ export class ProgrammeExerciceComponent implements OnInit {
   }
 
   deleteExercice(index) {
-    console.log(index);
 
     this.data.exercices.splice(index, 1);
   }

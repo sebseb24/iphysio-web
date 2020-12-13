@@ -2,10 +2,9 @@ import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
-//import * as firebase from 'firebase';
 import { DatePipe } from '@angular/common';
 import { Patient } from '../../../NodeJS/models/patients';
-import { PatientService } from '../patients/patient.service';
+import { PatientService } from '../../../NodeJS/services/patients/patient.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import firebase from "firebase/app";
@@ -79,21 +78,6 @@ export class ChatroomComponent implements OnInit {
       'message' : [null, Validators.required]
     });
   }
-
-  // openDialog() {
-  //   const dialogConfig = new MatDialogConfig();
-  //   dialogConfig.width = "500px";
-  //   dialogConfig.height = "inherit";
-  //   //dialogConfig.disableClose = true;
-  //   dialogConfig.autoFocus = true;
-
-  //   dialogConfig.data = {
-  //     id: 1,
-  //     title: 'Angular For Beginners'
-  //   };
-
-  //   this.dialog.open(NouveauPatientComponent, dialogConfig);
-  // }
 
 
   refreshPatientList() {

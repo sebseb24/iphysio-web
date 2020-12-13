@@ -1,12 +1,10 @@
 const express = require('express');
 var router = express.Router();
-var ObjectId = require('mongoose').Types.ObjectId;
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+var security = require('./security');
 
 var { Exercice } = require('../models/exercices');
 
-router.get('/', (req, res) => {
+router.get('/',  security.verifyToken, (req, res) => {
 
 
     Exercice.find({isActive : true},(err, docs) => {
@@ -16,12 +14,5 @@ router.get('/', (req, res) => {
 
 
 });
-
-router.post('/', (req, res) => {
-
-    
-});
-
-
 
 module.exports = router;

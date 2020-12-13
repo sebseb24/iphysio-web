@@ -1,5 +1,5 @@
-const { StylesCompileDependency } = require("@angular/compiler");
-const { SelectMultipleControlValueAccessor } = require("@angular/forms");
+/*const { StylesCompileDependency } = require("@angular/compiler");
+const { SelectMultipleControlValueAccessor } = require("@angular/forms");*/
 const { assert } = require("console");
 const {Builder,  By, Key, util, until} = require("selenium-webdriver");
 const crypto = require("crypto");
@@ -270,13 +270,7 @@ async function testAjoutPatientValidateNotCreatable(btnNewPatientCreer) {
             reject(new Error("Ajout patient, tous les champs obligatoire doivent être entré pour la création d'un nouveau patient"));
 
         }).catch((err) => {
-            //assert(err.name =="ElementNotInteractableError", "Le bouton de création de patient doit être désactivé");
-
-            //if(err.name != "ElementNotInteractableError") {
-            //    reject(new Error(err));
-            //} else {
                 resolve("Patient non creatable");
-            //}
         });
     });
 }
@@ -311,7 +305,6 @@ async function connectUser(driver) {
 
         driver.wait( until.elementLocated(By.id('idAjoutPatient')),
         5000).then(() => {
-            //console.log("promised resolved 1");
             resolve("Hello");
         }).catch(err => {
             reject(new Error(err));
@@ -319,9 +312,9 @@ async function connectUser(driver) {
     });  
 }
 
-async function testEditPatient() {
+async function testEditPatient(patName) {
 
-    let patientName = "Jean Tanpas";
+    let patientName = patName;
     let driver = await new Builder().forBrowser("chrome").build();
     await connectUser(driver);    
     let btnAjoutPatient = await driver.findElement(By.id('idAjoutPatient'));
@@ -393,13 +386,6 @@ async function testEditPatient() {
     assert(lblPatientName == "Joe Kekun", "Edit Patient, Validation du nom après modification" + lblPatientName);
     assert(lblPatientEmail == "jean.tambien@gmail.com", "Edit Patient, Validation du email après modification" + lblPatientEmail);
     assert(lblPatientTelephone == "+1 (444) 4444-3333", "Edit Patient, Validation du numéro de téléphone après modification" + lblPatientTelephone);
-
-    //await driver.get(siteUrl);
-    /*await sleep(5000); // weird davoir à mettre ça
-    await driver.get(siteUrl);
-    await driver.navigate().refresh();
-    await driver.wait( until.elementLocated(By.id('idAjoutPatient')),
-        5000);*/
 
     await sleep(5000);
 
@@ -550,9 +536,11 @@ function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-testBadLogin();
-testLogin();
+
+/*Ne pas effacer ces lignes en commentaire */
+//testBadLogin();
+//testLogin();
 //testArchive();
-//testAjoutPatient();
-//testEditPatient();
-//testProgrammeExercice("Germain Patoine", "Plier le bras gauche");
+testAjoutPatient();
+testEditPatient("Sébastien Pomerleau");
+testProgrammeExercice("Gus Belmont", "Plier le bras gauche");

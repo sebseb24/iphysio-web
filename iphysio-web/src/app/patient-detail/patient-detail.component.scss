@@ -41,7 +41,6 @@
 .grid-container > div {
     background-color: white;
     border-radius: 3px;
-    // padding: 5px 15px;
     font-size: 30px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
@@ -64,7 +63,6 @@
 
 .card-content {
     min-height: 300px;
-    // border: 1px solid #f2f2f2;
     border-radius: 3px;
     height: 93%;
 }
@@ -120,8 +118,6 @@
 
 .note-text{
     min-height: 300px;
-    // overflow-y: scroll;
-    // overflow: hidden;
     resize: none;
     border: 1px solid #f2f2f2;
     border-radius: 5px;
@@ -138,4 +134,14 @@
 
 .custom-button:hover {
     background-color: #0083A9;
+}
+
+#idInpDateGraph {
+    width: 100px;
+    margin-left: 10px;
+}
+
+#idInpDateEndGraph {
+    width: 100px;
+    margin-left: 10px;
 }

@@ -20,7 +20,6 @@
     grid-template-areas:
         'description description photo1'
         'parametres parametres photo2';
-    //grid-gap: 10px;
 }
 
 
@@ -49,8 +48,6 @@
 
 textarea {
     min-height: 145px;
-    // overflow-y: scroll;
-    // overflow: hidden;
     resize: none;
     border: 1px solid #a6a6a6;
     border-radius: 5px;

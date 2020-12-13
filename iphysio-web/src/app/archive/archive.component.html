@@ -1,0 +1,12 @@
+<div class="archive" style="text-align: center; margin: auto;">
+
+    <div>Patients</div>
+    <div class="card-content">
+
+    <ul>
+        <li *ngFor="let pat of lstPatient">{{pat.name}} <mat-slide-toggle [(ngModel)]="pat.isActive"></mat-slide-toggle></li>
+    </ul>
+
+    </div>
+    <button (click)="saveAll()" id="btnArchiveSauvegarder">Sauvegarder</button>
+</div>

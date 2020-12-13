@@ -1,13 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {FormBuilder, Validators, FormGroup, NgForm, NgModel} from "@angular/forms";
-import { PatientService } from '../patients/patient.service';
-import { Patient } from '../../../NodeJS/models/patients';
-import { Physio } from '../../../NodeJS/models/physios';
-
-
-declare var M: any;
-
+import { Component, OnInit } from '@angular/core';
+import {MatDialogRef} from "@angular/material/dialog";
+import {NgForm} from "@angular/forms";
+import { PatientService } from '../../../../NodeJS/services/patients/patient.service';
+import { Patient } from '../../../../NodeJS/models/patients';
+import { Physio } from '../../../../NodeJS/models/physios';
 
 @Component({
   selector: 'app-nouveau-patient',
@@ -39,9 +35,7 @@ export class NouveauPatientComponent implements OnInit {
   onSubmit(form: NgForm) {
     console.log(this.selectedPhysio);
     form.value.physio_associe = [this.selectedPhysio];
-    //console.log(form);
-    this.patientService.postPatient(form.value).subscribe((res) => {
-      //M.toast({ html: 'Patient créé avec succès ! why ?? ', classes: 'rounded' });
+    this.patientService.postPatient(form.value).subscribe(() => {
       this.refreshPatientList();
       this.close();
     });
@@ -58,7 +52,6 @@ export class NouveauPatientComponent implements OnInit {
   }
 
   annuler() {
-    console.log("jannule");
     this.dialogRef.close();
   } 
 }

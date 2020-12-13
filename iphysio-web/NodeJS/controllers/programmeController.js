@@ -1,10 +1,7 @@
-const { splitClasses } = require('@angular/compiler');
 const express = require('express');
 var router = express.Router();
-var ObjectId = require('mongoose').Types.ObjectId;
 var security = require('./security');
 
-//require('mongoose').set('debug', true);
 
 var { Patient } = require('../models/patients');
 var { Programme } = require('../models/programme');
@@ -17,7 +14,7 @@ router.get('/', security.verifyToken, (req, res) => {
     });
 });
 
-router.get('/:patientId', (req, res) => {
+router.get('/:patientId', security.verifyToken,(req, res) => {
 
     Programme.aggregate([
         {
@@ -98,7 +95,7 @@ router.get('/:patientId', (req, res) => {
 
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', security.verifyToken,(req, res) => {
 
     Programme.findByIdAndRemove(req.params.id, (err, doc) => {
         if (!err) { res.send(doc); }
@@ -107,7 +104,7 @@ router.delete('/:id', (req, res) => {
 
 });
 
-router.post('/', (req, res) => {
+router.post('/', security.verifyToken,(req, res) => {
 
 
     let exer = req.body.exercices.map(a => a.parametres);
@@ -126,7 +123,7 @@ router.post('/', (req, res) => {
 
 
 
-router.put('/', (req, res) => {
+router.put('/', security.verifyToken,(req, res) => {
 
     let exer = req.body.exercices.map(a => a.parametres);
 
