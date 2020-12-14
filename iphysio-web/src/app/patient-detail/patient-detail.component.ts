@@ -137,6 +137,7 @@ export class PatientDetailComponent implements OnInit {
   dateStartChange(type: string, event: MatDatepickerInputEvent<Date>) {
 
     this.graphService.movementChart.options.scales.xAxes[0].ticks.min = event.value;
+    this.graphService.tempsExercice.options.scales.xAxes[0].ticks.min = event.value;
 
     this.graphService.movementChart.update();
     this.graphService.tempsExercice.update();
